@@ -1,0 +1,29 @@
+[build-system]
+requires = ["hatchling", "hatch-requirements-txt"]
+build-backend = "hatchling.build"
+
+[project]
+name = "personality_questionnaire"
+version = "1.0.0"
+description = "BFI-2 personality questionnaire processing methods."
+keywords = ["bfi-2", "personality", "questionnaire"]
+authors = [
+  { name = "fodorad", email = "foauaai@inf.elte.hu" },
+]
+readme = {"file" = "README.md", "content-type" = "text/markdown"}
+requires-python = ">=3.11"
+license = "MIT"
+dynamic = ["dependencies"]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "License :: OSI Approved :: MIT License",
+  "Operating System :: OS Independent",
+]
+
+[project.urls]
+Documentation = "https://github.com/fodorad/personality_questionnaire#readme"
+Issues = "https://github.com/fodorad/personality_questionnaire/issues"
+Source = "https://github.com/fodorad/personality_questionnaire"
+
+[tool.hatch.metadata.hooks.requirements_txt]
+files = ["requirements.txt"]
