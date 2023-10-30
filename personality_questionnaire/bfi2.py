@@ -191,11 +191,12 @@ def bfi2_trait(answers: Sequence[Sequence], questions: list[str]) -> np.ndarray:
     return scaled_trait_values
 
 
-def bfi2(answers: Sequence[Sequence]) -> dict[str, np.ndarray]:
+def bfi2(answers: Sequence[Sequence], flip_neurocitism: bool = False) -> dict[str, np.ndarray]:
     """Calculates BFI-2 domain and facet scale values.
 
     Args:
         answers (Sequence[Sequence]): participants' answers to the BFI-2 questionnaire.
+        flip_neurocitism (bool, optional): if True, then Neurocitism is converted to Emotional Stability. Defaults to False.
 
     Returns:
         dict[str, np.ndarray]: Big Five (OCEAN) and FACET scale values for every answer.
@@ -203,14 +204,59 @@ def bfi2(answers: Sequence[Sequence]) -> dict[str, np.ndarray]:
     big_five = list(DOMAIN_SCALES.keys())
     trait_values = np.zeros(shape=(len(answers), len(big_five)), dtype=float)
     for trait_index, trait_name in enumerate(big_five):
-        trait_values[:, trait_index] = bfi2_trait(answers, DOMAIN_SCALES[trait_name])
+
+        values = bfi2_trait(answers, DOMAIN_SCALES[trait_name])
+
+        if trait_name == 'neurocitism' and flip_neurocitism:
+            values = flip_trait_dimension(values)
+
+        trait_values[:, trait_index] = values
 
     facet_names = list(FACET_SCALES.keys())
     facet_values = np.zeros(shape=(len(answers), len(facet_names)), dtype=float)
     for facet_index, facet_name in enumerate(facet_names):
-        facet_values[:, facet_index] = bfi2_trait(answers, FACET_SCALES[facet_name])
+
+        values = bfi2_trait(answers, FACET_SCALES[facet_name])
+
+        if facet_name in ['Anxiety', 'Depression', 'Emotional Volatility']:
+            values = flip_trait_dimension(values)
+
+        facet_values[:, facet_index] = values
 
     return {
         'OCEAN': trait_values,
         'FACET': facet_values,
     }
+
+
+def flip_trait_dimension(single_trait_values: np.ndarray) -> np.ndarray:
+    """Flips trait values within the dimension.
+    In case of OCEAN, all traits except Neurocitism have negative connotation
+    attached to the lower end of the dimension, and positive to the higher end of the dimension.
+    Only Neurocitism works the exact opposite.
+    For easier further machine learning useage, Neurocitism should be flipped to be similar to the other traits.
+    Flipping within scaled dimension is simple, because the values are in range [0..1], and 1-values are the expected result.
+    Emotional Stability is the flipped Neurocitism.
+
+    Example:
+        Neurocitism value for the participant is 0.7.
+        Emotional Stability = 1 - Neurocitism
+        Emotional Stability value for the participant is 0.3.
+
+    Args:
+        single_trait_values (np.ndarray): trait values of shape (N,).
+
+    Raises:
+        ValueError: raises if single_trait_values has more than 1 dimension.
+        ValueError: raises if single_trait_values are not in range [0..1].
+
+    Returns:
+        np.ndarray: flipped trait values.
+    """
+    if single_trait_values.ndim > 1:
+        raise ValueError(f'Tensor shape expected to be (N,), got instead {single_trait_values.shape}.')
+
+    if single_trait_values.min() < 0 or single_trait_values.max() > 1:
+        raise ValueError(f'Tensor values are expected to be in range [0..1], got instead [{single_trait_values.min()}..{single_trait_values.max()}]')
+
+    return 1 - single_trait_values
