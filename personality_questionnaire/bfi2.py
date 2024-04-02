@@ -77,7 +77,7 @@ DOMAIN_SCALES: dict[str, list[str]] = {
     'conscientiousness': ['3R', '8R', '13', '18', '23R', '28R', '33', '38', '43', '48R', '53', '58R'],
     'extraversion':      ['1', '6', '11R', '16R', '21', '26R', '31R', '36R', '41', '46', '51R', '56'],
     'agreeableness':     ['2', '7', '12R', '17R', '22R', '27', '32', '37R', '42R', '47R', '52', '57'],
-    'neurocitism':       ['4R', '9R', '14', '19', '24R', '29R', '34', '39', '44R', '49R', '54', '59'],
+    'neuroticism':       ['4R', '9R', '14', '19', '24R', '29R', '34', '39', '44R', '49R', '54', '59'],
 }
 
 
@@ -104,7 +104,7 @@ DOMAIN_SCALES_AS_FACET_SCALES: dict[str, list[str]] = {
     'extraversion':      FACET_SCALES['Sociability']            + FACET_SCALES['Assertiveness']         + FACET_SCALES['Energy Level'],
     'agreeableness':     FACET_SCALES['Compassion']             + FACET_SCALES['Respectfulness']        + FACET_SCALES['Trust'],
     'conscientiousness': FACET_SCALES['Organization']           + FACET_SCALES['Productiveness']        + FACET_SCALES['Responsibility'],
-    'neurocitism':       FACET_SCALES['Anxiety']                + FACET_SCALES['Depression']            + FACET_SCALES['Emotional Volatility'],
+    'neuroticism':       FACET_SCALES['Anxiety']                + FACET_SCALES['Depression']            + FACET_SCALES['Emotional Volatility'],
     'openness':          FACET_SCALES['Intellectual Curiosity'] + FACET_SCALES['Aesthetic Sensitivity'] + FACET_SCALES['Creative Imagination'],
 }
 
@@ -191,12 +191,12 @@ def bfi2_trait(answers: Sequence[Sequence], questions: list[str]) -> np.ndarray:
     return scaled_trait_values
 
 
-def bfi2(answers: Sequence[Sequence], flip_neurocitism: bool = False) -> dict[str, np.ndarray]:
+def bfi2(answers: Sequence[Sequence], flip_neuroticism: bool = False) -> dict[str, np.ndarray]:
     """Calculates BFI-2 domain and facet scale values.
 
     Args:
         answers (Sequence[Sequence]): participants' answers to the BFI-2 questionnaire.
-        flip_neurocitism (bool, optional): if True, then Neurocitism is converted to Emotional Stability. Defaults to False.
+        flip_neuroticism (bool, optional): if True, then Neuroticism is converted to Emotional Stability. Defaults to False.
 
     Returns:
         dict[str, np.ndarray]: Big Five (OCEAN) and FACET scale values for every answer.
@@ -207,7 +207,7 @@ def bfi2(answers: Sequence[Sequence], flip_neurocitism: bool = False) -> dict[st
 
         values = bfi2_trait(answers, DOMAIN_SCALES[trait_name])
 
-        if trait_name == 'neurocitism' and flip_neurocitism:
+        if trait_name == 'neuroticism' and flip_neuroticism:
             values = flip_trait_dimension(values)
 
         trait_values[:, trait_index] = values
@@ -231,16 +231,16 @@ def bfi2(answers: Sequence[Sequence], flip_neurocitism: bool = False) -> dict[st
 
 def flip_trait_dimension(single_trait_values: np.ndarray) -> np.ndarray:
     """Flips trait values within the dimension.
-    In case of OCEAN, all traits except Neurocitism have negative connotation
+    In case of OCEAN, all traits except Neuroticism have negative connotation
     attached to the lower end of the dimension, and positive to the higher end of the dimension.
-    Only Neurocitism works the exact opposite.
-    For easier further machine learning useage, Neurocitism should be flipped to be similar to the other traits.
+    Only Neuroticism works the exact opposite.
+    For easier further machine learning useage, Neuroticism should be flipped to be similar to the other traits.
     Flipping within scaled dimension is simple, because the values are in range [0..1], and 1-values are the expected result.
-    Emotional Stability is the flipped Neurocitism.
+    Emotional Stability is the flipped Neuroticism.
 
     Example:
-        Neurocitism value for the participant is 0.7.
-        Emotional Stability = 1 - Neurocitism
+        Neuroticism value for the participant is 0.7.
+        Emotional Stability = 1 - Neuroticism
         Emotional Stability value for the participant is 0.3.
 
     Args:

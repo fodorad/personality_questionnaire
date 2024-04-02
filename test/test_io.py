@@ -1,16 +1,16 @@
 import unittest
 import numpy as np
 from personality_questionnaire import DATA_DIR
-from personality_questionnaire.dataloader import load_csv_int, load_csv_str, load_tsv
+from personality_questionnaire.io import load_csv_int, load_csv_str, load_tsv
 from personality_questionnaire.bfi2 import BFI2_QUESTIONNAIRE
 
 
 class DataloaderTestCase(unittest.TestCase):
 
     def test_load_data(self):
-        data_from_int = load_csv_int(DATA_DIR / 'answers_int.csv')
-        data_from_str = load_csv_str(DATA_DIR / 'answers_str.csv')
-        data_from_npy = np.load(DATA_DIR / 'answers.npy')
+        data_from_int = load_csv_int(DATA_DIR / 'answers_int.csv', 60)
+        data_from_str = load_csv_str(DATA_DIR / 'answers_str.csv', 60)
+        data_from_npy: np.ndarray = np.load(DATA_DIR / 'answers.npy')
         self.assertEqual(data_from_int.shape, (2, 60))
         self.assertEqual(data_from_str.shape, (2, 60))
         self.assertEqual(data_from_npy.shape, (2, 60))

@@ -5,8 +5,8 @@ build-backend = "hatchling.build"
 [project]
 name = "personality_questionnaire"
 version = "1.1.0"
-description = "BFI-2 personality questionnaire processing methods."
-keywords = ["bfi-2", "personality", "questionnaire"]
+description = "Personality and general experiment questionnaire processing methods."
+keywords = ["bfi-2", "vas-f", "personality", "questionnaire"]
 authors = [
   { name = "fodorad", email = "foauaai@inf.elte.hu" },
 ]
