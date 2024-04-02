@@ -37,12 +37,23 @@ python -m unittest discover -s test
 ```
 
 # Quick start
-## Run interactive BFI-2 questionnaire
+### Run interactive BFI-2 questionnaire
+If you installed it via pip:
+```
+personality_questionnaire --participant_id test --questionnaire bfi2
+```
+alternative call:
 ```
 python personality_questionnaire/api.py --participant_id test --questionnaire bfi2
 ```
 
-## Run interactive VAS-F (pre- and post-)questionnaires
+### Run interactive VAS-F (pre- and post-)questionnaires
+If you installed it via pip:
+```
+personality_questionnaire --participant_id test --questionnaire vasf --vasf_tag pre
+personality_questionnaire --participant_id test --questionnaire vasf --vasf_tag post
+```
+alternative call:
 ```
 python personality_questionnaire/api.py --participant_id test --questionnaire vasf --vasf_tag pre
 python personality_questionnaire/api.py --participant_id test --questionnaire vasf --vasf_tag post

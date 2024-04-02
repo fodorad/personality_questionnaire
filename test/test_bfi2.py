@@ -7,7 +7,7 @@ from personality_questionnaire.bfi2 import bfi2
 class DataloaderTestCase(unittest.TestCase):
 
     def setUp(self):
-        self.data = np.load(DATA_DIR / 'answers.npy')
+        self.data = np.load(DATA_DIR / 'test_bfi2_answers.npy')
         self.ocean = np.array([[0.521, 0.646, 0.417, 0.604, 0.250],
                                [0.583, 0.208, 0.729, 0.438, 0.604]])
 

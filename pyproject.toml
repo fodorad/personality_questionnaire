@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "personality_questionnaire"
-version = "1.1.1"
+version = "1.1.2"
 description = "Personality and general experiment questionnaire processing methods."
 keywords = ["bfi-2", "vas-f", "personality", "questionnaire"]
 authors = [
@@ -19,6 +19,9 @@ classifiers = [
   "License :: OSI Approved :: MIT License",
   "Operating System :: OS Independent",
 ]
+
+[project.scripts]
+personality-questionnaire = "personality_questionnaire.api:main"
 
 [project.urls]
 Documentation = "https://github.com/fodorad/personality_questionnaire#readme"

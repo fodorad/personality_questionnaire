@@ -8,9 +8,9 @@ from personality_questionnaire.bfi2 import BFI2_QUESTIONNAIRE
 class DataloaderTestCase(unittest.TestCase):
 
     def test_load_data(self):
-        data_from_int = load_csv_int(DATA_DIR / 'answers_int.csv', 60)
-        data_from_str = load_csv_str(DATA_DIR / 'answers_str.csv', 60)
-        data_from_npy: np.ndarray = np.load(DATA_DIR / 'answers.npy')
+        data_from_int = load_csv_int(DATA_DIR / 'test_bfi2_answers_int.csv', 60)
+        data_from_str = load_csv_str(DATA_DIR / 'test_bfi2_answers_str.csv', 60)
+        data_from_npy: np.ndarray = np.load(DATA_DIR / 'test_bfi2_answers.npy')
         self.assertEqual(data_from_int.shape, (2, 60))
         self.assertEqual(data_from_str.shape, (2, 60))
         self.assertEqual(data_from_npy.shape, (2, 60))
