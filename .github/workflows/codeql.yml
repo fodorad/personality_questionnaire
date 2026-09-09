@@ -1,0 +1,38 @@
+name: CodeQL
+
+# Runs on push to main and a weekly cron only. Deliberately NOT on pull_request:
+# the code-scanning PR check fails whenever a PR adds any new alert, and there is
+# no supported way to make it advisory. Scanning main still surfaces findings in
+# the Security tab for triage -- CodeQL is an information provider here, not a
+# merge gate.
+on:
+  push:
+    branches: [main]
+  schedule:
+    # The odd minute avoids top-of-hour scheduling congestion on hosted runners.
+    - cron: "17 6 * * 1"
+
+permissions:
+  contents: read
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+    strategy:
+      fail-fast: false
+      matrix:
+        language: [actions, python]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: github/codeql-action/init@v3
+        with:
+          languages: ${{ matrix.language }}
+          queries: security-extended
+
+      - uses: github/codeql-action/analyze@v3
+        with:
+          category: "/language:${{ matrix.language }}"

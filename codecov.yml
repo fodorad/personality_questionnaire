@@ -1,0 +1,20 @@
+coverage:
+  precision: 2
+  round: down
+  range: "90...100"
+  status:
+    project:
+      default:
+        # An explicit floor, not `auto`: `auto` only compares against the previous
+        # commit, so coverage could drift below 90% one acceptable step at a time.
+        target: 90%
+        threshold: 1%
+    patch:
+      default:
+        target: 90%
+        threshold: 5%
+
+comment:
+  layout: "reach,diff,flags,tree"
+  behavior: default
+  require_changes: false
