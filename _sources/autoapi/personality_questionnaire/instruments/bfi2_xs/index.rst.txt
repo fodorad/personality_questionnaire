@@ -1,0 +1,54 @@
+personality_questionnaire.instruments.bfi2_xs
+=============================================
+
+.. py:module:: personality_questionnaire.instruments.bfi2_xs
+
+.. autoapi-nested-parse::
+
+   The BFI-2 Extra-Short Form (BFI-2-XS), 15 items.
+
+   Soto, C. J., & John, O. P. (2017). Short and extra-short forms of the Big Five
+   Inventory-2: The BFI-2-S and BFI-2-XS. ``Journal of Research in Personality, 68``,
+   69-81.
+
+   Three items per domain, one drawn from each of that domain's facets, retaining
+   roughly 80% of the full BFI-2's reliability at the domain level. Domains only: with
+   a single item per facet the form cannot support facet scores, and the authors say so
+   explicitly.
+
+   Every item is **borrowed from the BFI-2 by reference** rather than retyped, so a
+   wording correction in the parent propagates here and cannot silently diverge. Only
+   the mapping below is local to this module; ``tests/instruments/test_bfi2_xs.py``
+   asserts the borrowed text still matches its source.
+
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   personality_questionnaire.instruments.bfi2_xs.XS_TO_BFI2
+   personality_questionnaire.instruments.bfi2_xs.BFI2_XS
+
+
+Module Contents
+---------------
+
+.. py:data:: XS_TO_BFI2
+   :type:  dict[int, int]
+
+   BFI-2-XS item number to its BFI-2 source item number.
+
+   Taken from the published BFI-2-XS form, whose fifteen statements are a subset of the
+   BFI-2's sixty. The order is the form's own administration order, which is not the
+   parent's -- item 1 of the BFI-2-XS is item 16 of the BFI-2.
+
+.. py:data:: BFI2_XS
+   :type:  personality_questionnaire.registry.Questionnaire
+
+   The registered BFI-2-XS instrument.
+
+   Domains only. The form carries one item per facet, which is too few to estimate a
+   facet score, so no facet subscales are declared.
+

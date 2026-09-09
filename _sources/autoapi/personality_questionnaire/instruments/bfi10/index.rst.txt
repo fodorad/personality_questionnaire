@@ -1,0 +1,59 @@
+personality_questionnaire.instruments.bfi10
+===========================================
+
+.. py:module:: personality_questionnaire.instruments.bfi10
+
+.. autoapi-nested-parse::
+
+   The Big Five Inventory-10 (BFI-10), 10 items.
+
+   Rammstedt, B., & John, O. P. (2007). Measuring personality in one minute or less: A
+   10-item short version of the Big Five Inventory in English and German. ``Journal of
+   Research in Personality, 41``, 203-212.
+
+   Two items per domain, one keyed in each direction, for settings under extreme time
+   pressure. Unlike the :mod:`~personality_questionnaire.instruments.bfi2_xs`, this form
+   is **not** a subset of the BFI-2: it descends from the older BFI-44, and its wording
+   differs. Its items are therefore native rather than borrowed, and carry no
+   ``source_number``.
+
+   Domains only. With two items per domain there is no facet structure to score, and
+   the pairs are chosen for breadth rather than to represent any single facet.
+
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   personality_questionnaire.instruments.bfi10.BFI10_LABELS
+   personality_questionnaire.instruments.bfi10.BFI10_ITEM_TEXT
+   personality_questionnaire.instruments.bfi10.BFI10
+
+
+Module Contents
+---------------
+
+.. py:data:: BFI10_LABELS
+   :type:  dict[str, int]
+
+   The BFI-10's five response options.
+
+   The midpoint is worded "Neither agree nor disagree", where the BFI-2 uses "Neutral;
+   no opinion". The labels are part of the published instrument, so they are not
+   harmonised across forms.
+
+.. py:data:: BFI10_ITEM_TEXT
+   :type:  dict[int, str]
+
+   The 10 BFI-10 items, in the published administration order.
+
+   Transcribed from Appendix A of Rammstedt & John (2007). The items are lower-case and
+   unpunctuated in the source, completing the stem as a sentence.
+
+.. py:data:: BFI10
+   :type:  personality_questionnaire.registry.Questionnaire
+
+   The registered BFI-10 instrument.
+

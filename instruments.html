@@ -225,7 +225,9 @@
 </ul>
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="autoapi/personality_questionnaire/instruments/index.html">personality_questionnaire.instruments</a><input aria-label="Toggle navigation of personality_questionnaire.instruments" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/personality_questionnaire/instruments/bfi10/index.html">personality_questionnaire.instruments.bfi10</a></li>
 <li class="toctree-l3"><a class="reference internal" href="autoapi/personality_questionnaire/instruments/bfi2/index.html">personality_questionnaire.instruments.bfi2</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/personality_questionnaire/instruments/bfi2_xs/index.html">personality_questionnaire.instruments.bfi2_xs</a></li>
 <li class="toctree-l3"><a class="reference internal" href="autoapi/personality_questionnaire/instruments/vasf/index.html">personality_questionnaire.instruments.vasf</a></li>
 </ul>
 </li>
@@ -336,6 +338,78 @@ and predictive power. <em>Journal of Personality and Social Psychology, 113</em>
 </div></blockquote>
 <p>Free for research purposes; see the authors’ terms.</p>
 </section>
+<section id="bfi-2-extra-short-form-bfi2-xs">
+<h2>BFI-2 Extra-Short Form (<code class="docutils literal notranslate"><span class="pre">bfi2-xs</span></code>)<a class="headerlink" href="#bfi-2-extra-short-form-bfi2-xs" title="Link to this heading">¶</a></h2>
+<p>Fifteen items on the same 1–5 agreement scale as the BFI-2, three per domain, one
+drawn from each of that domain’s facets. Retains roughly 80% of the full form’s
+domain-level reliability.</p>
+<p><strong>Domains only.</strong> With one item per facet the form cannot support facet scores, and
+the authors say so explicitly.</p>
+<p>Every item is borrowed from the BFI-2 <strong>by reference</strong> rather than retyped, so a
+wording correction in the parent propagates automatically. Only the item-number
+mapping is local, and the reverse keys are derived from the parent rather than
+transcribed — polarity is a property of an item’s wording, so a borrowed item keeps
+the keying its source earned. A test checks the derived result against the published
+key regardless.</p>
+<p>Note that the numbering is the short form’s own: item 1 of the BFI-2-XS is item 16 of
+the BFI-2.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Short-form scores are <strong>not</strong> interchangeable with full-form scores item for item.
+The BFI-2 reverses exactly half of each twelve-item domain, so a constant response
+collapses to the midpoint; a three-item domain reverses one or two of three and
+cannot balance. Both forms agree at the scale midpoint, and diverge away from it.</p>
+</div>
+<blockquote>
+<div><p>Soto, C. J., &amp; John, O. P. (2017). Short and extra-short forms of the Big Five
+Inventory-2: The BFI-2-S and BFI-2-XS. <em>Journal of Research in Personality, 68</em>,
+69–81.</p>
+</div></blockquote>
+</section>
+<section id="big-five-inventory-10-bfi10">
+<h2>Big Five Inventory-10 (<code class="docutils literal notranslate"><span class="pre">bfi10</span></code>)<a class="headerlink" href="#big-five-inventory-10-bfi10" title="Link to this heading">¶</a></h2>
+<p>Ten items, two per domain, for settings under severe time pressure.</p>
+<p>Unlike the BFI-2-XS, the BFI-10 is <strong>not</strong> a subset of the BFI-2. It descends from
+the older BFI-44, so its wording differs, its stem differs (“I see myself as someone
+who…” rather than “I am someone who…”), and its midpoint label differs (“Neither
+agree nor disagree” rather than “Neutral; no opinion”). Its items are therefore
+native and carry no <code class="docutils literal notranslate"><span class="pre">source_number</span></code>. Published labels are reproduced per form rather
+than harmonised across them.</p>
+<p>Each domain deliberately pairs one positively and one negatively keyed item, so
+exactly five of the ten items are reversed and any uniform response cancels to the
+midpoint.</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Domain</p></th>
+<th class="head"><p>Items</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Extraversion</p></td>
+<td><p>1R, 6</p></td>
+</tr>
+<tr class="row-odd"><td><p>Agreeableness</p></td>
+<td><p>2, 7R</p></td>
+</tr>
+<tr class="row-even"><td><p>Conscientiousness</p></td>
+<td><p>3R, 8</p></td>
+</tr>
+<tr class="row-odd"><td><p>Neuroticism</p></td>
+<td><p>4R, 9</p></td>
+</tr>
+<tr class="row-even"><td><p>Openness</p></td>
+<td><p>5R, 10</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<blockquote>
+<div><p>Rammstedt, B., &amp; John, O. P. (2007). Measuring personality in one minute or less: A
+10-item short version of the Big Five Inventory in English and German. <em>Journal of
+Research in Personality, 41</em>, 203–212.</p>
+</div></blockquote>
+</section>
 <section id="visual-analogue-scale-to-evaluate-fatigue-severity-vasf">
 <h2>Visual Analogue Scale to Evaluate Fatigue Severity (<code class="docutils literal notranslate"><span class="pre">vasf</span></code>)<a class="headerlink" href="#visual-analogue-scale-to-evaluate-fatigue-severity-vasf" title="Link to this heading">¶</a></h2>
 <p>Eighteen items, each a line from 0 to 10 between two named anchors.</p>
@@ -377,6 +451,39 @@ eyes open is no effort at all”</em> — so each item carries its finished <cod
 <div><p>Lee, K. A., Hicks, G., &amp; Nino-Murcia, G. (1991). Validity and reliability of a
 scale to assess fatigue. <em>Psychiatry Research, 36</em>(3), 291–298.</p>
 </div></blockquote>
+</section>
+<section id="choosing-a-big-five-form">
+<h2>Choosing a Big Five form<a class="headerlink" href="#choosing-a-big-five-form" title="Link to this heading">¶</a></h2>
+<p>All three report the same five domains, in the same order, on the same <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">1]</span></code>
+scale, so they are interchangeable to downstream code.</p>
+<div class="table-wrapper colwidths-auto docutils container">
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>Items</p></th>
+<th class="head"><p>Facets</p></th>
+<th class="head"><p>Use when</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bfi2</span></code></p></td>
+<td><p>60</p></td>
+<td><p>yes</p></td>
+<td><p>Personality is a primary variable</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bfi2-xs</span></code></p></td>
+<td><p>15</p></td>
+<td><p>no</p></td>
+<td><p>Domain scores suffice and BFI-2 comparability matters</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bfi10</span></code></p></td>
+<td><p>10</p></td>
+<td><p>no</p></td>
+<td><p>Time is severely constrained</p></td>
+</tr>
+</tbody>
+</table>
+</div>
 </section>
 <section id="adding-an-instrument">
 <h2>Adding an instrument<a class="headerlink" href="#adding-an-instrument" title="Link to this heading">¶</a></h2>
@@ -445,7 +552,10 @@ references a missing item or reverse-keys an item it does not contain fails at i
             <ul>
 <li><a class="reference internal" href="#">Instruments</a><ul>
 <li><a class="reference internal" href="#big-five-inventory-2-bfi2">Big Five Inventory-2 (<code class="docutils literal notranslate"><span class="pre">bfi2</span></code>)</a></li>
+<li><a class="reference internal" href="#bfi-2-extra-short-form-bfi2-xs">BFI-2 Extra-Short Form (<code class="docutils literal notranslate"><span class="pre">bfi2-xs</span></code>)</a></li>
+<li><a class="reference internal" href="#big-five-inventory-10-bfi10">Big Five Inventory-10 (<code class="docutils literal notranslate"><span class="pre">bfi10</span></code>)</a></li>
 <li><a class="reference internal" href="#visual-analogue-scale-to-evaluate-fatigue-severity-vasf">Visual Analogue Scale to Evaluate Fatigue Severity (<code class="docutils literal notranslate"><span class="pre">vasf</span></code>)</a></li>
+<li><a class="reference internal" href="#choosing-a-big-five-form">Choosing a Big Five form</a></li>
 <li><a class="reference internal" href="#adding-an-instrument">Adding an instrument</a></li>
 </ul>
 </li>

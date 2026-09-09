@@ -20,7 +20,9 @@ Submodules
 .. toctree::
    :maxdepth: 1
 
+   /autoapi/personality_questionnaire/instruments/bfi10/index
    /autoapi/personality_questionnaire/instruments/bfi2/index
+   /autoapi/personality_questionnaire/instruments/bfi2_xs/index
    /autoapi/personality_questionnaire/instruments/vasf/index
 
 

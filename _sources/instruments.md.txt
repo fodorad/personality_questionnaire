@@ -36,6 +36,63 @@ Before 2.0 they were flipped unconditionally while the domain was not; see
 
 Free for research purposes; see the authors' terms.
 
+## BFI-2 Extra-Short Form (`bfi2-xs`)
+
+Fifteen items on the same 1–5 agreement scale as the BFI-2, three per domain, one
+drawn from each of that domain's facets. Retains roughly 80% of the full form's
+domain-level reliability.
+
+**Domains only.** With one item per facet the form cannot support facet scores, and
+the authors say so explicitly.
+
+Every item is borrowed from the BFI-2 **by reference** rather than retyped, so a
+wording correction in the parent propagates automatically. Only the item-number
+mapping is local, and the reverse keys are derived from the parent rather than
+transcribed — polarity is a property of an item's wording, so a borrowed item keeps
+the keying its source earned. A test checks the derived result against the published
+key regardless.
+
+Note that the numbering is the short form's own: item 1 of the BFI-2-XS is item 16 of
+the BFI-2.
+
+:::{note}
+Short-form scores are **not** interchangeable with full-form scores item for item.
+The BFI-2 reverses exactly half of each twelve-item domain, so a constant response
+collapses to the midpoint; a three-item domain reverses one or two of three and
+cannot balance. Both forms agree at the scale midpoint, and diverge away from it.
+:::
+
+> Soto, C. J., & John, O. P. (2017). Short and extra-short forms of the Big Five
+> Inventory-2: The BFI-2-S and BFI-2-XS. *Journal of Research in Personality, 68*,
+> 69–81.
+
+## Big Five Inventory-10 (`bfi10`)
+
+Ten items, two per domain, for settings under severe time pressure.
+
+Unlike the BFI-2-XS, the BFI-10 is **not** a subset of the BFI-2. It descends from
+the older BFI-44, so its wording differs, its stem differs ("I see myself as someone
+who…" rather than "I am someone who…"), and its midpoint label differs ("Neither
+agree nor disagree" rather than "Neutral; no opinion"). Its items are therefore
+native and carry no `source_number`. Published labels are reproduced per form rather
+than harmonised across them.
+
+Each domain deliberately pairs one positively and one negatively keyed item, so
+exactly five of the ten items are reversed and any uniform response cancels to the
+midpoint.
+
+| Domain | Items |
+| --- | --- |
+| Extraversion | 1R, 6 |
+| Agreeableness | 2, 7R |
+| Conscientiousness | 3R, 8 |
+| Neuroticism | 4R, 9 |
+| Openness | 5R, 10 |
+
+> Rammstedt, B., & John, O. P. (2007). Measuring personality in one minute or less: A
+> 10-item short version of the Big Five Inventory in English and German. *Journal of
+> Research in Personality, 41*, 203–212.
+
 ## Visual Analogue Scale to Evaluate Fatigue Severity (`vasf`)
 
 Eighteen items, each a line from 0 to 10 between two named anchors.
@@ -61,6 +118,17 @@ eyes open is no effort at all"* — so each item carries its finished `prompt`. 
 
 > Lee, K. A., Hicks, G., & Nino-Murcia, G. (1991). Validity and reliability of a
 > scale to assess fatigue. *Psychiatry Research, 36*(3), 291–298.
+
+## Choosing a Big Five form
+
+All three report the same five domains, in the same order, on the same `[0, 1]`
+scale, so they are interchangeable to downstream code.
+
+| | Items | Facets | Use when |
+| --- | --- | --- | --- |
+| `bfi2` | 60 | yes | Personality is a primary variable |
+| `bfi2-xs` | 15 | no | Domain scores suffice and BFI-2 comparability matters |
+| `bfi10` | 10 | no | Time is severely constrained |
 
 ## Adding an instrument
 
