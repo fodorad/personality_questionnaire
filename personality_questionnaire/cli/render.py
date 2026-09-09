@@ -5,10 +5,18 @@ from __future__ import annotations
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
+    from personality_questionnaire.analysis import Descriptive, SubscaleReliability
     from personality_questionnaire.registry import Questionnaire
     from personality_questionnaire.scoring import ScoreResult
 
-__all__ = ["format_instrument", "format_records", "format_registry", "format_scores"]
+__all__ = [
+    "format_descriptives",
+    "format_instrument",
+    "format_records",
+    "format_registry",
+    "format_reliability",
+    "format_scores",
+]
 
 
 def format_scores(result: ScoreResult, row: int = 0, *, decimals: int = 3) -> list[str]:
@@ -126,4 +134,71 @@ def format_records(summaries: list) -> list[str]:
             f"{summary.questionnaire:<{key_width}}  {summary.tag or '-':<6}  "
             f"{summary.n_responses:>5}  {collected}{marker}"
         )
+    return lines
+
+
+def format_reliability(
+    questionnaire: Questionnaire, per_subscale: dict[str, SubscaleReliability]
+) -> list[str]:
+    """Render internal-consistency diagnostics, grouped by subscale level.
+
+    Args:
+        questionnaire: The instrument the diagnostics were computed for.
+        per_subscale: Subscale name to its reliability diagnostics, as returned by
+            :func:`personality_questionnaire.analysis.subscale_reliability`.
+
+    Returns:
+        Lines to print.
+    """
+    lines = [f"{questionnaire.name} reliability:"]
+
+    for level in questionnaire.levels:
+        subscales = questionnaire.subscales_at(level)
+        if not subscales:
+            continue
+
+        lines.append("")
+        lines.append(f"  {level.title()}")
+        width = max(len(s.name) for s in subscales)
+        for subscale in subscales:
+            reliability = per_subscale[subscale.name]
+            weakest = min(reliability.item_total_correlations, default=0.0)
+            lines.append(
+                f"    {subscale.name:<{width}}  alpha={reliability.alpha:.3f}  "
+                f"n_items={reliability.n_items}  weakest_item_corr={weakest:.3f}"
+            )
+
+    return lines
+
+
+def format_descriptives(
+    questionnaire: Questionnaire, per_subscale: dict[str, Descriptive]
+) -> list[str]:
+    """Render descriptive statistics, grouped by subscale level.
+
+    Args:
+        questionnaire: The instrument the statistics were computed for.
+        per_subscale: Subscale name to its descriptive statistics, as returned by
+            :func:`personality_questionnaire.analysis.describe`.
+
+    Returns:
+        Lines to print.
+    """
+    lines = [f"{questionnaire.name} descriptives:"]
+
+    for level in questionnaire.levels:
+        subscales = questionnaire.subscales_at(level)
+        if not subscales:
+            continue
+
+        lines.append("")
+        lines.append(f"  {level.title()}")
+        width = max(len(s.name) for s in subscales)
+        for subscale in subscales:
+            d = per_subscale[subscale.name]
+            lines.append(
+                f"    {subscale.name:<{width}}  mean={d.mean:.3f}  sd={d.sd:.3f}  "
+                f"range=[{d.minimum:.3f}, {d.maximum:.3f}]  n={d.n}"
+            )
+
     return lines

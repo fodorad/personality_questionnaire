@@ -51,12 +51,6 @@ mysql = [
   "pymysql>=1.1",
 ]
 
-# Psychometric diagnostics over collected records.
-analysis = [
-  "scipy>=1.18.1",
-  "matplotlib",
-]
-
 dev = [
   "ruff",
   "ty",

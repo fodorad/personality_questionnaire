@@ -323,6 +323,42 @@ def _cmd_export(args: argparse.Namespace) -> int:
     return EXIT_OK
 
 
+def _cmd_analyze(args: argparse.Namespace) -> int:
+    """Report psychometric diagnostics for one instrument's collected records.
+
+    Args:
+        args: Parsed arguments.
+
+    Returns:
+        An exit code.
+    """
+    from personality_questionnaire import analysis
+
+    instrument = registry.get(args.questionnaire)
+    repository = _repository(args)
+    _codes, answers = repository.responses_for(args.questionnaire)
+
+    if len(answers) < 2:
+        log.error(
+            "need at least 2 complete %s records to compute diagnostics, found %d",
+            args.questionnaire,
+            len(answers),
+        )
+        return EXIT_MISSING_INPUT
+
+    responses = np.array(answers)
+
+    if args.metric in ("alpha", "corr"):
+        reliability = analysis.subscale_reliability(instrument, responses)
+        _emit(render.format_reliability(instrument, reliability))
+    else:
+        result = scoring.score(instrument, responses)
+        descriptives = analysis.describe(result.names, result.values)
+        _emit(render.format_descriptives(instrument, descriptives))
+
+    return EXIT_OK
+
+
 def _load_responses(path: Path, questionnaire: registry.Questionnaire) -> np.ndarray:
     """Load responses from a CSV, NPY or JSON file.
 
@@ -458,6 +494,21 @@ def build_parser() -> argparse.ArgumentParser:
     score_parser.add_argument("--input", required=True, help="responses (.csv, .npy or .json)")
     score_parser.add_argument("--output", default=None, help="write the scores to this CSV")
     score_parser.set_defaults(func=_cmd_score)
+
+    analyze_parser = subparsers.add_parser(
+        "analyze", help="report psychometric diagnostics over collected records"
+    )
+    analyze_parser.add_argument(
+        "questionnaire", choices=registry.keys(), help="instrument to analyze"
+    )
+    analyze_parser.add_argument(
+        "--metric",
+        default="alpha",
+        choices=("alpha", "describe", "corr"),
+        help="alpha/corr: reliability diagnostics; describe: score statistics",
+    )
+    analyze_parser.add_argument("--db", default=None, help="database URL")
+    analyze_parser.set_defaults(func=_cmd_analyze)
 
     return parser
 
