@@ -7,11 +7,12 @@ personality_questionnaire.core.theme
 
    Central theme tokens -- every colour this project uses lives here.
 
-   The palette is drawn from laboratory glassware and archival paper rather than the
-   saturated blues and violets that most research software reaches for: a participant
-   answering sixty introspective questions should not feel marketed to. Deep petrol
-   carries the chrome, a single muted ochre marks the item currently being answered,
-   and everything else stays quiet.
+   Dark navy carries the chrome; a single burnt-orange accent marks the item
+   currently being answered. The pairing is deliberately far from the muted
+   teal-and-sage research-software look this project used before 2.5 -- close enough
+   to a sibling project's own petrol-and-ochre palette that the two applications were
+   hard to tell apart at a glance. Navy against warm paper, with orange as the one
+   saturated colour in the room, reads as its own thing.
 
    Every foreground/background pairing defined here meets WCAG AA (4.5:1) for normal
    text against :data:`PAPER` or white. ``tests/core/test_theme.py`` asserts it, so a
@@ -36,6 +37,7 @@ Attributes
    personality_questionnaire.core.theme.NEUTRAL
    personality_questionnaire.core.theme.PAPER
    personality_questionnaire.core.theme.INK
+   personality_questionnaire.core.theme.UNANSWERED
    personality_questionnaire.core.theme.ROW_BORDER
    personality_questionnaire.core.theme.DOMAIN_COLORS
    personality_questionnaire.core.theme.LOGO_MARK_SVG
@@ -55,55 +57,65 @@ Module Contents
 ---------------
 
 .. py:data:: PRIMARY
-   :value: '#0F4C5C'
+   :value: '#12294B'
 
 
-   Deep petrol. Application header, primary actions, links.
+   Dark navy. Application header, primary actions, links.
 
 .. py:data:: ACCENT
-   :value: '#A9521F'
+   :value: '#B84C14'
 
 
-   Burnt ochre. The item being answered, progress fill -- used sparingly.
+   Burnt orange. The item being answered, progress fill -- the one saturated
+   colour in the palette, so it stays legible as a signal precisely because
+   everything else is quiet.
 
 .. py:data:: SUCCESS
-   :value: '#3F6B54'
+   :value: '#2E6E5E'
 
 
-   Muted sage. An item answered, a record saved.
+   Deep teal-green. An item answered, a record saved.
 
 .. py:data:: WARNING
-   :value: '#8A6508'
+   :value: '#8A5A00'
 
 
    Dark amber. An incomplete record, unanswered items remaining.
 
 .. py:data:: DANGER
-   :value: '#A63446'
+   :value: '#A6303B'
 
 
-   Deep rust. Validation failure, destructive actions.
+   Deep rust red. Validation failure, destructive actions.
 
 .. py:data:: NEUTRAL
-   :value: '#5A6670'
+   :value: '#565F6E'
 
 
-   Slate. Secondary text, totals, disabled states.
+   Cool slate. Secondary text, totals, disabled states.
 
 .. py:data:: PAPER
-   :value: '#FBFAF7'
+   :value: '#FAF8F5'
 
 
    Warm off-white. The page ground.
 
 .. py:data:: INK
-   :value: '#1B2A30'
+   :value: '#151B26'
 
 
-   Near-black with a petrol cast. Body text.
+   Near-black with a navy cast. Body text.
+
+.. py:data:: UNANSWERED
+   :value: '#DDD8D0'
+
+
+   Same hairline colour as :data:`ROW_BORDER`, isolated for cases that need only
+   the colour rather than the full declaration -- an unanswered questionnaire item's
+   border, for instance.
 
 .. py:data:: ROW_BORDER
-   :value: '1px solid #DCD9D2'
+   :value: '1px solid #DDD8D0'
 
 
    The hairline every list row and card carries.

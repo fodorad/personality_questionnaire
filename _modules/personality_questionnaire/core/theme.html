@@ -20,24 +20,24 @@
   body {
     --color-code-background: #f2f2f2;
   --color-code-foreground: #1e1e1e;
-  --color-brand-primary: #0F4C5C;
-  --color-brand-content: #0F4C5C;
+  --color-brand-primary: #12294B;
+  --color-brand-content: #12294B;
   
   }
   @media not print {
     body[data-theme="dark"] {
       --color-code-background: #202020;
   --color-code-foreground: #d0d0d0;
-  --color-brand-primary: #7FB3C0;
-  --color-brand-content: #7FB3C0;
+  --color-brand-primary: #E8925C;
+  --color-brand-content: #E8925C;
   
     }
     @media (prefers-color-scheme: dark) {
       body:not([data-theme="light"]) {
         --color-code-background: #202020;
   --color-code-foreground: #d0d0d0;
-  --color-brand-primary: #7FB3C0;
-  --color-brand-content: #7FB3C0;
+  --color-brand-primary: #E8925C;
+  --color-brand-content: #E8925C;
   
       }
     }
@@ -302,11 +302,12 @@
           <h1>Source code for personality_questionnaire.core.theme</h1><div class="highlight"><pre>
 <span></span><span class="sd">"""Central theme tokens -- every colour this project uses lives here.</span>
 
-<span class="sd">The palette is drawn from laboratory glassware and archival paper rather than the</span>
-<span class="sd">saturated blues and violets that most research software reaches for: a participant</span>
-<span class="sd">answering sixty introspective questions should not feel marketed to. Deep petrol</span>
-<span class="sd">carries the chrome, a single muted ochre marks the item currently being answered,</span>
-<span class="sd">and everything else stays quiet.</span>
+<span class="sd">Dark navy carries the chrome; a single burnt-orange accent marks the item</span>
+<span class="sd">currently being answered. The pairing is deliberately far from the muted</span>
+<span class="sd">teal-and-sage research-software look this project used before 2.5 -- close enough</span>
+<span class="sd">to a sibling project's own petrol-and-ochre palette that the two applications were</span>
+<span class="sd">hard to tell apart at a glance. Navy against warm paper, with orange as the one</span>
+<span class="sd">saturated colour in the room, reads as its own thing.</span>
 
 <span class="sd">Every foreground/background pairing defined here meets WCAG AA (4.5:1) for normal</span>
 <span class="sd">text against :data:`PAPER` or white. ``tests/core/test_theme.py`` asserts it, so a</span>
@@ -332,48 +333,56 @@
     <span class="s2">"PRIMARY"</span><span class="p">,</span>
     <span class="s2">"ROW_BORDER"</span><span class="p">,</span>
     <span class="s2">"SUCCESS"</span><span class="p">,</span>
+    <span class="s2">"UNANSWERED"</span><span class="p">,</span>
     <span class="s2">"WARNING"</span><span class="p">,</span>
     <span class="s2">"color"</span><span class="p">,</span>
     <span class="s2">"contrast_ratio"</span><span class="p">,</span>
     <span class="s2">"domain_color"</span><span class="p">,</span>
 <span class="p">]</span>
 
-<span class="n">PRIMARY</span> <span class="o">=</span> <span class="s2">"#0F4C5C"</span>
-<span class="sd">"""Deep petrol. Application header, primary actions, links."""</span>
+<span class="n">PRIMARY</span> <span class="o">=</span> <span class="s2">"#12294B"</span>
+<span class="sd">"""Dark navy. Application header, primary actions, links."""</span>
 
-<span class="n">ACCENT</span> <span class="o">=</span> <span class="s2">"#A9521F"</span>
-<span class="sd">"""Burnt ochre. The item being answered, progress fill -- used sparingly."""</span>
+<span class="n">ACCENT</span> <span class="o">=</span> <span class="s2">"#B84C14"</span>
+<span class="sd">"""Burnt orange. The item being answered, progress fill -- the one saturated</span>
+<span class="sd">colour in the palette, so it stays legible as a signal precisely because</span>
+<span class="sd">everything else is quiet."""</span>
 
-<span class="n">SUCCESS</span> <span class="o">=</span> <span class="s2">"#3F6B54"</span>
-<span class="sd">"""Muted sage. An item answered, a record saved."""</span>
+<span class="n">SUCCESS</span> <span class="o">=</span> <span class="s2">"#2E6E5E"</span>
+<span class="sd">"""Deep teal-green. An item answered, a record saved."""</span>
 
-<span class="n">WARNING</span> <span class="o">=</span> <span class="s2">"#8A6508"</span>
+<span class="n">WARNING</span> <span class="o">=</span> <span class="s2">"#8A5A00"</span>
 <span class="sd">"""Dark amber. An incomplete record, unanswered items remaining."""</span>
 
-<span class="n">DANGER</span> <span class="o">=</span> <span class="s2">"#A63446"</span>
-<span class="sd">"""Deep rust. Validation failure, destructive actions."""</span>
+<span class="n">DANGER</span> <span class="o">=</span> <span class="s2">"#A6303B"</span>
+<span class="sd">"""Deep rust red. Validation failure, destructive actions."""</span>
 
-<span class="n">NEUTRAL</span> <span class="o">=</span> <span class="s2">"#5A6670"</span>
-<span class="sd">"""Slate. Secondary text, totals, disabled states."""</span>
+<span class="n">NEUTRAL</span> <span class="o">=</span> <span class="s2">"#565F6E"</span>
+<span class="sd">"""Cool slate. Secondary text, totals, disabled states."""</span>
 
-<span class="n">PAPER</span> <span class="o">=</span> <span class="s2">"#FBFAF7"</span>
+<span class="n">PAPER</span> <span class="o">=</span> <span class="s2">"#FAF8F5"</span>
 <span class="sd">"""Warm off-white. The page ground."""</span>
 
-<span class="n">INK</span> <span class="o">=</span> <span class="s2">"#1B2A30"</span>
-<span class="sd">"""Near-black with a petrol cast. Body text."""</span>
+<span class="n">INK</span> <span class="o">=</span> <span class="s2">"#151B26"</span>
+<span class="sd">"""Near-black with a navy cast. Body text."""</span>
 
-<span class="n">ROW_BORDER</span> <span class="o">=</span> <span class="s2">"1px solid #DCD9D2"</span>
+<span class="n">UNANSWERED</span> <span class="o">=</span> <span class="s2">"#DDD8D0"</span>
+<span class="sd">"""Same hairline colour as :data:`ROW_BORDER`, isolated for cases that need only</span>
+<span class="sd">the colour rather than the full declaration -- an unanswered questionnaire item's</span>
+<span class="sd">border, for instance."""</span>
+
+<span class="n">ROW_BORDER</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">"1px solid </span><span class="si">{</span><span class="n">UNANSWERED</span><span class="si">}</span><span class="s2">"</span>
 <span class="sd">"""The hairline every list row and card carries."""</span>
 
 <span class="n">HEADER_FG</span> <span class="o">=</span> <span class="s2">"#FFFFFF"</span>
 <span class="sd">"""Header text and icons, readable on :data:`PRIMARY`."""</span>
 
 <span class="n">DOMAIN_COLORS</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">"openness"</span><span class="p">:</span> <span class="s2">"#0F4C5C"</span><span class="p">,</span>
-    <span class="s2">"conscientiousness"</span><span class="p">:</span> <span class="s2">"#3F6B54"</span><span class="p">,</span>
-    <span class="s2">"extraversion"</span><span class="p">:</span> <span class="s2">"#A9521F"</span><span class="p">,</span>
-    <span class="s2">"agreeableness"</span><span class="p">:</span> <span class="s2">"#7A5C8A"</span><span class="p">,</span>
-    <span class="s2">"neuroticism"</span><span class="p">:</span> <span class="s2">"#A63446"</span><span class="p">,</span>
+    <span class="s2">"openness"</span><span class="p">:</span> <span class="s2">"#3E4C8A"</span><span class="p">,</span>
+    <span class="s2">"conscientiousness"</span><span class="p">:</span> <span class="s2">"#2E6E5E"</span><span class="p">,</span>
+    <span class="s2">"extraversion"</span><span class="p">:</span> <span class="s2">"#B84C14"</span><span class="p">,</span>
+    <span class="s2">"agreeableness"</span><span class="p">:</span> <span class="s2">"#7A4A82"</span><span class="p">,</span>
+    <span class="s2">"neuroticism"</span><span class="p">:</span> <span class="s2">"#A6303B"</span><span class="p">,</span>
 <span class="p">}</span>
 <span class="sd">"""One colour per Big Five domain.</span>
 

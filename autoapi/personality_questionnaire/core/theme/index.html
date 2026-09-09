@@ -21,24 +21,24 @@
   body {
     --color-code-background: #f2f2f2;
   --color-code-foreground: #1e1e1e;
-  --color-brand-primary: #0F4C5C;
-  --color-brand-content: #0F4C5C;
+  --color-brand-primary: #12294B;
+  --color-brand-content: #12294B;
   
   }
   @media not print {
     body[data-theme="dark"] {
       --color-code-background: #202020;
   --color-code-foreground: #d0d0d0;
-  --color-brand-primary: #7FB3C0;
-  --color-brand-content: #7FB3C0;
+  --color-brand-primary: #E8925C;
+  --color-brand-content: #E8925C;
   
     }
     @media (prefers-color-scheme: dark) {
       body:not([data-theme="light"]) {
         --color-code-background: #202020;
   --color-code-foreground: #d0d0d0;
-  --color-brand-primary: #7FB3C0;
-  --color-brand-content: #7FB3C0;
+  --color-brand-primary: #E8925C;
+  --color-brand-content: #E8925C;
   
       }
     }
@@ -313,11 +313,12 @@
           <section id="module-personality_questionnaire.core.theme">
 <span id="personality-questionnaire-core-theme"></span><h1>personality_questionnaire.core.theme<a class="headerlink" href="#module-personality_questionnaire.core.theme" title="Link to this heading">¶</a></h1>
 <p>Central theme tokens – every colour this project uses lives here.</p>
-<p>The palette is drawn from laboratory glassware and archival paper rather than the
-saturated blues and violets that most research software reaches for: a participant
-answering sixty introspective questions should not feel marketed to. Deep petrol
-carries the chrome, a single muted ochre marks the item currently being answered,
-and everything else stays quiet.</p>
+<p>Dark navy carries the chrome; a single burnt-orange accent marks the item
+currently being answered. The pairing is deliberately far from the muted
+teal-and-sage research-software look this project used before 2.5 – close enough
+to a sibling project’s own petrol-and-ochre palette that the two applications were
+hard to tell apart at a glance. Navy against warm paper, with orange as the one
+saturated colour in the room, reads as its own thing.</p>
 <p>Every foreground/background pairing defined here meets WCAG AA (4.5:1) for normal
 text against <a class="reference internal" href="#personality_questionnaire.core.theme.PAPER" title="personality_questionnaire.core.theme.PAPER"><code class="xref py py-data docutils literal notranslate"><span class="pre">PAPER</span></code></a> or white. <code class="docutils literal notranslate"><span class="pre">tests/core/test_theme.py</span></code> asserts it, so a
 future colour tweak cannot quietly make the questionnaire harder to read.</p>
@@ -330,36 +331,39 @@ icon and the localhost application.</p>
 <table class="autosummary longtable docutils align-default">
 <tbody>
 <tr class="row-odd"><td><p><a class="reference internal" href="#personality_questionnaire.core.theme.PRIMARY" title="personality_questionnaire.core.theme.PRIMARY"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PRIMARY</span></code></a></p></td>
-<td><p>Deep petrol. Application header, primary actions, links.</p></td>
+<td><p>Dark navy. Application header, primary actions, links.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#personality_questionnaire.core.theme.ACCENT" title="personality_questionnaire.core.theme.ACCENT"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ACCENT</span></code></a></p></td>
-<td><p>Burnt ochre. The item being answered, progress fill -- used sparingly.</p></td>
+<td><p>Burnt orange. The item being answered, progress fill -- the one saturated</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#personality_questionnaire.core.theme.SUCCESS" title="personality_questionnaire.core.theme.SUCCESS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">SUCCESS</span></code></a></p></td>
-<td><p>Muted sage. An item answered, a record saved.</p></td>
+<td><p>Deep teal-green. An item answered, a record saved.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#personality_questionnaire.core.theme.WARNING" title="personality_questionnaire.core.theme.WARNING"><code class="xref py py-obj docutils literal notranslate"><span class="pre">WARNING</span></code></a></p></td>
 <td><p>Dark amber. An incomplete record, unanswered items remaining.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#personality_questionnaire.core.theme.DANGER" title="personality_questionnaire.core.theme.DANGER"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DANGER</span></code></a></p></td>
-<td><p>Deep rust. Validation failure, destructive actions.</p></td>
+<td><p>Deep rust red. Validation failure, destructive actions.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#personality_questionnaire.core.theme.NEUTRAL" title="personality_questionnaire.core.theme.NEUTRAL"><code class="xref py py-obj docutils literal notranslate"><span class="pre">NEUTRAL</span></code></a></p></td>
-<td><p>Slate. Secondary text, totals, disabled states.</p></td>
+<td><p>Cool slate. Secondary text, totals, disabled states.</p></td>
 </tr>
 <tr class="row-odd"><td><p><a class="reference internal" href="#personality_questionnaire.core.theme.PAPER" title="personality_questionnaire.core.theme.PAPER"><code class="xref py py-obj docutils literal notranslate"><span class="pre">PAPER</span></code></a></p></td>
 <td><p>Warm off-white. The page ground.</p></td>
 </tr>
 <tr class="row-even"><td><p><a class="reference internal" href="#personality_questionnaire.core.theme.INK" title="personality_questionnaire.core.theme.INK"><code class="xref py py-obj docutils literal notranslate"><span class="pre">INK</span></code></a></p></td>
-<td><p>Near-black with a petrol cast. Body text.</p></td>
+<td><p>Near-black with a navy cast. Body text.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#personality_questionnaire.core.theme.ROW_BORDER" title="personality_questionnaire.core.theme.ROW_BORDER"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ROW_BORDER</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#personality_questionnaire.core.theme.UNANSWERED" title="personality_questionnaire.core.theme.UNANSWERED"><code class="xref py py-obj docutils literal notranslate"><span class="pre">UNANSWERED</span></code></a></p></td>
+<td><p>Same hairline colour as <a class="reference internal" href="#personality_questionnaire.core.theme.ROW_BORDER" title="personality_questionnaire.core.theme.ROW_BORDER"><code class="xref py py-data docutils literal notranslate"><span class="pre">ROW_BORDER</span></code></a>, isolated for cases that need only</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#personality_questionnaire.core.theme.ROW_BORDER" title="personality_questionnaire.core.theme.ROW_BORDER"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ROW_BORDER</span></code></a></p></td>
 <td><p>The hairline every list row and card carries.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#personality_questionnaire.core.theme.DOMAIN_COLORS" title="personality_questionnaire.core.theme.DOMAIN_COLORS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DOMAIN_COLORS</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#personality_questionnaire.core.theme.DOMAIN_COLORS" title="personality_questionnaire.core.theme.DOMAIN_COLORS"><code class="xref py py-obj docutils literal notranslate"><span class="pre">DOMAIN_COLORS</span></code></a></p></td>
 <td><p>One colour per Big Five domain.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#personality_questionnaire.core.theme.LOGO_MARK_SVG" title="personality_questionnaire.core.theme.LOGO_MARK_SVG"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LOGO_MARK_SVG</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#personality_questionnaire.core.theme.LOGO_MARK_SVG" title="personality_questionnaire.core.theme.LOGO_MARK_SVG"><code class="xref py py-obj docutils literal notranslate"><span class="pre">LOGO_MARK_SVG</span></code></a></p></td>
 <td><p>a five-by-five Likert response grid.</p></td>
 </tr>
 </tbody>
@@ -388,55 +392,65 @@ icon and the localhost application.</p>
 <h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading">¶</a></h2>
 <dl class="py data">
 <dt class="sig sig-object py" id="personality_questionnaire.core.theme.PRIMARY">
-<span class="sig-prename descclassname"><span class="pre">personality_questionnaire.core.theme.</span></span><span class="sig-name descname"><span class="pre">PRIMARY</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'#0F4C5C'</span></span><a class="headerlink" href="#personality_questionnaire.core.theme.PRIMARY" title="Link to this definition">¶</a></dt>
-<dd><p>Deep petrol. Application header, primary actions, links.</p>
+<span class="sig-prename descclassname"><span class="pre">personality_questionnaire.core.theme.</span></span><span class="sig-name descname"><span class="pre">PRIMARY</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'#12294B'</span></span><a class="headerlink" href="#personality_questionnaire.core.theme.PRIMARY" title="Link to this definition">¶</a></dt>
+<dd><p>Dark navy. Application header, primary actions, links.</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="personality_questionnaire.core.theme.ACCENT">
-<span class="sig-prename descclassname"><span class="pre">personality_questionnaire.core.theme.</span></span><span class="sig-name descname"><span class="pre">ACCENT</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'#A9521F'</span></span><a class="headerlink" href="#personality_questionnaire.core.theme.ACCENT" title="Link to this definition">¶</a></dt>
-<dd><p>Burnt ochre. The item being answered, progress fill – used sparingly.</p>
+<span class="sig-prename descclassname"><span class="pre">personality_questionnaire.core.theme.</span></span><span class="sig-name descname"><span class="pre">ACCENT</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'#B84C14'</span></span><a class="headerlink" href="#personality_questionnaire.core.theme.ACCENT" title="Link to this definition">¶</a></dt>
+<dd><p>Burnt orange. The item being answered, progress fill – the one saturated
+colour in the palette, so it stays legible as a signal precisely because
+everything else is quiet.</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="personality_questionnaire.core.theme.SUCCESS">
-<span class="sig-prename descclassname"><span class="pre">personality_questionnaire.core.theme.</span></span><span class="sig-name descname"><span class="pre">SUCCESS</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'#3F6B54'</span></span><a class="headerlink" href="#personality_questionnaire.core.theme.SUCCESS" title="Link to this definition">¶</a></dt>
-<dd><p>Muted sage. An item answered, a record saved.</p>
+<span class="sig-prename descclassname"><span class="pre">personality_questionnaire.core.theme.</span></span><span class="sig-name descname"><span class="pre">SUCCESS</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'#2E6E5E'</span></span><a class="headerlink" href="#personality_questionnaire.core.theme.SUCCESS" title="Link to this definition">¶</a></dt>
+<dd><p>Deep teal-green. An item answered, a record saved.</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="personality_questionnaire.core.theme.WARNING">
-<span class="sig-prename descclassname"><span class="pre">personality_questionnaire.core.theme.</span></span><span class="sig-name descname"><span class="pre">WARNING</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'#8A6508'</span></span><a class="headerlink" href="#personality_questionnaire.core.theme.WARNING" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">personality_questionnaire.core.theme.</span></span><span class="sig-name descname"><span class="pre">WARNING</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'#8A5A00'</span></span><a class="headerlink" href="#personality_questionnaire.core.theme.WARNING" title="Link to this definition">¶</a></dt>
 <dd><p>Dark amber. An incomplete record, unanswered items remaining.</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="personality_questionnaire.core.theme.DANGER">
-<span class="sig-prename descclassname"><span class="pre">personality_questionnaire.core.theme.</span></span><span class="sig-name descname"><span class="pre">DANGER</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'#A63446'</span></span><a class="headerlink" href="#personality_questionnaire.core.theme.DANGER" title="Link to this definition">¶</a></dt>
-<dd><p>Deep rust. Validation failure, destructive actions.</p>
+<span class="sig-prename descclassname"><span class="pre">personality_questionnaire.core.theme.</span></span><span class="sig-name descname"><span class="pre">DANGER</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'#A6303B'</span></span><a class="headerlink" href="#personality_questionnaire.core.theme.DANGER" title="Link to this definition">¶</a></dt>
+<dd><p>Deep rust red. Validation failure, destructive actions.</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="personality_questionnaire.core.theme.NEUTRAL">
-<span class="sig-prename descclassname"><span class="pre">personality_questionnaire.core.theme.</span></span><span class="sig-name descname"><span class="pre">NEUTRAL</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'#5A6670'</span></span><a class="headerlink" href="#personality_questionnaire.core.theme.NEUTRAL" title="Link to this definition">¶</a></dt>
-<dd><p>Slate. Secondary text, totals, disabled states.</p>
+<span class="sig-prename descclassname"><span class="pre">personality_questionnaire.core.theme.</span></span><span class="sig-name descname"><span class="pre">NEUTRAL</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'#565F6E'</span></span><a class="headerlink" href="#personality_questionnaire.core.theme.NEUTRAL" title="Link to this definition">¶</a></dt>
+<dd><p>Cool slate. Secondary text, totals, disabled states.</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="personality_questionnaire.core.theme.PAPER">
-<span class="sig-prename descclassname"><span class="pre">personality_questionnaire.core.theme.</span></span><span class="sig-name descname"><span class="pre">PAPER</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'#FBFAF7'</span></span><a class="headerlink" href="#personality_questionnaire.core.theme.PAPER" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">personality_questionnaire.core.theme.</span></span><span class="sig-name descname"><span class="pre">PAPER</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'#FAF8F5'</span></span><a class="headerlink" href="#personality_questionnaire.core.theme.PAPER" title="Link to this definition">¶</a></dt>
 <dd><p>Warm off-white. The page ground.</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="personality_questionnaire.core.theme.INK">
-<span class="sig-prename descclassname"><span class="pre">personality_questionnaire.core.theme.</span></span><span class="sig-name descname"><span class="pre">INK</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'#1B2A30'</span></span><a class="headerlink" href="#personality_questionnaire.core.theme.INK" title="Link to this definition">¶</a></dt>
-<dd><p>Near-black with a petrol cast. Body text.</p>
+<span class="sig-prename descclassname"><span class="pre">personality_questionnaire.core.theme.</span></span><span class="sig-name descname"><span class="pre">INK</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'#151B26'</span></span><a class="headerlink" href="#personality_questionnaire.core.theme.INK" title="Link to this definition">¶</a></dt>
+<dd><p>Near-black with a navy cast. Body text.</p>
+</dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="personality_questionnaire.core.theme.UNANSWERED">
+<span class="sig-prename descclassname"><span class="pre">personality_questionnaire.core.theme.</span></span><span class="sig-name descname"><span class="pre">UNANSWERED</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'#DDD8D0'</span></span><a class="headerlink" href="#personality_questionnaire.core.theme.UNANSWERED" title="Link to this definition">¶</a></dt>
+<dd><p>Same hairline colour as <a class="reference internal" href="#personality_questionnaire.core.theme.ROW_BORDER" title="personality_questionnaire.core.theme.ROW_BORDER"><code class="xref py py-data docutils literal notranslate"><span class="pre">ROW_BORDER</span></code></a>, isolated for cases that need only
+the colour rather than the full declaration – an unanswered questionnaire item’s
+border, for instance.</p>
 </dd></dl>
 
 <dl class="py data">
 <dt class="sig sig-object py" id="personality_questionnaire.core.theme.ROW_BORDER">
-<span class="sig-prename descclassname"><span class="pre">personality_questionnaire.core.theme.</span></span><span class="sig-name descname"><span class="pre">ROW_BORDER</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'1px</span> <span class="pre">solid</span> <span class="pre">#DCD9D2'</span></span><a class="headerlink" href="#personality_questionnaire.core.theme.ROW_BORDER" title="Link to this definition">¶</a></dt>
+<span class="sig-prename descclassname"><span class="pre">personality_questionnaire.core.theme.</span></span><span class="sig-name descname"><span class="pre">ROW_BORDER</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'1px</span> <span class="pre">solid</span> <span class="pre">#DDD8D0'</span></span><a class="headerlink" href="#personality_questionnaire.core.theme.ROW_BORDER" title="Link to this definition">¶</a></dt>
 <dd><p>The hairline every list row and card carries.</p>
 </dd></dl>
 
@@ -592,6 +606,7 @@ matches <code class="docutils literal notranslate"><span class="pre">docs/assets
 <li><a class="reference internal" href="#personality_questionnaire.core.theme.NEUTRAL"><code class="docutils literal notranslate"><span class="pre">NEUTRAL</span></code></a></li>
 <li><a class="reference internal" href="#personality_questionnaire.core.theme.PAPER"><code class="docutils literal notranslate"><span class="pre">PAPER</span></code></a></li>
 <li><a class="reference internal" href="#personality_questionnaire.core.theme.INK"><code class="docutils literal notranslate"><span class="pre">INK</span></code></a></li>
+<li><a class="reference internal" href="#personality_questionnaire.core.theme.UNANSWERED"><code class="docutils literal notranslate"><span class="pre">UNANSWERED</span></code></a></li>
 <li><a class="reference internal" href="#personality_questionnaire.core.theme.ROW_BORDER"><code class="docutils literal notranslate"><span class="pre">ROW_BORDER</span></code></a></li>
 <li><a class="reference internal" href="#personality_questionnaire.core.theme.DOMAIN_COLORS"><code class="docutils literal notranslate"><span class="pre">DOMAIN_COLORS</span></code></a></li>
 <li><a class="reference internal" href="#personality_questionnaire.core.theme.domain_color"><code class="docutils literal notranslate"><span class="pre">domain_color()</span></code></a></li>
