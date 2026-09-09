@@ -10,6 +10,46 @@ Commits.
 
 ---
 
+## [2.0.0](https://github.com/fodorad/personality_questionnaire/compare/v1.1.2...v2.0.0) (2026-09-09)
+
+
+### ⚠ BREAKING CHANGES
+
+* restructure onto a questionnaire registry and correct BFI-2 scoring ([#1](https://github.com/fodorad/personality_questionnaire/issues/1))
+* the three Negative Emotionality facets change sign. Pass legacy_facet_polarity=True to bfi2() to restore pre-2.0 values; domain scores are unaffected. DATA_DIR and PROJECT_DIR now warn and do not resolve from an installed wheel -- DATA_DIR pointed at a directory beside site-packages that was never shipped, so the 1.x wheel was already broken for any consumer that touched it; use personality_questionnaire.asset() instead. DOMAIN_SCALES_AS_FACET_SCALES is removed, having never been read by any code path. The minimum supported Python is now 3.12. Every other published name -- bfi2(), bfi2_trait(), flip_trait_dimension(), vasf(), DOMAIN_SCALES, FACET_SCALES, ANSWER, BFI2_QUESTIONNAIRE, VASF_QUESTIONNAIRE and ANSWER_DIMS -- keeps its exact signature and return value.
+
+### Features
+
+* **cli:** replace the --questionnaire flag with list, info, run and score subcommands ([2179b13](https://github.com/fodorad/personality_questionnaire/commit/2179b138047505d0ede5bd9b6d0cddff614b5223))
+* **core:** add a theme module with a WCAG AA verified palette and repository mark ([2179b13](https://github.com/fodorad/personality_questionnaire/commit/2179b138047505d0ede5bd9b6d0cddff614b5223))
+* **instruments:** give the VAS-F its own Fatigue and Energy subscales ([2179b13](https://github.com/fodorad/personality_questionnaire/commit/2179b138047505d0ede5bd9b6d0cddff614b5223))
+* record package version, git SHA and instrument hash with every scoring run ([2179b13](https://github.com/fodorad/personality_questionnaire/commit/2179b138047505d0ede5bd9b6d0cddff614b5223))
+* restructure onto a questionnaire registry and correct BFI-2 scoring ([#1](https://github.com/fodorad/personality_questionnaire/issues/1)) ([2179b13](https://github.com/fodorad/personality_questionnaire/commit/2179b138047505d0ede5bd9b6d0cddff614b5223))
+* ship py.typed so downstream type checkers see the annotations ([2179b13](https://github.com/fodorad/personality_questionnaire/commit/2179b138047505d0ede5bd9b6d0cddff614b5223))
+
+
+### Bug Fixes
+
+* **cli:** default --output-dir to writing nothing instead of the tracked data directory ([2179b13](https://github.com/fodorad/personality_questionnaire/commit/2179b138047505d0ede5bd9b6d0cddff614b5223))
+* **cli:** exit rather than block forever when input ends mid-questionnaire ([2179b13](https://github.com/fodorad/personality_questionnaire/commit/2179b138047505d0ede5bd9b6d0cddff614b5223))
+* **cli:** stop returning a failure exit code from the VAS-F pre path ([2179b13](https://github.com/fodorad/personality_questionnaire/commit/2179b138047505d0ede5bd9b6d0cddff614b5223))
+* **instruments:** compose VAS-F prompts in the instrument, correcting an anchor typo ([2179b13](https://github.com/fodorad/personality_questionnaire/commit/2179b138047505d0ede5bd9b6d0cddff614b5223))
+* **io:** report the offending line number instead of raising an opaque numpy error ([2179b13](https://github.com/fodorad/personality_questionnaire/commit/2179b138047505d0ede5bd9b6d0cddff614b5223))
+* **io:** set an explicit encoding and newline so CSV rows are not double-spaced ([2179b13](https://github.com/fodorad/personality_questionnaire/commit/2179b138047505d0ede5bd9b6d0cddff614b5223))
+* ship instrument data inside the wheel via importlib.resources ([2179b13](https://github.com/fodorad/personality_questionnaire/commit/2179b138047505d0ede5bd9b6d0cddff614b5223))
+
+
+### Documentation
+
+* add a README, instrument reference, design notes and migration guide ([2179b13](https://github.com/fodorad/personality_questionnaire/commit/2179b138047505d0ede5bd9b6d0cddff614b5223))
+* add the coverage badge and correct the Python badge to 3.12-3.14 ([2179b13](https://github.com/fodorad/personality_questionnaire/commit/2179b138047505d0ede5bd9b6d0cddff614b5223))
+* publish the Sphinx site to GitHub Pages ([2179b13](https://github.com/fodorad/personality_questionnaire/commit/2179b138047505d0ede5bd9b6d0cddff614b5223))
+
+
+### Build System
+
+* raise the minimum supported Python to 3.12 ([2179b13](https://github.com/fodorad/personality_questionnaire/commit/2179b138047505d0ede5bd9b6d0cddff614b5223))
+
 ## 2.0.0
 
 ### ⚠ BREAKING CHANGES
