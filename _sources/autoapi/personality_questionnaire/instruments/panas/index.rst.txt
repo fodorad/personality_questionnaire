@@ -1,0 +1,69 @@
+personality_questionnaire.instruments.panas
+===========================================
+
+.. py:module:: personality_questionnaire.instruments.panas
+
+.. autoapi-nested-parse::
+
+   The Positive and Negative Affect Schedule (PANAS), 20 items.
+
+   Watson, D., Clark, L. A., & Tellegen, A. (1988). Development and validation of brief
+   measures of positive and negative affect: the PANAS scales. ``Journal of Personality
+   and Social Psychology, 54(6)``, 1063-1070.
+
+   Twenty mood adjectives, ten measuring Positive Affect and ten Negative Affect, rated
+   for how strongly the respondent has felt that way over a stated period. The two
+   scales are near-independent rather than opposite ends of one dimension, which is the
+   instrument's central claim.
+
+   **No item is reverse-keyed.** Each adjective is scored in the direction it is worded,
+   and a negative adjective raises Negative Affect rather than lowering Positive Affect.
+   This makes the PANAS the first shipped instrument whose reverse-key set is empty,
+   which exercises that branch of the shared scorer.
+
+   Like the VAS-F, the PANAS is well suited to pre/post administration around an
+   intervention; see :func:`personality_questionnaire.scoring.delta`.
+
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   personality_questionnaire.instruments.panas.PANAS_LABELS
+   personality_questionnaire.instruments.panas.PANAS_ITEM_TEXT
+   personality_questionnaire.instruments.panas.PANAS
+
+
+Module Contents
+---------------
+
+.. py:data:: PANAS_LABELS
+   :type:  dict[str, int]
+
+   The PANAS's five response options.
+
+   These describe intensity rather than agreement, unlike the BFI forms: the respondent
+   reports how strongly a mood applied, not whether a statement is true of them.
+
+.. py:data:: PANAS_ITEM_TEXT
+   :type:  dict[int, str]
+
+   The 20 PANAS adjectives, in the published administration order.
+
+   Positive and negative adjectives alternate early in the form and interleave
+   throughout, so a respondent cannot answer a whole scale by pattern.
+
+.. py:data:: PANAS
+   :type:  personality_questionnaire.registry.Questionnaire
+
+   The registered PANAS instrument.
+
+   Each scale is reported twice. ``Positive Affect`` and ``Negative Affect`` are means
+   normalised to ``[0, 1]``, matching every other instrument here so downstream code
+   sees one convention. ``Positive Affect (sum)`` and ``Negative Affect (sum)`` are the
+   10-50 totals the literature is written in -- Watson et al. report normative means of
+   33.3 for Positive Affect and 17.4 for Negative Affect -- so a published comparison
+   needs no arithmetic at the call site.
+

@@ -228,6 +228,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../instruments/bfi10/index.html">personality_questionnaire.instruments.bfi10</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../instruments/bfi2/index.html">personality_questionnaire.instruments.bfi2</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../instruments/bfi2_xs/index.html">personality_questionnaire.instruments.bfi2_xs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../instruments/panas/index.html">personality_questionnaire.instruments.panas</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../instruments/vasf/index.html">personality_questionnaire.instruments.vasf</a></li>
 </ul>
 </li>
@@ -313,16 +314,19 @@ a participant has already answered every item.</p>
 <div class="table-wrapper autosummary longtable docutils container">
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#personality_questionnaire.registry.ScaleType" title="personality_questionnaire.registry.ScaleType"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ScaleType</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#personality_questionnaire.registry.Aggregation" title="personality_questionnaire.registry.Aggregation"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Aggregation</span></code></a></p></td>
+<td><p>How a subscale combines its items into a score.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#personality_questionnaire.registry.ScaleType" title="personality_questionnaire.registry.ScaleType"><code class="xref py py-obj docutils literal notranslate"><span class="pre">ScaleType</span></code></a></p></td>
 <td><p>How a single item is answered.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#personality_questionnaire.registry.Item" title="personality_questionnaire.registry.Item"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Item</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#personality_questionnaire.registry.Item" title="personality_questionnaire.registry.Item"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Item</span></code></a></p></td>
 <td><p>One questionnaire item.</p></td>
 </tr>
-<tr class="row-odd"><td><p><a class="reference internal" href="#personality_questionnaire.registry.Subscale" title="personality_questionnaire.registry.Subscale"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Subscale</span></code></a></p></td>
+<tr class="row-even"><td><p><a class="reference internal" href="#personality_questionnaire.registry.Subscale" title="personality_questionnaire.registry.Subscale"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Subscale</span></code></a></p></td>
 <td><p>A scored scale: a set of items, some of which may be reverse-keyed.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#personality_questionnaire.registry.Questionnaire" title="personality_questionnaire.registry.Questionnaire"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Questionnaire</span></code></a></p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#personality_questionnaire.registry.Questionnaire" title="personality_questionnaire.registry.Questionnaire"><code class="xref py py-obj docutils literal notranslate"><span class="pre">Questionnaire</span></code></a></p></td>
 <td><p>A complete, self-describing instrument.</p></td>
 </tr>
 </tbody>
@@ -349,6 +353,30 @@ a participant has already answered every item.</p>
 </section>
 <section id="module-contents">
 <h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading">¶</a></h2>
+<dl class="py class">
+<dt class="sig sig-object py" id="personality_questionnaire.registry.Aggregation">
+<span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">personality_questionnaire.registry.</span></span><span class="sig-name descname"><span class="pre">Aggregation</span></span><a class="reference internal" href="../../../_modules/personality_questionnaire/registry.html#Aggregation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#personality_questionnaire.registry.Aggregation" title="Link to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-obj docutils literal notranslate"><span class="pre">enum.StrEnum</span></code></p>
+<p>How a subscale combines its items into a score.</p>
+<p>Most instruments average, which keeps a score on the same range as a single
+item and makes scales of different lengths comparable. Some are published as a
+total instead – the PANAS reports 10-50 per scale – and reproducing the
+published number matters more than internal consistency there.</p>
+<p>Initialize self.  See help(type(self)) for accurate signature.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="personality_questionnaire.registry.Aggregation.MEAN">
+<span class="sig-name descname"><span class="pre">MEAN</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'mean'</span></span><a class="headerlink" href="#personality_questionnaire.registry.Aggregation.MEAN" title="Link to this definition">¶</a></dt>
+<dd><p>Average of the (reverse-keyed) items. Normalisable to <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">1]</span></code>.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="personality_questionnaire.registry.Aggregation.SUM">
+<span class="sig-name descname"><span class="pre">SUM</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'sum'</span></span><a class="headerlink" href="#personality_questionnaire.registry.Aggregation.SUM" title="Link to this definition">¶</a></dt>
+<dd><p>Total of the (reverse-keyed) items, as published. Never normalised.</p>
+</dd></dl>
+
+</dd></dl>
+
 <dl class="py class">
 <dt class="sig sig-object py" id="personality_questionnaire.registry.ScaleType">
 <span class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></span><span class="sig-prename descclassname"><span class="pre">personality_questionnaire.registry.</span></span><span class="sig-name descname"><span class="pre">ScaleType</span></span><a class="reference internal" href="../../../_modules/personality_questionnaire/registry.html#ScaleType"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#personality_questionnaire.registry.ScaleType" title="Link to this definition">¶</a></dt>
@@ -465,6 +493,14 @@ output ordering and UI grouping only.</p>
 <dd><p>Plain-language direction of the scale, e.g. <code class="docutils literal notranslate"><span class="pre">&quot;more</span> <span class="pre">neurotic&quot;</span></code>.
 Recorded as data so a consumer never has to infer polarity from a name,
 which is precisely the inference that went wrong before 2.0.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="personality_questionnaire.registry.Subscale.aggregation">
+<span class="sig-name descname"><span class="pre">aggregation</span></span><a class="headerlink" href="#personality_questionnaire.registry.Subscale.aggregation" title="Link to this definition">¶</a></dt>
+<dd><p>How the items combine. Defaults to a mean; a scale published as
+a total declares <a class="reference internal" href="#personality_questionnaire.registry.Aggregation.SUM" title="personality_questionnaire.registry.Aggregation.SUM"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Aggregation.SUM</span></code></a>, and is left unnormalised so it
+reproduces the published number.</p>
 </dd></dl>
 
 </dd></dl>
@@ -752,6 +788,11 @@ statement.</p>
 <li><a class="reference internal" href="#classes">Classes</a></li>
 <li><a class="reference internal" href="#functions">Functions</a></li>
 <li><a class="reference internal" href="#module-contents">Module Contents</a><ul>
+<li><a class="reference internal" href="#personality_questionnaire.registry.Aggregation"><code class="docutils literal notranslate"><span class="pre">Aggregation</span></code></a><ul>
+<li><a class="reference internal" href="#personality_questionnaire.registry.Aggregation.MEAN"><code class="docutils literal notranslate"><span class="pre">Aggregation.MEAN</span></code></a></li>
+<li><a class="reference internal" href="#personality_questionnaire.registry.Aggregation.SUM"><code class="docutils literal notranslate"><span class="pre">Aggregation.SUM</span></code></a></li>
+</ul>
+</li>
 <li><a class="reference internal" href="#personality_questionnaire.registry.ScaleType"><code class="docutils literal notranslate"><span class="pre">ScaleType</span></code></a><ul>
 <li><a class="reference internal" href="#personality_questionnaire.registry.ScaleType.LIKERT"><code class="docutils literal notranslate"><span class="pre">ScaleType.LIKERT</span></code></a></li>
 <li><a class="reference internal" href="#personality_questionnaire.registry.ScaleType.VISUAL_ANALOGUE"><code class="docutils literal notranslate"><span class="pre">ScaleType.VISUAL_ANALOGUE</span></code></a></li>
@@ -773,6 +814,7 @@ statement.</p>
 <li><a class="reference internal" href="#personality_questionnaire.registry.Subscale.level"><code class="docutils literal notranslate"><span class="pre">Subscale.level</span></code></a></li>
 <li><a class="reference internal" href="#personality_questionnaire.registry.Subscale.parent"><code class="docutils literal notranslate"><span class="pre">Subscale.parent</span></code></a></li>
 <li><a class="reference internal" href="#personality_questionnaire.registry.Subscale.higher_is"><code class="docutils literal notranslate"><span class="pre">Subscale.higher_is</span></code></a></li>
+<li><a class="reference internal" href="#personality_questionnaire.registry.Subscale.aggregation"><code class="docutils literal notranslate"><span class="pre">Subscale.aggregation</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#personality_questionnaire.registry.Questionnaire"><code class="docutils literal notranslate"><span class="pre">Questionnaire</span></code></a><ul>

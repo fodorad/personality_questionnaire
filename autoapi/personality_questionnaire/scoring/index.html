@@ -228,6 +228,7 @@
 <li class="toctree-l3"><a class="reference internal" href="../instruments/bfi10/index.html">personality_questionnaire.instruments.bfi10</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../instruments/bfi2/index.html">personality_questionnaire.instruments.bfi2</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../instruments/bfi2_xs/index.html">personality_questionnaire.instruments.bfi2_xs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../instruments/panas/index.html">personality_questionnaire.instruments.panas</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../instruments/vasf/index.html">personality_questionnaire.instruments.vasf</a></li>
 </ul>
 </li>
@@ -460,7 +461,9 @@ with <code class="docutils literal notranslate"><span class="pre">names</span></
 <dt class="sig sig-object py" id="personality_questionnaire.scoring.ScoreResult.normalized">
 <span class="sig-name descname"><span class="pre">normalized</span></span><a class="headerlink" href="#personality_questionnaire.scoring.ScoreResult.normalized" title="Link to this definition">¶</a></dt>
 <dd><p>Whether <code class="docutils literal notranslate"><span class="pre">values</span></code> is rescaled to <code class="docutils literal notranslate"><span class="pre">[0,</span> <span class="pre">1]</span></code> or left on the
-instrument’s own response scale.</p>
+instrument’s own response scale. Subscales declaring
+<a class="reference internal" href="../registry/index.html#personality_questionnaire.registry.Aggregation.SUM" title="personality_questionnaire.registry.Aggregation.SUM"><code class="xref py py-attr docutils literal notranslate"><span class="pre">SUM</span></code></a> are never
+rescaled, whatever this says.</p>
 </dd></dl>
 
 <dl class="py property">

@@ -32,6 +32,7 @@ Classes
 
 .. autoapisummary::
 
+   personality_questionnaire.registry.Aggregation
    personality_questionnaire.registry.ScaleType
    personality_questionnaire.registry.Item
    personality_questionnaire.registry.Subscale
@@ -50,6 +51,35 @@ Functions
 
 Module Contents
 ---------------
+
+.. py:class:: Aggregation
+
+   Bases: :py:obj:`enum.StrEnum`
+
+
+   How a subscale combines its items into a score.
+
+   Most instruments average, which keeps a score on the same range as a single
+   item and makes scales of different lengths comparable. Some are published as a
+   total instead -- the PANAS reports 10-50 per scale -- and reproducing the
+   published number matters more than internal consistency there.
+
+   Initialize self.  See help(type(self)) for accurate signature.
+
+
+   .. py:attribute:: MEAN
+      :value: 'mean'
+
+
+      Average of the (reverse-keyed) items. Normalisable to ``[0, 1]``.
+
+
+   .. py:attribute:: SUM
+      :value: 'sum'
+
+
+      Total of the (reverse-keyed) items, as published. Never normalised.
+
 
 .. py:class:: ScaleType
 
@@ -149,6 +179,12 @@ Module Contents
       Plain-language direction of the scale, e.g. ``"more neurotic"``.
       Recorded as data so a consumer never has to infer polarity from a name,
       which is precisely the inference that went wrong before 2.0.
+
+   .. attribute:: aggregation
+
+      How the items combine. Defaults to a mean; a scale published as
+      a total declares :attr:`Aggregation.SUM`, and is left unnormalised so it
+      reproduces the published number.
 
 
 .. py:class:: Questionnaire

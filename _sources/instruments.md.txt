@@ -93,6 +93,48 @@ midpoint.
 > 10-item short version of the Big Five Inventory in English and German. *Journal of
 > Research in Personality, 41*, 203–212.
 
+## Positive and Negative Affect Schedule (`panas`)
+
+Twenty mood adjectives rated 1–5 for intensity, ten forming Positive Affect and ten
+Negative Affect. The two scales are near-independent rather than opposite ends of one
+dimension — that is the instrument's central claim, and it is why a negative
+adjective raises Negative Affect rather than lowering Positive Affect.
+
+**No item is reverse-keyed.** Each adjective scores in the direction it is worded,
+making the PANAS the first shipped instrument with an empty reverse-key set.
+
+| Scale | Items |
+| --- | --- |
+| Positive Affect | 1, 3, 5, 9, 10, 12, 14, 16, 17, 19 |
+| Negative Affect | 2, 4, 6, 7, 8, 11, 13, 15, 18, 20 |
+
+### Two reported forms
+
+Each scale appears twice in the output:
+
+| Subscale | Range | Use |
+| --- | --- | --- |
+| `Positive Affect` / `Negative Affect` | `[0, 1]` | Consistent with every other instrument here |
+| `Positive Affect (sum)` / `Negative Affect (sum)` | 10–50 | The form the literature is written in |
+
+The literature reports totals — Watson et al. give normative means of 33.3 for
+Positive Affect and 17.4 for Negative Affect — so the published totals are carried
+alongside the normalised means rather than left for the caller to reconstruct. A
+subscale declares this through
+{attr}`~personality_questionnaire.registry.Aggregation.SUM`, and summed subscales are
+never rescaled, since normalising them would destroy the number their norms use.
+
+### Time frame
+
+The stem reproduces the published default, "over the past week". The window is the
+instrument's one deliberate variable — Watson et al. validate everything from "right
+now" to "in general", and the scale's test–retest behaviour changes with it. A study
+using a different window should say so in its own materials.
+
+> Watson, D., Clark, L. A., & Tellegen, A. (1988). Development and validation of
+> brief measures of positive and negative affect: the PANAS scales. *Journal of
+> Personality and Social Psychology, 54*(6), 1063–1070.
+
 ## Visual Analogue Scale to Evaluate Fatigue Severity (`vasf`)
 
 Eighteen items, each a line from 0 to 10 between two named anchors.

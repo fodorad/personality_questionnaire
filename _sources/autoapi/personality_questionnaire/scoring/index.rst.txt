@@ -127,7 +127,9 @@ Module Contents
    .. attribute:: normalized
 
       Whether ``values`` is rescaled to ``[0, 1]`` or left on the
-      instrument's own response scale.
+      instrument's own response scale. Subscales declaring
+      :attr:`~personality_questionnaire.registry.Aggregation.SUM` are never
+      rescaled, whatever this says.
 
 
    .. py:property:: n_participants
