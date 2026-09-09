@@ -147,7 +147,7 @@ def _item_row(draft: DraftRecord, item, update: Callable[[], None]) -> None:  # 
     def mark_answered() -> None:
         """Tint the card's border once the item has an answer."""
         answered = item.number in draft.responses
-        colour = theme.SUCCESS if answered else "#DCD9D2"
+        colour = theme.SUCCESS if answered else theme.UNANSWERED
         card.style(f"border:1px solid {colour};border-left:4px solid {colour};border-radius:10px")
 
     with card:

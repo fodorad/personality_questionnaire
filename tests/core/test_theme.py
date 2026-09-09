@@ -74,7 +74,7 @@ class TestContrastRatio(unittest.TestCase):
         self.assertAlmostEqual(theme.contrast_ratio("#000000", "#FFFFFF"), 21.0, places=1)
 
     def test_identical_colors_are_one(self):
-        self.assertAlmostEqual(theme.contrast_ratio("#0F4C5C", "#0F4C5C"), 1.0, places=6)
+        self.assertAlmostEqual(theme.contrast_ratio("#12294B", "#12294B"), 1.0, places=6)
 
     def test_is_symmetric(self):
         self.assertAlmostEqual(

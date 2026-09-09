@@ -1,10 +1,11 @@
 """Central theme tokens -- every colour this project uses lives here.
 
-The palette is drawn from laboratory glassware and archival paper rather than the
-saturated blues and violets that most research software reaches for: a participant
-answering sixty introspective questions should not feel marketed to. Deep petrol
-carries the chrome, a single muted ochre marks the item currently being answered,
-and everything else stays quiet.
+Dark navy carries the chrome; a single burnt-orange accent marks the item
+currently being answered. The pairing is deliberately far from the muted
+teal-and-sage research-software look this project used before 2.5 -- close enough
+to a sibling project's own petrol-and-ochre palette that the two applications were
+hard to tell apart at a glance. Navy against warm paper, with orange as the one
+saturated colour in the room, reads as its own thing.
 
 Every foreground/background pairing defined here meets WCAG AA (4.5:1) for normal
 text against :data:`PAPER` or white. ``tests/core/test_theme.py`` asserts it, so a
@@ -30,48 +31,56 @@ __all__ = [
     "PRIMARY",
     "ROW_BORDER",
     "SUCCESS",
+    "UNANSWERED",
     "WARNING",
     "color",
     "contrast_ratio",
     "domain_color",
 ]
 
-PRIMARY = "#0F4C5C"
-"""Deep petrol. Application header, primary actions, links."""
+PRIMARY = "#12294B"
+"""Dark navy. Application header, primary actions, links."""
 
-ACCENT = "#A9521F"
-"""Burnt ochre. The item being answered, progress fill -- used sparingly."""
+ACCENT = "#B84C14"
+"""Burnt orange. The item being answered, progress fill -- the one saturated
+colour in the palette, so it stays legible as a signal precisely because
+everything else is quiet."""
 
-SUCCESS = "#3F6B54"
-"""Muted sage. An item answered, a record saved."""
+SUCCESS = "#2E6E5E"
+"""Deep teal-green. An item answered, a record saved."""
 
-WARNING = "#8A6508"
+WARNING = "#8A5A00"
 """Dark amber. An incomplete record, unanswered items remaining."""
 
-DANGER = "#A63446"
-"""Deep rust. Validation failure, destructive actions."""
+DANGER = "#A6303B"
+"""Deep rust red. Validation failure, destructive actions."""
 
-NEUTRAL = "#5A6670"
-"""Slate. Secondary text, totals, disabled states."""
+NEUTRAL = "#565F6E"
+"""Cool slate. Secondary text, totals, disabled states."""
 
-PAPER = "#FBFAF7"
+PAPER = "#FAF8F5"
 """Warm off-white. The page ground."""
 
-INK = "#1B2A30"
-"""Near-black with a petrol cast. Body text."""
+INK = "#151B26"
+"""Near-black with a navy cast. Body text."""
 
-ROW_BORDER = "1px solid #DCD9D2"
+UNANSWERED = "#DDD8D0"
+"""Same hairline colour as :data:`ROW_BORDER`, isolated for cases that need only
+the colour rather than the full declaration -- an unanswered questionnaire item's
+border, for instance."""
+
+ROW_BORDER = f"1px solid {UNANSWERED}"
 """The hairline every list row and card carries."""
 
 HEADER_FG = "#FFFFFF"
 """Header text and icons, readable on :data:`PRIMARY`."""
 
 DOMAIN_COLORS: dict[str, str] = {
-    "openness": "#0F4C5C",
-    "conscientiousness": "#3F6B54",
-    "extraversion": "#A9521F",
-    "agreeableness": "#7A5C8A",
-    "neuroticism": "#A63446",
+    "openness": "#3E4C8A",
+    "conscientiousness": "#2E6E5E",
+    "extraversion": "#B84C14",
+    "agreeableness": "#7A4A82",
+    "neuroticism": "#A6303B",
 }
 """One colour per Big Five domain.
 

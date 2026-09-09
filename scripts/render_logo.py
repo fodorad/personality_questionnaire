@@ -29,8 +29,8 @@ stroke competes with the dots."""
 
 ROWS = [9.6, 20.8, 32.0, 43.2, 54.4]
 COLS = [7.0, 18.85, 30.7, 42.55, 54.4]
-PETROL = (0x0F, 0x4C, 0x5C)
-OCHRE = (0xA9, 0x52, 0x1F)
+NAVY = (0x12, 0x29, 0x4B)
+ORANGE = (0xB8, 0x4C, 0x14)
 ANSWERED = {0: 3, 1: 1, 3: 4, 4: 2}
 CURRENT = (2, 2)
 
@@ -57,10 +57,10 @@ def circles():
     """Yield (cx, cy, r, rgb, alpha) in user units."""
     for r_i, cy in enumerate(ROWS):
         for c_i, cx in enumerate(COLS):
-            yield cx, cy, 3.0, PETROL, 0.22
+            yield cx, cy, 3.0, NAVY, 0.22
     for r_i, c_i in sorted(ANSWERED.items()):
-        yield COLS[c_i], ROWS[r_i], 5.6, PETROL, 1.0
-    yield COLS[CURRENT[1]], ROWS[CURRENT[0]], 6.8, OCHRE, 1.0
+        yield COLS[c_i], ROWS[r_i], 5.6, NAVY, 1.0
+    yield COLS[CURRENT[1]], ROWS[CURRENT[0]], 6.8, ORANGE, 1.0
 
 
 def render() -> bytes:
@@ -73,7 +73,7 @@ def render() -> bytes:
         uy = (y + 0.5) * unit
         for x in range(n):
             if in_plate((x + 0.5) * unit, uy):
-                row[x] = (PLATE_ALPHA, PETROL)
+                row[x] = (PLATE_ALPHA, NAVY)
     shapes = [
         (cx * SCALE * SS, cy * SCALE * SS, r * SCALE * SS, rgb, a)
         for cx, cy, r, rgb, a in circles()
