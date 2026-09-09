@@ -42,7 +42,7 @@ dependencies = [
 [project.optional-dependencies]
 # The localhost data-collection application: SQL-backed, multi-participant.
 ui = [
-  "nicegui>=2.0",
+  "nicegui>=3.16.0",
   "sqlalchemy>=2.0",
 ]
 
