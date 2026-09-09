@@ -1,0 +1,67 @@
+personality_questionnaire
+=========================
+
+.. py:module:: personality_questionnaire
+
+.. autoapi-nested-parse::
+
+   Administer, score and record validated personality and affect questionnaires.
+
+   The package is organised around a registry of instruments. Each instrument is data
+   -- items, response range, subscale membership, reverse keys -- and a single
+   vectorised scorer turns responses into scores:
+
+   >>> import personality_questionnaire as pq
+   >>> bfi2 = pq.get("bfi2")
+   >>> result = pq.score(bfi2, [[3] * 60])
+   >>> round(result.as_dict()["extraversion"], 3)
+   0.5
+
+   The pre-2.0 functional API (:func:`personality_questionnaire.bfi2.bfi2` and
+   :func:`personality_questionnaire.vasf.vasf`) is still supported; see those modules.
+
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/personality_questionnaire/api/index
+   /autoapi/personality_questionnaire/bfi2/index
+   /autoapi/personality_questionnaire/cli/index
+   /autoapi/personality_questionnaire/core/index
+   /autoapi/personality_questionnaire/instruments/index
+   /autoapi/personality_questionnaire/io/index
+   /autoapi/personality_questionnaire/provenance/index
+   /autoapi/personality_questionnaire/registry/index
+   /autoapi/personality_questionnaire/scoring/index
+   /autoapi/personality_questionnaire/vasf/index
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   personality_questionnaire.asset
+
+
+Package Contents
+----------------
+
+.. py:function:: asset(name: str) -> importlib.resources.abc.Traversable
+
+   Return a data file shipped inside the package.
+
+   Works from a wheel, an sdist and a source checkout alike, which the pre-2.0
+   ``DATA_DIR`` did not: it resolved relative to the repository root, so an
+   installed wheel pointed at a ``data`` directory beside ``site-packages`` that
+   had never been shipped.
+
+   :param name: File name relative to the package's ``assets`` directory.
+
+   :returns: A traversable handle supporting ``.read_text()`` and ``.open()``.
+
+

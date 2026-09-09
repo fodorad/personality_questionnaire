@@ -1,0 +1,22 @@
+personality_questionnaire.cli
+=============================
+
+.. py:module:: personality_questionnaire.cli
+
+.. autoapi-nested-parse::
+
+   The command-line interface.
+
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/personality_questionnaire/cli/main/index
+   /autoapi/personality_questionnaire/cli/prompt/index
+   /autoapi/personality_questionnaire/cli/render/index
+
+

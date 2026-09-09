@@ -1,0 +1,58 @@
+personality_questionnaire.instruments.bfi2
+==========================================
+
+.. py:module:: personality_questionnaire.instruments.bfi2
+
+.. autoapi-nested-parse::
+
+   The Big Five Inventory-2 (BFI-2), 60 items.
+
+   Soto, C. J., & John, O. P. (2017). The next Big Five Inventory (BFI-2): Developing
+   and assessing a hierarchical model with 15 facets to enhance bandwidth, fidelity,
+   and predictive power. ``Journal of Personality and Social Psychology, 113``, 117-143.
+
+   The BFI-2 is hierarchical: five domains, each resolved by three facets of four items.
+   Both levels are declared here as sibling subscales over the item pool rather than
+   composing domains from facets, because the arithmetic is identical either way and
+   flat declaration lets a single matrix multiplication produce every score at once.
+
+   .. note::
+      The three Negative Emotionality facets are scored in the direction their names
+      describe -- higher means more anxious, more depressed, more volatile. Before 2.0
+      they were flipped unconditionally while the domain was not, so ``OCEAN`` and
+      ``FACET`` disagreed on polarity by default. See
+      :func:`personality_questionnaire.bfi2.bfi2` for the compatibility switch.
+
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   personality_questionnaire.instruments.bfi2.BFI2_LABELS
+   personality_questionnaire.instruments.bfi2.BFI2_ITEM_TEXT
+   personality_questionnaire.instruments.bfi2.BFI2
+
+
+Module Contents
+---------------
+
+.. py:data:: BFI2_LABELS
+   :type:  dict[str, int]
+
+   The BFI-2's five response options, in ascending order.
+
+.. py:data:: BFI2_ITEM_TEXT
+   :type:  dict[int, str]
+
+   The 60 BFI-2 items, keyed by item number.
+
+   Exposed because the short forms borrow from this pool by reference and the shipped
+   TSV is generated from it.
+
+.. py:data:: BFI2
+   :type:  personality_questionnaire.registry.Questionnaire
+
+   The registered BFI-2 instrument.
+

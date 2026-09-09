@@ -1,0 +1,113 @@
+personality_questionnaire.bfi2
+==============================
+
+.. py:module:: personality_questionnaire.bfi2
+
+.. autoapi-nested-parse::
+
+   Backwards-compatible surface for the pre-2.0 BFI-2 API.
+
+   Every name here has been published since 1.0.0 and keeps its exact signature. The
+   data is derived from :data:`personality_questionnaire.instruments.bfi2.BFI2` rather
+   than duplicated, so the registry stays the single source of truth.
+
+   New code should prefer the registry:
+
+   >>> import personality_questionnaire as pq
+   >>> result = pq.score(pq.get("bfi2"), answers)   # doctest: +SKIP
+
+   .. note::
+      **Changed in 2.0.** The three Negative Emotionality facets are now scored in the
+      direction their names describe. Before 2.0 they were flipped unconditionally
+      while the ``neuroticism`` domain was not, so the two levels of the returned dict
+      disagreed on polarity whenever ``flip_neuroticism`` was left at its default. Pass
+      ``legacy_facet_polarity=True`` to reproduce pre-2.0 numbers exactly.
+
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   personality_questionnaire.bfi2.BFI2_QUESTIONNAIRE
+   personality_questionnaire.bfi2.ANSWER
+   personality_questionnaire.bfi2.DOMAIN_SCALES
+   personality_questionnaire.bfi2.FACET_SCALES
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   personality_questionnaire.bfi2.flip_trait_dimension
+   personality_questionnaire.bfi2.bfi2_trait
+   personality_questionnaire.bfi2.bfi2
+
+
+Module Contents
+---------------
+
+.. py:data:: BFI2_QUESTIONNAIRE
+   :type:  dict[int, str]
+
+   The 60 BFI-2 items, keyed by item number.
+
+.. py:data:: ANSWER
+   :type:  dict[str, int]
+
+   The five response labels mapped to their values.
+
+.. py:data:: DOMAIN_SCALES
+   :type:  dict[str, list[str]]
+
+   The five domain scales in ``"5R"`` item-key notation.
+
+.. py:data:: FACET_SCALES
+   :type:  dict[str, list[str]]
+
+   The fifteen facet scales in ``"5R"`` item-key notation.
+
+.. py:function:: flip_trait_dimension(single_trait_values: numpy.ndarray) -> numpy.ndarray
+
+   Flip trait values within a scaled dimension.
+
+   Every OCEAN trait except Neuroticism attaches its positive connotation to the
+   high end of the dimension; Neuroticism runs the other way. Flipping it yields
+   Emotional Stability, which is more convenient downstream.
+
+   :param single_trait_values: Trait values of shape ``(N,)`` in ``[0, 1]``.
+
+   :returns: The flipped values.
+
+   :raises ValueError: If the input is not one-dimensional or falls outside ``[0, 1]``.
+
+
+.. py:function:: bfi2_trait(answers: collections.abc.Sequence[collections.abc.Sequence], questions: list[str]) -> numpy.ndarray
+
+   Calculate one BFI-2 trait for every answer.
+
+   :param answers: Participants' answers to the 60-item questionnaire.
+   :param questions: Item keys for the trait, in ``"5R"`` notation.
+
+   :returns: One trait value per answer, scaled to ``[0, 1]``.
+
+
+.. py:function:: bfi2(answers: collections.abc.Sequence[collections.abc.Sequence], flip_neuroticism: bool = False, *, legacy_facet_polarity: bool = False) -> dict[str, numpy.ndarray]
+
+   Calculate BFI-2 domain and facet scale values.
+
+   :param answers: Participants' answers to the 60-item questionnaire.
+   :param flip_neuroticism: If True, Neuroticism is converted to Emotional Stability.
+                            Since 2.0 this flips the domain *and* its three facets together, so both
+                            levels describe the same construct.
+   :param legacy_facet_polarity: If True, reproduce the pre-2.0 behaviour in which the
+                                 three Negative Emotionality facets were flipped regardless of
+                                 ``flip_neuroticism``. Deprecated; provided so published results can be
+                                 reproduced.
+
+   :returns: A mapping with ``"OCEAN"`` of shape ``(N, 5)`` and ``"FACET"`` of shape
+             ``(N, 15)``.
+
+

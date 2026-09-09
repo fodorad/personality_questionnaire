@@ -1,0 +1,124 @@
+personality_questionnaire.io
+============================
+
+.. py:module:: personality_questionnaire.io
+
+.. autoapi-nested-parse::
+
+   Reading and writing questionnaire responses and scores.
+
+   The readers accept the formats the pre-2.0 CLI wrote -- headerless CSV of integers
+   or of response labels, and tab-separated item tables -- and the writers produce them.
+   Every file is opened with an explicit encoding and, for CSV, ``newline=""`` as the
+   :mod:`csv` module requires, so output is byte-identical across platforms.
+
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   personality_questionnaire.io.PathType
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   personality_questionnaire.io.load_csv
+   personality_questionnaire.io.load_csv_int
+   personality_questionnaire.io.load_csv_str
+   personality_questionnaire.io.load_tsv
+   personality_questionnaire.io.save_csv_int
+   personality_questionnaire.io.save_csv
+   personality_questionnaire.io.save_json
+   personality_questionnaire.io.load_json
+
+
+Module Contents
+---------------
+
+.. py:data:: PathType
+
+   Anything acceptable as a filesystem path.
+
+.. py:function:: load_csv(csv_path: PathType, n_values: int, conversion_fn: collections.abc.Callable[[str], Any]) -> numpy.ndarray
+
+   Load a headerless CSV, converting each cell.
+
+   :param csv_path: File to read.
+   :param n_values: Number of values expected per row.
+   :param conversion_fn: Applied to every cell.
+
+   :returns: An array of shape ``(n_rows, n_values)``.
+
+   :raises ValueError: If a row does not hold exactly ``n_values`` cells, or a cell
+       cannot be converted. Both messages name the offending line.
+
+
+.. py:function:: load_csv_int(csv_path: PathType, n_values: int) -> numpy.ndarray
+
+   Load a headerless CSV of integer responses.
+
+   :param csv_path: File to read.
+   :param n_values: Number of values expected per row.
+
+   :returns: An integer array of shape ``(n_rows, n_values)``.
+
+
+.. py:function:: load_csv_str(csv_path: PathType, n_values: int) -> numpy.ndarray
+
+   Load a headerless CSV of BFI-2 response labels.
+
+   :param csv_path: File to read.
+   :param n_values: Number of values expected per row.
+
+   :returns: An integer array of shape ``(n_rows, n_values)``.
+
+
+.. py:function:: load_tsv(tsv_path: PathType) -> dict[int, str]
+
+   Load a tab-separated item table with an ``ID``/``ITEM`` header.
+
+   :param tsv_path: File to read.
+
+   :returns: A mapping of item number to item text.
+
+
+.. py:function:: save_csv_int(csv_path: PathType, data: collections.abc.Sequence[collections.abc.Sequence]) -> None
+
+   Write integer responses to a headerless CSV.
+
+   :param csv_path: File to write.
+   :param data: Rows of integer responses.
+
+
+.. py:function:: save_csv(csv_path: PathType, data: numpy.ndarray) -> None
+
+   Write scores to a headerless CSV.
+
+   :param csv_path: File to write.
+   :param data: Rows of scores.
+
+
+.. py:function:: save_json(json_path: PathType, payload: dict) -> pathlib.Path
+
+   Write a mapping as indented JSON.
+
+   :param json_path: File to write.
+   :param payload: The mapping to serialise.
+
+   :returns: The path written, so a caller can report it.
+
+
+.. py:function:: load_json(json_path: PathType) -> dict
+
+   Read a JSON mapping.
+
+   :param json_path: File to read.
+
+   :returns: The parsed mapping.
+
+

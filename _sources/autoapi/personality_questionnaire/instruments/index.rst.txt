@@ -1,0 +1,26 @@
+personality_questionnaire.instruments
+=====================================
+
+.. py:module:: personality_questionnaire.instruments
+
+.. autoapi-nested-parse::
+
+   Shipped questionnaire definitions.
+
+   Importing this package registers every instrument, so
+   :data:`personality_questionnaire.registry.REGISTRY` is populated as a side effect of
+   importing :mod:`personality_questionnaire`. Each module here is pure data; the
+   arithmetic lives in :mod:`personality_questionnaire.scoring`.
+
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/personality_questionnaire/instruments/bfi2/index
+   /autoapi/personality_questionnaire/instruments/vasf/index
+
+

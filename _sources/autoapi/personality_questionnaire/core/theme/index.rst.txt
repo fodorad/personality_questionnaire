@@ -1,0 +1,152 @@
+personality_questionnaire.core.theme
+====================================
+
+.. py:module:: personality_questionnaire.core.theme
+
+.. autoapi-nested-parse::
+
+   Central theme tokens -- every colour this project uses lives here.
+
+   The palette is drawn from laboratory glassware and archival paper rather than the
+   saturated blues and violets that most research software reaches for: a participant
+   answering sixty introspective questions should not feel marketed to. Deep petrol
+   carries the chrome, a single muted ochre marks the item currently being answered,
+   and everything else stays quiet.
+
+   Every foreground/background pairing defined here meets WCAG AA (4.5:1) for normal
+   text against :data:`PAPER` or white. ``tests/core/test_theme.py`` asserts it, so a
+   future colour tweak cannot quietly make the questionnaire harder to read.
+
+   Referenced by name, never as a raw hex literal at the call site, so a redesign
+   touches one file. The same tokens drive the documentation theme, the repository
+   icon and the localhost application.
+
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   personality_questionnaire.core.theme.PRIMARY
+   personality_questionnaire.core.theme.ACCENT
+   personality_questionnaire.core.theme.SUCCESS
+   personality_questionnaire.core.theme.WARNING
+   personality_questionnaire.core.theme.DANGER
+   personality_questionnaire.core.theme.NEUTRAL
+   personality_questionnaire.core.theme.PAPER
+   personality_questionnaire.core.theme.INK
+   personality_questionnaire.core.theme.ROW_BORDER
+   personality_questionnaire.core.theme.DOMAIN_COLORS
+   personality_questionnaire.core.theme.LOGO_MARK_SVG
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   personality_questionnaire.core.theme.color
+   personality_questionnaire.core.theme.contrast_ratio
+
+
+Module Contents
+---------------
+
+.. py:data:: PRIMARY
+   :value: '#0F4C5C'
+
+
+   Deep petrol. Application header, primary actions, links.
+
+.. py:data:: ACCENT
+   :value: '#A9521F'
+
+
+   Burnt ochre. The item being answered, progress fill -- used sparingly.
+
+.. py:data:: SUCCESS
+   :value: '#3F6B54'
+
+
+   Muted sage. An item answered, a record saved.
+
+.. py:data:: WARNING
+   :value: '#8A6508'
+
+
+   Dark amber. An incomplete record, unanswered items remaining.
+
+.. py:data:: DANGER
+   :value: '#A63446'
+
+
+   Deep rust. Validation failure, destructive actions.
+
+.. py:data:: NEUTRAL
+   :value: '#5A6670'
+
+
+   Slate. Secondary text, totals, disabled states.
+
+.. py:data:: PAPER
+   :value: '#FBFAF7'
+
+
+   Warm off-white. The page ground.
+
+.. py:data:: INK
+   :value: '#1B2A30'
+
+
+   Near-black with a petrol cast. Body text.
+
+.. py:data:: ROW_BORDER
+   :value: '1px solid #DCD9D2'
+
+
+   The hairline every list row and card carries.
+
+.. py:data:: DOMAIN_COLORS
+   :type:  dict[str, str]
+
+   One colour per Big Five domain.
+
+   Shared by the application's chips and the analysis plots, so a domain keeps the same
+   colour wherever a reader meets it.
+
+.. py:function:: color(name: ColorName) -> str
+
+   Look up a semantic colour by name.
+
+   :param name: One of the semantic role names.
+
+   :returns: The hex value.
+
+   :raises KeyError: If the name is not a defined role.
+
+
+.. py:function:: contrast_ratio(foreground: str, background: str) -> float
+
+   Compute the WCAG contrast ratio between two colours.
+
+   :param foreground: A ``#rrggbb`` value.
+   :param background: A ``#rrggbb`` value.
+
+   :returns: The ratio, from 1.0 (identical) to 21.0 (black on white).
+
+
+.. py:data:: LOGO_MARK_SVG
+   :value: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" style="width:100%;height:100%"...
+
+
+   a five-by-five Likert response grid.
+
+   Five rows of five discrete options -- what a participant actually sees -- with the
+   filled marks tracing one person's answers and the ochre mark on the item being
+   answered. The rows double as the Big Five. Scales to its container, so the same
+   string serves the documentation header, the application header and the favicon, and
+   matches ``docs/assets/logo.svg`` exactly.
+
+   :type: The repository mark
+

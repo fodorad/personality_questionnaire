@@ -1,0 +1,69 @@
+personality_questionnaire.cli.prompt
+====================================
+
+.. py:module:: personality_questionnaire.cli.prompt
+
+.. autoapi-nested-parse::
+
+   The interactive item loop.
+
+   Reading and writing are injected rather than called directly, so the whole
+   administration path is unit-testable with a scripted participant and a captured
+   transcript. That matters because this is the one code path a participant actually
+   touches.
+
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   personality_questionnaire.cli.prompt.QUIT_WORDS
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   personality_questionnaire.cli.prompt.parse_response
+   personality_questionnaire.cli.prompt.ask_items
+
+
+Module Contents
+---------------
+
+.. py:data:: QUIT_WORDS
+
+   Words that abandon the questionnaire instead of answering an item.
+
+.. py:function:: parse_response(raw: str, questionnaire: personality_questionnaire.registry.Questionnaire) -> int | None
+
+   Parse one typed response.
+
+   :param raw: What the participant typed.
+   :param questionnaire: The instrument being administered.
+
+   :returns: The parsed value, or ``None`` if it was not a valid response.
+
+
+.. py:function:: ask_items(questionnaire: personality_questionnaire.registry.Questionnaire, *, read: collections.abc.Callable[[str], str] = input, write: collections.abc.Callable[[str], None] = print) -> list[int] | None
+
+   Administer every item of an instrument.
+
+   Input may come from a terminal or from a pipe -- piping answers in is a
+   legitimate way to script an administration. What is *not* legitimate is input
+   running out mid-questionnaire: that yields a partial record, so it raises rather
+   than returning whatever was collected so far.
+
+   :param questionnaire: The instrument to administer.
+   :param read: Called with a prompt, returns the participant's line.
+   :param write: Called with each line of output.
+
+   :returns: One response per item in administration order, or ``None`` if the
+             participant quit.
+
+   :raises EOFError: If input ends before every item is answered.
+
+

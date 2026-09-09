@@ -1,0 +1,59 @@
+personality_questionnaire.vasf
+==============================
+
+.. py:module:: personality_questionnaire.vasf
+
+.. autoapi-nested-parse::
+
+   Backwards-compatible surface for the pre-2.0 VAS-F API.
+
+   :func:`vasf` keeps its exact pre-2.0 signature and return value -- an item-wise
+   ``post - pre`` difference of shape ``(N, 18)``. Subscale scoring added in 2.0 is
+   reached through the registry instead, so no existing caller's indexing changes:
+
+   >>> import personality_questionnaire as pq
+   >>> paired = pq.delta(pq.get("vasf"), pre, post)   # doctest: +SKIP
+   >>> paired.subscale_delta                          # doctest: +SKIP
+
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   personality_questionnaire.vasf.VASF_QUESTIONNAIRE
+   personality_questionnaire.vasf.ANSWER_DIMS
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   personality_questionnaire.vasf.vasf
+
+
+Module Contents
+---------------
+
+.. py:data:: VASF_QUESTIONNAIRE
+   :type:  dict[int, str]
+
+   The 18 VAS-F items, keyed by item number.
+
+.. py:data:: ANSWER_DIMS
+   :type:  dict[int, tuple[str, str]]
+
+   Per-item low and high anchor labels.
+
+.. py:function:: vasf(pre_answers: list[int] | numpy.ndarray, post_answers: list[int] | numpy.ndarray) -> numpy.ndarray
+
+   Calculate the item-wise VAS-F change across an intervention.
+
+   :param pre_answers: Answers given before the experiment.
+   :param post_answers: Answers given after it.
+
+   :returns: The item-wise ``post - pre`` difference.
+
+

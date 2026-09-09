@@ -1,0 +1,15 @@
+personality_questionnaire.api
+=============================
+
+.. py:module:: personality_questionnaire.api
+
+.. autoapi-nested-parse::
+
+   Backwards-compatible entry point for the pre-2.0 console script.
+
+   The ``personality-questionnaire`` script has pointed at :func:`main` since 1.1.0.
+   It now forwards to :mod:`personality_questionnaire.cli.main`, which accepts both the
+   subcommand form and the old flat flags.
+
+
+

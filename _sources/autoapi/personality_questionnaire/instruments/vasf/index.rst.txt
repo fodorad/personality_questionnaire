@@ -1,0 +1,51 @@
+personality_questionnaire.instruments.vasf
+==========================================
+
+.. py:module:: personality_questionnaire.instruments.vasf
+
+.. autoapi-nested-parse::
+
+   The Visual Analogue Scale to Evaluate Fatigue Severity (VAS-F), 18 items.
+
+   Lee, K. A., Hicks, G., & Nino-Murcia, G. (1991). Validity and reliability of a scale
+   to assess fatigue. ``Psychiatry Research, 36(3)``, 291-298.
+
+   Each item is a line between two anchors, answered 0..10. Two of the three subscales
+   are the instrument's own, Fatigue and Energy, each scored in its own direction, and
+   the third is a derived composite offered for convenience and clearly labelled as
+   such.
+
+   The VAS-F is normally administered twice, before and after some intervention, and
+   its primary result is the difference. That makes it :attr:`~Questionnaire.paired`;
+   see :func:`personality_questionnaire.scoring.delta`.
+
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   personality_questionnaire.instruments.vasf.VASF_ITEM_TEXT
+   personality_questionnaire.instruments.vasf.VASF
+
+
+Module Contents
+---------------
+
+.. py:data:: VASF_ITEM_TEXT
+   :type:  dict[int, str]
+
+   The 18 VAS-F items, keyed by item number.
+
+.. py:data:: VASF
+   :type:  personality_questionnaire.registry.Questionnaire
+
+   The registered VAS-F instrument.
+
+   Fatigue and Energy are the instrument's own two scales, each scored in its own
+   direction. ``Fatigue (composite)`` reverse-keys the five energy items into the
+   fatigue direction to give a single number across all eighteen items; it is a
+   modelling convenience, not part of Lee et al.'s scoring, which is why it carries its
+   own ``"composite"`` level and an explicit name.
+

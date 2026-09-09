@@ -1,0 +1,20 @@
+personality_questionnaire.core
+==============================
+
+.. py:module:: personality_questionnaire.core
+
+.. autoapi-nested-parse::
+
+   Cross-cutting concerns: theme tokens, configuration and shared state.
+
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/personality_questionnaire/core/theme/index
+
+

@@ -1,0 +1,229 @@
+personality_questionnaire.scoring
+=================================
+
+.. py:module:: personality_questionnaire.scoring
+
+.. autoapi-nested-parse::
+
+   The single scorer shared by every instrument.
+
+   All questionnaire arithmetic lives here. Instruments contribute data -- item counts,
+   response ranges, subscale membership, reverse keys -- and this module turns a cohort
+   of responses into scores without knowing which instrument it is holding.
+
+   The work is vectorised over the whole cohort. Reverse-keying is one masked
+   :func:`numpy.where`, and every subscale of every level is computed by a single
+   matrix multiplication against a precomputed weight matrix, so scoring ten thousand
+   participants costs one BLAS call rather than ten thousand Python loops.
+
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   personality_questionnaire.scoring.ScoreResult
+   personality_questionnaire.scoring.PairedScoreResult
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   personality_questionnaire.scoring.reverse
+   personality_questionnaire.scoring.validate_responses
+   personality_questionnaire.scoring.keyed_matrix
+   personality_questionnaire.scoring.subscale_means
+   personality_questionnaire.scoring.score
+   personality_questionnaire.scoring.delta
+
+
+Module Contents
+---------------
+
+.. py:function:: reverse(values: numpy.ndarray, minimum: int, maximum: int) -> numpy.ndarray
+
+   Reverse-key responses on a scale bounded by ``minimum`` and ``maximum``.
+
+   A reverse-keyed item measures its scale in the opposite direction, so the
+   response is reflected about the scale's midpoint: ``minimum + maximum - value``.
+   On the BFI-2's 1..5 that is the familiar ``6 - value``; on the VAS-F's 0..10 it
+   is ``10 - value``. Deriving it from the range rather than hard-coding a constant
+   is what lets one function serve every instrument.
+
+   :param values: Responses to reflect. Any shape.
+   :param minimum: Lowest valid response on the scale.
+   :param maximum: Highest valid response on the scale.
+
+   :returns: The reflected responses, same shape and dtype as ``values``.
+
+
+.. py:function:: validate_responses(questionnaire: personality_questionnaire.registry.Questionnaire, answers: numpy.ndarray) -> None
+
+   Check that responses match the instrument's shape and range.
+
+   :param questionnaire: The instrument the responses were collected with.
+   :param answers: Responses of shape ``(n_participants, n_items)``.
+
+   :raises ValueError: If the item count is wrong, or any response falls outside the
+       instrument's valid range. Both messages name the instrument, because a
+       length mismatch is almost always a mixed-up instrument.
+
+
+.. py:function:: keyed_matrix(questionnaire: personality_questionnaire.registry.Questionnaire, answers: numpy.ndarray) -> numpy.ndarray
+
+   Reflect every item that some subscale reverse-keys.
+
+   Provided for inspection and for :attr:`ScoreResult.keyed`, which reports the
+   responses as a reader of a single scale would see them. Scoring does not use it:
+   an item may be reverse-keyed by one subscale and forward-keyed by another, so
+   only the per-subscale weights in :func:`_weight_matrix` are authoritative.
+
+   :param questionnaire: The instrument the responses were collected with.
+   :param answers: Responses of shape ``(n_participants, n_items)``.
+
+   :returns: Responses with reverse-keyed items reflected, same shape as ``answers``.
+
+
+.. py:function:: subscale_means(questionnaire: personality_questionnaire.registry.Questionnaire, answers: numpy.ndarray) -> numpy.ndarray
+
+   Compute every subscale mean for every participant in one operation.
+
+   :param questionnaire: The instrument the responses were collected with.
+   :param answers: Raw responses of shape ``(n_participants, n_items)``. Reverse-keying
+                   is applied by the weights, so these must **not** be pre-keyed.
+
+   :returns: Subscale means of shape ``(n_participants, n_subscales)``, in
+             :attr:`Questionnaire.subscales` order.
+
+
+.. py:class:: ScoreResult
+
+   Scores for a cohort on one instrument.
+
+   .. attribute:: questionnaire
+
+      The instrument that was scored.
+
+   .. attribute:: raw
+
+      Responses exactly as given, shape ``(n_participants, n_items)``.
+
+   .. attribute:: keyed
+
+      Responses after reverse-keying, same shape as ``raw``.
+
+   .. attribute:: values
+
+      Subscale scores, shape ``(n_participants, n_subscales)``, aligned
+      with ``names``.
+
+   .. attribute:: names
+
+      Subscale names, aligned with the columns of ``values``.
+
+   .. attribute:: normalized
+
+      Whether ``values`` is rescaled to ``[0, 1]`` or left on the
+      instrument's own response scale.
+
+
+   .. py:property:: n_participants
+      :type: int
+
+
+      The number of scored participants.
+
+
+   .. py:method:: by_level(level: str) -> dict[str, numpy.ndarray]
+
+      Return the scores for one subscale level.
+
+      :param level: One of the instrument's levels, e.g. ``"domain"``.
+
+      :returns: A mapping of subscale name to its column of scores.
+
+
+
+   .. py:method:: as_dict(row: int = 0) -> dict[str, float]
+
+      Return one participant's scores as a mapping.
+
+      :param row: Index of the participant.
+
+      :returns: A mapping of subscale name to score.
+
+
+
+   .. py:method:: to_records() -> list[dict[str, float]]
+
+      Return every participant's scores as a list of mappings.
+
+      :returns: One mapping per participant, in cohort order.
+
+
+
+.. py:class:: PairedScoreResult
+
+   Pre/post scores and their difference, for a paired instrument.
+
+   .. attribute:: pre
+
+      Scores from the first administration.
+
+   .. attribute:: post
+
+      Scores from the second administration.
+
+   .. attribute:: item_delta
+
+      Item-wise ``post - pre``, shape ``(n_participants, n_items)``.
+
+   .. attribute:: subscale_delta
+
+      Subscale-wise ``post - pre``, shape
+      ``(n_participants, n_subscales)``.
+
+
+   .. py:property:: names
+      :type: tuple[str, ...]
+
+
+      Subscale names, aligned with :attr:`subscale_delta` columns.
+
+
+.. py:function:: score(questionnaire: personality_questionnaire.registry.Questionnaire, answers: collections.abc.Sequence[collections.abc.Sequence] | numpy.ndarray, *, normalize: bool | None = None) -> ScoreResult
+
+   Score a cohort's responses to one instrument.
+
+   :param questionnaire: The instrument the responses were collected with.
+   :param answers: Responses for one participant or several, shaped
+                   ``(n_items,)`` or ``(n_participants, n_items)``.
+   :param normalize: Whether to rescale subscale means to ``[0, 1]``. Defaults to the
+                     instrument's own :attr:`~Questionnaire.normalize`.
+
+   :returns: The computed scores.
+
+   :raises ValueError: If the responses do not match the instrument's item count or
+       fall outside its response range.
+
+
+.. py:function:: delta(questionnaire: personality_questionnaire.registry.Questionnaire, pre_answers: collections.abc.Sequence[collections.abc.Sequence] | numpy.ndarray, post_answers: collections.abc.Sequence[collections.abc.Sequence] | numpy.ndarray, *, normalize: bool | None = None) -> PairedScoreResult
+
+   Score both administrations of a paired instrument and their difference.
+
+   :param questionnaire: The instrument, normally one with
+                         :attr:`~Questionnaire.paired` set.
+   :param pre_answers: Responses from before the intervention.
+   :param post_answers: Responses from after it.
+   :param normalize: Whether to rescale subscale means to ``[0, 1]``. Defaults to the
+                     instrument's own setting.
+
+   :returns: Both score sets and their item-wise and subscale-wise differences.
+
+   :raises ValueError: If either response set is invalid, or the two differ in the
+       number of participants.
+
+

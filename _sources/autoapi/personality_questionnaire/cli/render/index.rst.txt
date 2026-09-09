@@ -1,0 +1,53 @@
+personality_questionnaire.cli.render
+====================================
+
+.. py:module:: personality_questionnaire.cli.render
+
+.. autoapi-nested-parse::
+
+   Formatting scores and instrument metadata for the terminal.
+
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   personality_questionnaire.cli.render.format_scores
+   personality_questionnaire.cli.render.format_instrument
+   personality_questionnaire.cli.render.format_registry
+
+
+Module Contents
+---------------
+
+.. py:function:: format_scores(result: personality_questionnaire.scoring.ScoreResult, row: int = 0, *, decimals: int = 3) -> list[str]
+
+   Render one participant's scores, grouped by subscale level.
+
+   :param result: The computed scores.
+   :param row: Index of the participant.
+   :param decimals: Digits after the decimal point.
+
+   :returns: Lines to print.
+
+
+.. py:function:: format_instrument(questionnaire: personality_questionnaire.registry.Questionnaire) -> list[str]
+
+   Render an instrument's metadata and subscale tree.
+
+   :param questionnaire: The instrument to describe.
+
+   :returns: Lines to print.
+
+
+.. py:function:: format_registry(questionnaires: list[personality_questionnaire.registry.Questionnaire]) -> list[str]
+
+   Render the instrument table.
+
+   :param questionnaires: Instruments to list.
+
+   :returns: Lines to print.
+
+

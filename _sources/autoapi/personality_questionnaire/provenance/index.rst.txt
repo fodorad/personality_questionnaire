@@ -1,0 +1,93 @@
+personality_questionnaire.provenance
+====================================
+
+.. py:module:: personality_questionnaire.provenance
+
+.. autoapi-nested-parse::
+
+   Runtime provenance for a collected record.
+
+   A stored record should say what produced it. This module snapshots the package
+   version, the git revision when running from a checkout, and whether that checkout
+   had uncommitted changes -- which is the difference between a record that can be
+   reproduced exactly and one that cannot.
+
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   personality_questionnaire.provenance.Provenance
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   personality_questionnaire.provenance.capture
+   personality_questionnaire.provenance.instrument_hash
+
+
+Module Contents
+---------------
+
+.. py:class:: Provenance
+
+   What produced a record.
+
+   .. attribute:: package_version
+
+      Installed version of this package.
+
+   .. attribute:: git_sha
+
+      Full commit hash, or ``None`` when not running from a checkout.
+      An installed wheel has no repository, and inventing a hash would be
+      worse than recording its absence.
+
+   .. attribute:: git_dirty
+
+      Whether the checkout had uncommitted changes. A dirty tree means
+      the record cannot be reproduced from any commit.
+
+   .. attribute:: python_version
+
+      Running interpreter version.
+
+   .. attribute:: captured_at
+
+      When the snapshot was taken, in UTC.
+
+
+   .. py:method:: as_dict() -> dict
+
+      Return the snapshot as a JSON-serialisable mapping.
+
+      :returns: The fields, with the timestamp rendered as an ISO-8601 string.
+
+
+
+.. py:function:: capture(*, refresh: bool = False) -> Provenance
+
+   Snapshot the runtime.
+
+   :param refresh: Re-read git state instead of using the cached snapshot.
+
+   :returns: The provenance of the current process.
+
+
+.. py:function:: instrument_hash(questionnaire: personality_questionnaire.registry.Questionnaire) -> str
+
+   Hash an instrument's scored definition.
+
+   Pins exactly what was administered, so a later wording fix or scale correction
+   cannot retroactively change the meaning of an existing record.
+
+   :param questionnaire: The instrument to fingerprint.
+
+   :returns: A ``sha256:``-prefixed hex digest.
+
+

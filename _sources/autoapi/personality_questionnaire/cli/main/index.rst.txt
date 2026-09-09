@@ -1,0 +1,47 @@
+personality_questionnaire.cli.main
+==================================
+
+.. py:module:: personality_questionnaire.cli.main
+
+.. autoapi-nested-parse::
+
+   Command-line entry point.
+
+   Subcommands replace the pre-2.0 ``--questionnaire`` flag. The old form is still
+   accepted: it is rewritten to a subcommand with a deprecation warning, so existing
+   scripts keep working.
+
+   Two output channels are kept apart. Diagnostics go to :mod:`logging` on stderr, so
+   ``pq export`` can be piped; participant-facing prompts and scores are the program's
+   actual output and go to stdout.
+
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   personality_questionnaire.cli.main.build_parser
+   personality_questionnaire.cli.main.main
+
+
+Module Contents
+---------------
+
+.. py:function:: build_parser() -> argparse.ArgumentParser
+
+   Build the argument parser.
+
+   :returns: The configured parser.
+
+
+.. py:function:: main(argv: list[str] | None = None) -> int
+
+   Run the command-line interface.
+
+   :param argv: Arguments after the program name. Defaults to :data:`sys.argv`.
+
+   :returns: An exit code.
+
+

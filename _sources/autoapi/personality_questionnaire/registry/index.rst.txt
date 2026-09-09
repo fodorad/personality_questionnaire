@@ -1,0 +1,319 @@
+personality_questionnaire.registry
+==================================
+
+.. py:module:: personality_questionnaire.registry
+
+.. autoapi-nested-parse::
+
+   The instrument registry: what a questionnaire *is*, expressed as data.
+
+   Every shipped instrument is a :class:`Questionnaire` value built from
+   :class:`Item` and :class:`Subscale` values. There is deliberately no per-instrument
+   behaviour here and no subclassing: adding an instrument means adding data, and the
+   arithmetic lives once in :mod:`personality_questionnaire.scoring`.
+
+   Instrument definitions are Python literals rather than shipped data files. They are
+   checked by the type checker, validated at import by :meth:`Questionnaire.validate`,
+   and present in the wheel by construction -- a data file is checked by nothing until
+   a participant has already answered every item.
+
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   personality_questionnaire.registry.REGISTRY
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   personality_questionnaire.registry.ScaleType
+   personality_questionnaire.registry.Item
+   personality_questionnaire.registry.Subscale
+   personality_questionnaire.registry.Questionnaire
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   personality_questionnaire.registry.register
+   personality_questionnaire.registry.get
+   personality_questionnaire.registry.keys
+
+
+Module Contents
+---------------
+
+.. py:class:: ScaleType
+
+   Bases: :py:obj:`enum.StrEnum`
+
+
+   How a single item is answered.
+
+   The value drives widget selection in the UI and validation in the CLI; it never
+   affects the arithmetic, which is parameterised by the response range instead.
+
+   Initialize self.  See help(type(self)) for accurate signature.
+
+
+   .. py:attribute:: LIKERT
+      :value: 'likert'
+
+
+      Discrete ordered categories with verbal labels, rendered as radio buttons.
+
+
+   .. py:attribute:: VISUAL_ANALOGUE
+      :value: 'vas'
+
+
+      A continuous line between two anchors, rendered as a slider.
+
+
+.. py:class:: Item
+
+   One questionnaire item.
+
+   .. attribute:: number
+
+      Position in this instrument's own administration order, 1-based.
+
+   .. attribute:: text
+
+      The bare statement or adjective, without anchors or framing.
+
+   .. attribute:: prompt
+
+      The fully-formed question as shown to a participant, with any
+      anchors already embedded. Callers display this verbatim; assembling
+      prompt text at the call site is what let a typo and an index-range
+      branch live in the CLI before 2.0.
+
+   .. attribute:: low_anchor
+
+      Label for the minimum of the response range.
+
+   .. attribute:: high_anchor
+
+      Label for the maximum of the response range.
+
+   .. attribute:: source_number
+
+      Item number in the parent instrument when this item is
+      borrowed rather than native. ``None`` for a native item. The BFI-2-XS
+      borrows all fifteen of its items from the BFI-2; the BFI-10 borrows
+      none, because its wording descends from the BFI-44 instead.
+
+
+.. py:class:: Subscale
+
+   A scored scale: a set of items, some of which may be reverse-keyed.
+
+   Hierarchy is recorded but never computed with. The BFI-2 declares its five
+   domains and its fifteen facets as siblings, each listing the item numbers it
+   covers directly, so both levels are scored in a single pass. ``parent`` exists
+   to draw the tree in the UI and the docs, not to compose one scale from another.
+
+   .. attribute:: name
+
+      Display name, e.g. ``"Anxiety"`` or ``"Positive Affect"``.
+
+   .. attribute:: items
+
+      Item numbers contributing to this scale, in this instrument's own
+      1-based numbering.
+
+   .. attribute:: reverse
+
+      The subset of ``items`` that are reverse-keyed.
+
+   .. attribute:: level
+
+      Grouping tag -- ``"domain"``, ``"facet"`` or ``"subscale"``. Used for
+      output ordering and UI grouping only.
+
+   .. attribute:: parent
+
+      Name of the enclosing subscale, when there is one.
+
+   .. attribute:: higher_is
+
+      Plain-language direction of the scale, e.g. ``"more neurotic"``.
+      Recorded as data so a consumer never has to infer polarity from a name,
+      which is precisely the inference that went wrong before 2.0.
+
+
+.. py:class:: Questionnaire
+
+   A complete, self-describing instrument.
+
+   .. attribute:: key
+
+      Registry key and CLI token, e.g. ``"bfi2"`` or ``"bfi2-xs"``.
+
+   .. attribute:: name
+
+      Full human-readable name.
+
+   .. attribute:: scale
+
+      How items are answered.
+
+   .. attribute:: minimum
+
+      Lowest valid response value.
+
+   .. attribute:: maximum
+
+      Highest valid response value.
+
+   .. attribute:: items
+
+      The items, in administration order.
+
+   .. attribute:: subscales
+
+      Every scored scale, in output order.
+
+   .. attribute:: citation
+
+      Full citation of the source publication.
+
+   .. attribute:: labels
+
+      Ordered response labels mapped to their values, for a Likert scale.
+      Empty for a visual-analogue scale, whose ends are described by each
+      item's own anchors.
+
+   .. attribute:: license_note
+
+      Any use restriction the publisher attaches.
+
+   .. attribute:: paired
+
+      Whether the instrument is administered twice and its primary result
+      is a pre/post difference, as the VAS-F is.
+
+   .. attribute:: normalize
+
+      Whether :func:`~personality_questionnaire.scoring.score` rescales
+      subscale means to ``[0, 1]`` by default.
+
+
+   .. py:property:: n_items
+      :type: int
+
+
+      The number of items in the instrument.
+
+
+   .. py:property:: item_numbers
+      :type: frozenset[int]
+
+
+      Every valid item number.
+
+
+   .. py:method:: item(number: int) -> Item
+
+      Return the item with the given number.
+
+      :param number: The item's 1-based number.
+
+      :returns: The matching item.
+
+      :raises KeyError: If no item carries that number.
+
+
+
+   .. py:method:: subscale(name: str) -> Subscale
+
+      Return the subscale with the given name.
+
+      :param name: The subscale's display name.
+
+      :returns: The matching subscale.
+
+      :raises KeyError: If no subscale carries that name.
+
+
+
+   .. py:method:: subscales_at(level: str) -> tuple[Subscale, ...]
+
+      Return every subscale tagged with the given level.
+
+      :param level: One of ``"domain"``, ``"facet"`` or ``"subscale"``.
+
+      :returns: The matching subscales, in declaration order.
+
+
+
+   .. py:property:: levels
+      :type: tuple[str, ...]
+
+
+      The distinct subscale levels, in first-appearance order.
+
+
+   .. py:method:: validate() -> None
+
+      Check the instrument's internal consistency.
+
+      Called by :func:`register`, so a malformed instrument fails at import time
+      -- and therefore in CI -- rather than producing a plausible wrong score.
+
+      :raises ValueError: If item numbering is not ``1..n``, if a subscale references
+          an unknown item, if a reverse key is not among its own subscale's
+          items, if an item belongs to no subscale, if a subscale name is
+          duplicated, if a declared parent does not exist, or if the response
+          range is empty.
+
+
+
+.. py:data:: REGISTRY
+   :type:  dict[str, Questionnaire]
+
+   Every registered instrument, keyed by :attr:`Questionnaire.key`.
+
+   Populated at import of :mod:`personality_questionnaire.instruments`. Treat as
+   read-only; use :func:`register` to add to it.
+
+.. py:function:: register(questionnaire: Questionnaire) -> Questionnaire
+
+   Validate an instrument and add it to the registry.
+
+   :param questionnaire: The instrument to register.
+
+   :returns: The same instrument, so a module can both register and export it in one
+             statement.
+
+   :raises ValueError: If the key is already registered, or the instrument fails
+       :meth:`Questionnaire.validate`.
+
+
+.. py:function:: get(key: str) -> Questionnaire
+
+   Look up an instrument by key.
+
+   :param key: The registry key, e.g. ``"bfi2"``.
+
+   :returns: The matching instrument.
+
+   :raises KeyError: If the key is not registered. The message lists what is.
+
+
+.. py:function:: keys() -> tuple[str, ...]
+
+   Return every registered key, sorted.
+
+   :returns: The registry keys, suitable for an argparse ``choices``.
+
+
