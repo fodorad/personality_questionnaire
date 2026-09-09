@@ -204,6 +204,7 @@
   <p class="caption" role="heading"><span class="caption-text">Guides</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../instruments.html">Instruments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../storage.html">Storing records</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../design.html">Design decisions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../migration.html">Migrating to 2.0</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Changelog</a></li>
@@ -223,7 +224,14 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../autoapi/personality_questionnaire/core/theme/index.html">personality_questionnaire.core.theme</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../../autoapi/personality_questionnaire/instruments/index.html">personality_questionnaire.instruments</a><input aria-label="Toggle navigation of personality_questionnaire.instruments" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../autoapi/personality_questionnaire/db/index.html">personality_questionnaire.db</a><input aria-label="Toggle navigation of personality_questionnaire.db" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../autoapi/personality_questionnaire/db/export/index.html">personality_questionnaire.db.export</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../autoapi/personality_questionnaire/db/models/index.html">personality_questionnaire.db.models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../autoapi/personality_questionnaire/db/repository/index.html">personality_questionnaire.db.repository</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../autoapi/personality_questionnaire/db/session/index.html">personality_questionnaire.db.session</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../autoapi/personality_questionnaire/instruments/index.html">personality_questionnaire.instruments</a><input aria-label="Toggle navigation of personality_questionnaire.instruments" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../../autoapi/personality_questionnaire/instruments/bfi10/index.html">personality_questionnaire.instruments.bfi10</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../autoapi/personality_questionnaire/instruments/bfi2/index.html">personality_questionnaire.instruments.bfi2</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../autoapi/personality_questionnaire/instruments/bfi2_xs/index.html">personality_questionnaire.instruments.bfi2_xs</a></li>
@@ -286,7 +294,7 @@
     <span class="kn">from</span><span class="w"> </span><span class="nn">personality_questionnaire.registry</span><span class="w"> </span><span class="kn">import</span> <span class="n">Questionnaire</span>
     <span class="kn">from</span><span class="w"> </span><span class="nn">personality_questionnaire.scoring</span><span class="w"> </span><span class="kn">import</span> <span class="n">ScoreResult</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"format_instrument"</span><span class="p">,</span> <span class="s2">"format_registry"</span><span class="p">,</span> <span class="s2">"format_scores"</span><span class="p">]</span>
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"format_instrument"</span><span class="p">,</span> <span class="s2">"format_records"</span><span class="p">,</span> <span class="s2">"format_registry"</span><span class="p">,</span> <span class="s2">"format_scores"</span><span class="p">]</span>
 
 
 <div class="viewcode-block" id="format_scores">
@@ -381,6 +389,39 @@
         <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
             <span class="sa">f</span><span class="s2">"  </span><span class="si">{</span><span class="n">questionnaire</span><span class="o">.</span><span class="n">key</span><span class="si">:</span><span class="s2">&lt;</span><span class="si">{</span><span class="n">key_width</span><span class="si">}}</span><span class="s2">  </span><span class="si">{</span><span class="n">questionnaire</span><span class="o">.</span><span class="n">name</span><span class="si">:</span><span class="s2">&lt;</span><span class="si">{</span><span class="n">name_width</span><span class="si">}}</span><span class="s2">  "</span>
             <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">questionnaire</span><span class="o">.</span><span class="n">n_items</span><span class="si">:</span><span class="s2">&gt;5</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">questionnaire</span><span class="o">.</span><span class="n">subscales</span><span class="p">)</span><span class="si">:</span><span class="s2">&gt;9</span><span class="si">}</span><span class="s2">"</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="n">lines</span></div>
+
+
+
+<div class="viewcode-block" id="format_records">
+<a class="viewcode-back" href="../../../autoapi/personality_questionnaire/cli/render/index.html#personality_questionnaire.cli.render.format_records">[docs]</a>
+<span class="k">def</span><span class="w"> </span><span class="nf">format_records</span><span class="p">(</span><span class="n">summaries</span><span class="p">:</span> <span class="nb">list</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""Render the stored-record table.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        summaries: Record summaries, most recent first.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Lines to print.</span>
+<span class="sd">    """</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">summaries</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="s2">"No records stored."</span><span class="p">]</span>
+
+    <span class="n">code_width</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">participant_code</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">summaries</span><span class="p">)</span>
+    <span class="n">key_width</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">questionnaire</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">summaries</span><span class="p">)</span>
+
+    <span class="n">lines</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="sa">f</span><span class="s2">"  </span><span class="si">{</span><span class="s1">'ID'</span><span class="si">:</span><span class="s2">&gt;4</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="s1">'PARTICIPANT'</span><span class="si">:</span><span class="s2">&lt;</span><span class="si">{</span><span class="n">code_width</span><span class="si">}}</span><span class="s2">  </span><span class="si">{</span><span class="s1">'INSTRUMENT'</span><span class="si">:</span><span class="s2">&lt;</span><span class="si">{</span><span class="n">key_width</span><span class="si">}}</span><span class="s2">  "</span>
+        <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="s1">'TAG'</span><span class="si">:</span><span class="s2">&lt;6</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="s1">'ITEMS'</span><span class="si">:</span><span class="s2">&gt;5</span><span class="si">}</span><span class="s2">  COLLECTED"</span>
+    <span class="p">]</span>
+    <span class="k">for</span> <span class="n">summary</span> <span class="ow">in</span> <span class="n">summaries</span><span class="p">:</span>
+        <span class="n">collected</span> <span class="o">=</span> <span class="n">summary</span><span class="o">.</span><span class="n">started_at</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">"%Y-%m-</span><span class="si">%d</span><span class="s2"> %H:%M"</span><span class="p">)</span> <span class="k">if</span> <span class="n">summary</span><span class="o">.</span><span class="n">started_at</span> <span class="k">else</span> <span class="s2">""</span>
+        <span class="n">marker</span> <span class="o">=</span> <span class="s2">""</span> <span class="k">if</span> <span class="n">summary</span><span class="o">.</span><span class="n">complete</span> <span class="k">else</span> <span class="s2">"  (incomplete)"</span>
+        <span class="n">lines</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">"  </span><span class="si">{</span><span class="n">summary</span><span class="o">.</span><span class="n">session_id</span><span class="si">:</span><span class="s2">&gt;4</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">summary</span><span class="o">.</span><span class="n">participant_code</span><span class="si">:</span><span class="s2">&lt;</span><span class="si">{</span><span class="n">code_width</span><span class="si">}}</span><span class="s2">  "</span>
+            <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">summary</span><span class="o">.</span><span class="n">questionnaire</span><span class="si">:</span><span class="s2">&lt;</span><span class="si">{</span><span class="n">key_width</span><span class="si">}}</span><span class="s2">  </span><span class="si">{</span><span class="n">summary</span><span class="o">.</span><span class="n">tag</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="s1">'-'</span><span class="si">:</span><span class="s2">&lt;6</span><span class="si">}</span><span class="s2">  "</span>
+            <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">summary</span><span class="o">.</span><span class="n">n_responses</span><span class="si">:</span><span class="s2">&gt;5</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">collected</span><span class="si">}{</span><span class="n">marker</span><span class="si">}</span><span class="s2">"</span>
         <span class="p">)</span>
     <span class="k">return</span> <span class="n">lines</span></div>
 

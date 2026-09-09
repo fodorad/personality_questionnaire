@@ -1,0 +1,261 @@
+personality_questionnaire.db.repository
+=======================================
+
+.. py:module:: personality_questionnaire.db.repository
+
+.. autoapi-nested-parse::
+
+   Reading and writing records.
+
+   :class:`Repository` is the only thing the CLI and the application talk to. Callers
+   pass and receive plain :class:`Record` values rather than ORM instances, so nothing
+   outside this package holds a detached session or depends on SQLAlchemy.
+
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   personality_questionnaire.db.repository.Record
+   personality_questionnaire.db.repository.RecordSummary
+   personality_questionnaire.db.repository.Repository
+
+
+Module Contents
+---------------
+
+.. py:class:: Record
+
+   One complete administration, independent of the database.
+
+   .. attribute:: participant_code
+
+      The participant's study-local code.
+
+   .. attribute:: questionnaire
+
+      Registry key of the instrument.
+
+   .. attribute:: responses
+
+      Item number to response value.
+
+   .. attribute:: tag
+
+      Administration tag, e.g. ``"pre"``.
+
+   .. attribute:: experiment
+
+      Optional study or condition name.
+
+   .. attribute:: participant_label
+
+      Optional label for the participant.
+
+   .. attribute:: started_at
+
+      When administration began.
+
+   .. attribute:: completed_at
+
+      When it finished.
+
+   .. attribute:: source
+
+      How it was collected.
+
+   .. attribute:: extra
+
+      Study-specific metadata.
+
+   .. attribute:: session_id
+
+      Database id, set once the record has been saved.
+
+
+   .. py:property:: instrument
+      :type: personality_questionnaire.registry.Questionnaire
+
+
+      The instrument this record was collected with.
+
+
+   .. py:property:: answers
+      :type: list[int]
+
+
+      Responses in item order.
+
+      :returns: One value per item, ordered by item number.
+
+      :raises ValueError: If any item is unanswered, since a partial record cannot be
+          scored.
+
+
+   .. py:method:: score() -> personality_questionnaire.scoring.ScoreResult
+
+      Score this record.
+
+      :returns: The computed scores for the single participant.
+
+
+
+.. py:class:: RecordSummary
+
+   A record's metadata without its responses, for listings.
+
+   .. attribute:: session_id
+
+      Database id.
+
+   .. attribute:: participant_code
+
+      The participant's code.
+
+   .. attribute:: questionnaire
+
+      Registry key of the instrument.
+
+   .. attribute:: tag
+
+      Administration tag.
+
+   .. attribute:: experiment
+
+      Study or condition name.
+
+   .. attribute:: started_at
+
+      When administration began.
+
+   .. attribute:: completed_at
+
+      When it finished, if it did.
+
+   .. attribute:: n_responses
+
+      How many items were answered.
+
+   .. attribute:: source
+
+      How the record was collected.
+
+
+   .. py:property:: complete
+      :type: bool
+
+
+      Whether every item of the instrument was answered.
+
+
+.. py:class:: Repository(engine: sqlalchemy.Engine, *, create: bool = True)
+
+   Stores and retrieves records.
+
+   .. attribute:: engine
+
+      The engine every operation runs against.
+
+   Bind to an engine.
+
+   :param engine: The database to use.
+   :param create: Whether to create missing tables on construction.
+
+
+   .. py:method:: close() -> None
+
+      Release every pooled connection.
+
+      A long-lived process opens one repository and never closes it, but a test or
+      a short-lived command should hand its connections back rather than leaving
+      the pool to be finalised at interpreter exit.
+
+
+
+   .. py:method:: save(record: Record) -> Record
+
+      Persist a record together with its scores and provenance.
+
+      Scores are computed once, here, and stored. They are never recomputed on
+      read: a stored score is evidence of what a participant was told, and the
+      scoring version and instrument hash beside it say how it was produced.
+
+      :param record: The record to save. Must be complete.
+
+      :returns: The same record with :attr:`Record.session_id` populated.
+
+      :raises ValueError: If the record is missing responses, or its instrument is not
+          registered.
+
+
+
+   .. py:method:: load(session_id: int) -> Record
+
+      Load one record by its database id.
+
+      :param session_id: The session's id.
+
+      :returns: The record.
+
+      :raises KeyError: If no session carries that id.
+
+
+
+   .. py:method:: list(*, participant: str | None = None, questionnaire: str | None = None, experiment: str | None = None) -> list[RecordSummary]
+
+      List stored records, most recent first.
+
+      :param participant: Restrict to one participant code.
+      :param questionnaire: Restrict to one instrument.
+      :param experiment: Restrict to one experiment name.
+
+      :returns: Matching record summaries.
+
+
+
+   .. py:method:: delete(session_id: int) -> bool
+
+      Delete one record and everything belonging to it.
+
+      :param session_id: The session's id.
+
+      :returns: True if a record was deleted.
+
+
+
+   .. py:method:: participants() -> list[str]
+
+      List every participant code, sorted.
+
+      :returns: The codes.
+
+
+
+   .. py:method:: scores(session_id: int) -> dict[str, float]
+
+      Return the stored scores for a record.
+
+      These are the values computed when the record was saved, not a fresh
+      computation, so they remain valid evidence even after the scorer changes.
+
+      :param session_id: The session's id.
+
+      :returns: Subscale name to stored value.
+
+
+
+   .. py:method:: responses_for(questionnaire: str) -> tuple[list[str], list[list[int]]]
+
+      Return every complete response set for one instrument.
+
+      The shape analysis needs: one row per session, one column per item, plus the
+      participant code for each row.
+
+      :param questionnaire: Registry key of the instrument.
+
+      :returns: Participant codes and their responses, aligned.
+
+
+

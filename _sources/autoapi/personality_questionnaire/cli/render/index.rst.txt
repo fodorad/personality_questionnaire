@@ -17,6 +17,7 @@ Functions
    personality_questionnaire.cli.render.format_scores
    personality_questionnaire.cli.render.format_instrument
    personality_questionnaire.cli.render.format_registry
+   personality_questionnaire.cli.render.format_records
 
 
 Module Contents
@@ -47,6 +48,15 @@ Module Contents
    Render the instrument table.
 
    :param questionnaires: Instruments to list.
+
+   :returns: Lines to print.
+
+
+.. py:function:: format_records(summaries: list) -> list[str]
+
+   Render the stored-record table.
+
+   :param summaries: Record summaries, most recent first.
 
    :returns: Lines to print.
 

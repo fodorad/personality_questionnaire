@@ -204,6 +204,7 @@
   <p class="caption" role="heading"><span class="caption-text">Guides</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../instruments.html">Instruments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../storage.html">Storing records</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../design.html">Design decisions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../migration.html">Migrating to 2.0</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Changelog</a></li>
@@ -223,7 +224,14 @@
 <li class="toctree-l3"><a class="reference internal" href="../../../autoapi/personality_questionnaire/core/theme/index.html">personality_questionnaire.core.theme</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="../../../autoapi/personality_questionnaire/instruments/index.html">personality_questionnaire.instruments</a><input aria-label="Toggle navigation of personality_questionnaire.instruments" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../autoapi/personality_questionnaire/db/index.html">personality_questionnaire.db</a><input aria-label="Toggle navigation of personality_questionnaire.db" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../autoapi/personality_questionnaire/db/export/index.html">personality_questionnaire.db.export</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../autoapi/personality_questionnaire/db/models/index.html">personality_questionnaire.db.models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../autoapi/personality_questionnaire/db/repository/index.html">personality_questionnaire.db.repository</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../autoapi/personality_questionnaire/db/session/index.html">personality_questionnaire.db.session</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../autoapi/personality_questionnaire/instruments/index.html">personality_questionnaire.instruments</a><input aria-label="Toggle navigation of personality_questionnaire.instruments" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../../autoapi/personality_questionnaire/instruments/bfi10/index.html">personality_questionnaire.instruments.bfi10</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../autoapi/personality_questionnaire/instruments/bfi2/index.html">personality_questionnaire.instruments.bfi2</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../autoapi/personality_questionnaire/instruments/bfi2_xs/index.html">personality_questionnaire.instruments.bfi2_xs</a></li>
@@ -442,6 +450,11 @@
     <span class="nb">print</span><span class="p">(</span><span class="s2">""</span><span class="p">)</span>
     <span class="n">_emit</span><span class="p">(</span><span class="n">render</span><span class="o">.</span><span class="n">format_scores</span><span class="p">(</span><span class="n">result</span><span class="p">))</span>
 
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">args</span><span class="o">.</span><span class="n">no_save</span><span class="p">:</span>
+        <span class="n">saved</span> <span class="o">=</span> <span class="n">_save_record</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="n">questionnaire</span><span class="p">,</span> <span class="n">responses</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">""</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Saved record </span><span class="si">{</span><span class="n">saved</span><span class="o">.</span><span class="n">session_id</span><span class="si">}</span><span class="s2"> for </span><span class="si">{</span><span class="n">saved</span><span class="o">.</span><span class="n">participant_code</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
+
     <span class="n">provenance</span> <span class="o">=</span> <span class="n">capture</span><span class="p">()</span>
     <span class="n">log</span><span class="o">.</span><span class="n">info</span><span class="p">(</span>
         <span class="s2">"scored </span><span class="si">%s</span><span class="s2"> for </span><span class="si">%s</span><span class="s2"> (version </span><span class="si">%s</span><span class="s2">, git </span><span class="si">%s%s</span><span class="s2">)"</span><span class="p">,</span>
@@ -464,6 +477,109 @@
         <span class="nb">print</span><span class="p">(</span><span class="s2">""</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">written</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Wrote </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">EXIT_OK</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_repository</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="n">argparse</span><span class="o">.</span><span class="n">Namespace</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Open the record store named by the arguments or the environment.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        args: Parsed arguments, whose ``db`` may name a database URL.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A repository bound to that database.</span>
+<span class="sd">    """</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">personality_questionnaire.db</span><span class="w"> </span><span class="kn">import</span> <span class="n">Repository</span><span class="p">,</span> <span class="n">create_engine_from_env</span>
+
+    <span class="n">url</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="s2">"db"</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+    <span class="n">engine</span> <span class="o">=</span> <span class="n">create_engine_from_env</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+    <span class="n">log</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">"using database </span><span class="si">%s</span><span class="s2">"</span><span class="p">,</span> <span class="n">engine</span><span class="o">.</span><span class="n">url</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">Repository</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_save_record</span><span class="p">(</span>
+    <span class="n">args</span><span class="p">:</span> <span class="n">argparse</span><span class="o">.</span><span class="n">Namespace</span><span class="p">,</span>
+    <span class="n">questionnaire</span><span class="p">:</span> <span class="n">registry</span><span class="o">.</span><span class="n">Questionnaire</span><span class="p">,</span>
+    <span class="n">responses</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Persist one completed administration.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        args: Parsed arguments.</span>
+<span class="sd">        questionnaire: The instrument administered.</span>
+<span class="sd">        responses: The participant's answers, in item order.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        The saved record, carrying its new session id.</span>
+<span class="sd">    """</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">personality_questionnaire.db</span><span class="w"> </span><span class="kn">import</span> <span class="n">Record</span>
+
+    <span class="n">record</span> <span class="o">=</span> <span class="n">Record</span><span class="p">(</span>
+        <span class="n">participant_code</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">participant</span><span class="p">,</span>
+        <span class="n">questionnaire</span><span class="o">=</span><span class="n">questionnaire</span><span class="o">.</span><span class="n">key</span><span class="p">,</span>
+        <span class="n">responses</span><span class="o">=</span><span class="p">{</span><span class="n">n</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">responses</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="mi">1</span><span class="p">)},</span>
+        <span class="n">tag</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">tag</span><span class="p">,</span>
+        <span class="n">experiment</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">experiment</span> <span class="ow">or</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">source</span><span class="o">=</span><span class="s2">"cli"</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">_repository</span><span class="p">(</span><span class="n">args</span><span class="p">)</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">record</span><span class="p">)</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_cmd_records</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="n">argparse</span><span class="o">.</span><span class="n">Namespace</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""List stored records.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        args: Parsed arguments.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        An exit code.</span>
+<span class="sd">    """</span>
+    <span class="n">summaries</span> <span class="o">=</span> <span class="n">_repository</span><span class="p">(</span><span class="n">args</span><span class="p">)</span><span class="o">.</span><span class="n">list</span><span class="p">(</span>
+        <span class="n">participant</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">participant</span><span class="p">,</span>
+        <span class="n">questionnaire</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">questionnaire</span><span class="p">,</span>
+        <span class="n">experiment</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">experiment</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">_emit</span><span class="p">(</span><span class="n">render</span><span class="o">.</span><span class="n">format_records</span><span class="p">(</span><span class="n">summaries</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">EXIT_OK</span>
+
+
+<span class="k">def</span><span class="w"> </span><span class="nf">_cmd_export</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="n">argparse</span><span class="o">.</span><span class="n">Namespace</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Export stored records to a file or stdout.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        args: Parsed arguments.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        An exit code.</span>
+<span class="sd">    """</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">json</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">_json</span>
+
+    <span class="kn">from</span><span class="w"> </span><span class="nn">personality_questionnaire.db</span><span class="w"> </span><span class="kn">import</span> <span class="n">export</span> <span class="k">as</span> <span class="n">export_module</span>
+
+    <span class="n">repository</span> <span class="o">=</span> <span class="n">_repository</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+    <span class="n">summaries</span> <span class="o">=</span> <span class="n">repository</span><span class="o">.</span><span class="n">list</span><span class="p">(</span>
+        <span class="n">participant</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">participant</span><span class="p">,</span>
+        <span class="n">questionnaire</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">questionnaire</span><span class="p">,</span>
+        <span class="n">experiment</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">experiment</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">session_ids</span> <span class="o">=</span> <span class="p">[</span><span class="n">s</span><span class="o">.</span><span class="n">session_id</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">summaries</span> <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">complete</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">session_ids</span><span class="p">:</span>
+        <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">"no complete records match that selection"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">EXIT_MISSING_INPUT</span>
+
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">shape</span> <span class="o">==</span> <span class="s2">"json"</span><span class="p">:</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="n">_json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">export_module</span><span class="o">.</span><span class="n">to_json</span><span class="p">(</span><span class="n">repository</span><span class="p">,</span> <span class="n">session_ids</span><span class="p">),</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="n">export_module</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">repository</span><span class="o">.</span><span class="n">engine</span><span class="p">,</span> <span class="n">session_ids</span><span class="p">,</span> <span class="n">shape</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">output</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">""</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">Path</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">output</span><span class="p">)</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">parents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">Path</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">output</span><span class="p">)</span><span class="o">.</span><span class="n">write_text</span><span class="p">(</span><span class="n">text</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Wrote </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">session_ids</span><span class="p">)</span><span class="si">}</span><span class="s2"> record(s) to </span><span class="si">{</span><span class="n">args</span><span class="o">.</span><span class="n">output</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">EXIT_OK</span>
 
@@ -538,6 +654,8 @@
         <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
         <span class="n">help</span><span class="o">=</span><span class="s2">"write response and score CSVs into this directory"</span><span class="p">,</span>
     <span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">"--db"</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">"database URL (default: $PQ_DATABASE_URL)"</span><span class="p">)</span>
+    <span class="n">parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">"--no-save"</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">"store_true"</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">"score without storing the record"</span><span class="p">)</span>
     <span class="n">parser</span><span class="o">.</span><span class="n">set_defaults</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="n">_cmd_run</span><span class="p">)</span>
 
 
@@ -568,6 +686,28 @@
     <span class="n">info</span><span class="o">.</span><span class="n">set_defaults</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="n">_cmd_info</span><span class="p">)</span>
 
     <span class="n">_add_run_parser</span><span class="p">(</span><span class="n">subparsers</span><span class="p">)</span>
+
+    <span class="n">records</span> <span class="o">=</span> <span class="n">subparsers</span><span class="o">.</span><span class="n">add_parser</span><span class="p">(</span><span class="s2">"records"</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">"list stored records"</span><span class="p">)</span>
+    <span class="n">records</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">"--participant"</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">"restrict to one participant"</span><span class="p">)</span>
+    <span class="n">records</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">"--questionnaire"</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="n">registry</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="n">help</span><span class="o">=</span><span class="s2">"restrict to one instrument"</span>
+    <span class="p">)</span>
+    <span class="n">records</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">"--experiment"</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">"restrict to one experiment"</span><span class="p">)</span>
+    <span class="n">records</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">"--db"</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">"database URL"</span><span class="p">)</span>
+    <span class="n">records</span><span class="o">.</span><span class="n">set_defaults</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="n">_cmd_records</span><span class="p">)</span>
+
+    <span class="n">export_parser</span> <span class="o">=</span> <span class="n">subparsers</span><span class="o">.</span><span class="n">add_parser</span><span class="p">(</span><span class="s2">"export"</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">"export stored records"</span><span class="p">)</span>
+    <span class="n">export_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">"--participant"</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">"restrict to one participant"</span><span class="p">)</span>
+    <span class="n">export_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">"--questionnaire"</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="n">registry</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="n">help</span><span class="o">=</span><span class="s2">"restrict to one instrument"</span>
+    <span class="p">)</span>
+    <span class="n">export_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">"--experiment"</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">"restrict to one experiment"</span><span class="p">)</span>
+    <span class="n">export_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span>
+        <span class="s2">"--shape"</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">"wide"</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="p">(</span><span class="s2">"wide"</span><span class="p">,</span> <span class="s2">"long"</span><span class="p">,</span> <span class="s2">"json"</span><span class="p">),</span> <span class="n">help</span><span class="o">=</span><span class="s2">"output shape"</span>
+    <span class="p">)</span>
+    <span class="n">export_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">"--output"</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">"write here instead of stdout"</span><span class="p">)</span>
+    <span class="n">export_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">"--db"</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">"database URL"</span><span class="p">)</span>
+    <span class="n">export_parser</span><span class="o">.</span><span class="n">set_defaults</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="n">_cmd_export</span><span class="p">)</span>
 
     <span class="n">score_parser</span> <span class="o">=</span> <span class="n">subparsers</span><span class="o">.</span><span class="n">add_parser</span><span class="p">(</span><span class="s2">"score"</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">"score responses from a file"</span><span class="p">)</span>
     <span class="n">score_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">"questionnaire"</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="n">registry</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="n">help</span><span class="o">=</span><span class="s2">"instrument used"</span><span class="p">)</span>
@@ -614,9 +754,17 @@
 <span class="sd">        argv: Arguments after the program name.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        The rewritten arguments, or ``None`` if this is not the legacy form.</span>
+<span class="sd">        The rewritten arguments, or ``None`` if this is not the legacy form -- which</span>
+<span class="sd">        includes any invocation that already names a subcommand.</span>
 <span class="sd">    """</span>
     <span class="k">if</span> <span class="s2">"--questionnaire"</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">argv</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="c1"># `records` and `export` take a --questionnaire filter of their own, so the flag</span>
+    <span class="c1"># alone no longer identifies the legacy form. Only a command line that names no</span>
+    <span class="c1"># subcommand at all can be the pre-2.0 one.</span>
+    <span class="n">subcommands</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"list"</span><span class="p">,</span> <span class="s2">"info"</span><span class="p">,</span> <span class="s2">"run"</span><span class="p">,</span> <span class="s2">"score"</span><span class="p">,</span> <span class="s2">"records"</span><span class="p">,</span> <span class="s2">"export"</span><span class="p">}</span>
+    <span class="k">if</span> <span class="nb">any</span><span class="p">(</span><span class="n">token</span> <span class="ow">in</span> <span class="n">subcommands</span> <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">argv</span><span class="p">):</span>
         <span class="k">return</span> <span class="kc">None</span>
 
     <span class="n">values</span> <span class="o">=</span> <span class="p">{}</span>

@@ -205,6 +205,7 @@
   <p class="caption" role="heading"><span class="caption-text">Guides</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="instruments.html">Instruments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="storage.html">Storing records</a></li>
 <li class="toctree-l1"><a class="reference internal" href="design.html">Design decisions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="migration.html">Migrating to 2.0</a></li>
 <li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
@@ -224,7 +225,14 @@
 <li class="toctree-l3"><a class="reference internal" href="autoapi/personality_questionnaire/core/theme/index.html">personality_questionnaire.core.theme</a></li>
 </ul>
 </li>
-<li class="toctree-l2 has-children"><a class="reference internal" href="autoapi/personality_questionnaire/instruments/index.html">personality_questionnaire.instruments</a><input aria-label="Toggle navigation of personality_questionnaire.instruments" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="autoapi/personality_questionnaire/db/index.html">personality_questionnaire.db</a><input aria-label="Toggle navigation of personality_questionnaire.db" class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/personality_questionnaire/db/export/index.html">personality_questionnaire.db.export</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/personality_questionnaire/db/models/index.html">personality_questionnaire.db.models</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/personality_questionnaire/db/repository/index.html">personality_questionnaire.db.repository</a></li>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/personality_questionnaire/db/session/index.html">personality_questionnaire.db.session</a></li>
+</ul>
+</li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="autoapi/personality_questionnaire/instruments/index.html">personality_questionnaire.instruments</a><input aria-label="Toggle navigation of personality_questionnaire.instruments" class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="autoapi/personality_questionnaire/instruments/bfi10/index.html">personality_questionnaire.instruments.bfi10</a></li>
 <li class="toctree-l3"><a class="reference internal" href="autoapi/personality_questionnaire/instruments/bfi2/index.html">personality_questionnaire.instruments.bfi2</a></li>
 <li class="toctree-l3"><a class="reference internal" href="autoapi/personality_questionnaire/instruments/bfi2_xs/index.html">personality_questionnaire.instruments.bfi2_xs</a></li>
@@ -382,10 +390,19 @@ full citations and licence notes.</sub></p>
 <p>Administer one at the terminal:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pq<span class="w"> </span>list<span class="w">                                  </span><span class="c1"># what is available</span>
 pq<span class="w"> </span>info<span class="w"> </span>bfi2<span class="w">                             </span><span class="c1"># items, subscales, citation</span>
-pq<span class="w"> </span>run<span class="w"> </span>bfi2<span class="w"> </span>--participant<span class="w"> </span>P01<span class="w">            </span><span class="c1"># ask the questions, score the answers</span>
+pq<span class="w"> </span>run<span class="w"> </span>bfi2<span class="w"> </span>--participant<span class="w"> </span>P01<span class="w">            </span><span class="c1"># ask, score, and store</span>
 pq<span class="w"> </span>score<span class="w"> </span>bfi2<span class="w"> </span>--input<span class="w"> </span>answers.csv<span class="w">        </span><span class="c1"># score a file</span>
 </pre></div>
 </div>
+<p>Collect and export a study:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span><span class="s2">"personality_questionnaire[ui]"</span><span class="w">          </span><span class="c1"># adds the record store</span>
+pq<span class="w"> </span>run<span class="w"> </span>bfi2<span class="w"> </span>--participant<span class="w"> </span>P01<span class="w"> </span>--experiment<span class="w"> </span>study-a
+pq<span class="w"> </span>records<span class="w">                                            </span><span class="c1"># what is stored</span>
+pq<span class="w"> </span><span class="nb">export</span><span class="w"> </span>--shape<span class="w"> </span>long<span class="w"> </span>--output<span class="w"> </span>study-a.csv
+</pre></div>
+</div>
+<p>Records go to <code class="docutils literal notranslate"><span class="pre">~/.personality_questionnaire/records.db</span></code> unless <code class="docutils literal notranslate"><span class="pre">PQ_DATABASE_URL</span></code>
+says otherwise. See <a class="reference external" href="https://github.com/fodorad/personality_questionnaire/blob/main/docs/storage.md">docs/storage.md</a>.</p>
 </section>
 <section id="how-it-works">
 <h2>How it works<a class="headerlink" href="#how-it-works" title="Link to this heading">¶</a></h2>
@@ -420,8 +437,11 @@ pq<span class="w"> </span>score<span class="w"> </span>bfi2<span class="w"> </sp
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">provenance.py</span></code></p></td>
 <td><p>Package version, git SHA, instrument hash for each record</p></td>
 </tr>
-<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">cli/</span></code></p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">pq</span> <span class="pre">list</span> <span class="pre">|</span> <span class="pre">info</span> <span class="pre">|</span> <span class="pre">run</span> <span class="pre">|</span> <span class="pre">score</span></code></p></td>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">db/</span></code></p></td>
+<td><p>SQLAlchemy record store, and the JSON/wide/long export shapes</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">cli/</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">pq</span> <span class="pre">list</span> <span class="pre">|</span> <span class="pre">info</span> <span class="pre">|</span> <span class="pre">run</span> <span class="pre">|</span> <span class="pre">score</span> <span class="pre">|</span> <span class="pre">records</span> <span class="pre">|</span> <span class="pre">export</span></code></p></td>
 </tr>
 </tbody>
 </table>

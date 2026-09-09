@@ -1,0 +1,84 @@
+personality_questionnaire.db.export
+===================================
+
+.. py:module:: personality_questionnaire.db.export
+
+.. autoapi-nested-parse::
+
+   Turning stored records into files.
+
+   Three shapes, because three different readers want different things:
+
+   * **JSON** -- one record, self-describing, including its provenance. The archival
+     form: enough to reconstruct exactly what was administered and what was reported.
+   * **Wide CSV** -- one row per session, columns for every item and every subscale.
+     What a statistics package expects for a single instrument.
+   * **Long CSV** -- one row per value. The tidy form, and the only one that can hold
+     several instruments in a single file without inventing empty columns.
+
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   personality_questionnaire.db.export.SHAPES
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   personality_questionnaire.db.export.record_to_json
+   personality_questionnaire.db.export.to_json
+   personality_questionnaire.db.export.to_csv
+
+
+Module Contents
+---------------
+
+.. py:data:: SHAPES
+   :value: ('wide', 'long', 'json')
+
+
+   Export shapes the CLI and the application offer.
+
+.. py:function:: record_to_json(repository: personality_questionnaire.db.repository.Repository, session_id: int) -> dict[str, Any]
+
+   Build the archival JSON form of one record.
+
+   :param repository: The repository holding the record.
+   :param session_id: The record's session id.
+
+   :returns: participant, session, provenance, responses and
+             the scores as they were stored.
+   :rtype: A self-describing mapping
+
+   :raises KeyError: If no record carries that id.
+
+
+.. py:function:: to_json(repository: personality_questionnaire.db.repository.Repository, session_ids: list[int]) -> list[dict[str, Any]]
+
+   Build the archival JSON form of several records.
+
+   :param repository: The repository holding them.
+   :param session_ids: Which records to export.
+
+   :returns: One mapping per record, in the order given.
+
+
+.. py:function:: to_csv(engine: sqlalchemy.Engine, session_ids: list[int], *, shape: str = 'wide') -> str
+
+   Render records as CSV in the requested shape.
+
+   :param engine: The database to read from.
+   :param session_ids: Which sessions to export.
+   :param shape: ``"wide"`` or ``"long"``.
+
+   :returns: CSV text.
+
+   :raises ValueError: If the shape is unknown, or a wide export spans instruments.
+
+

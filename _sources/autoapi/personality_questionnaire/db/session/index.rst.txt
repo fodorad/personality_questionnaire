@@ -1,0 +1,79 @@
+personality_questionnaire.db.session
+====================================
+
+.. py:module:: personality_questionnaire.db.session
+
+.. autoapi-nested-parse::
+
+   Engine and session management.
+
+   The database URL comes from ``PQ_DATABASE_URL``, defaulting to a SQLite file under
+   the user's home directory so a lab machine needs no server and no configuration.
+
+   There are no migrations. The schema has one version, and a research tool that owns
+   its own database is better served by an explicit export and re-import than by a
+   migration graph nobody exercises. This is a decision, not an omission: see
+   ``docs/storage.md``.
+
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   personality_questionnaire.db.session.default_database_path
+   personality_questionnaire.db.session.database_url
+   personality_questionnaire.db.session.create_engine_from_env
+   personality_questionnaire.db.session.init_db
+   personality_questionnaire.db.session.session_scope
+
+
+Module Contents
+---------------
+
+.. py:function:: default_database_path() -> pathlib.Path
+
+   Return the path of the default SQLite database.
+
+   :returns: ``$PQ_HOME/records.db`` when set, else ``~/.personality_questionnaire/records.db``.
+
+
+.. py:function:: database_url() -> str
+
+   Resolve the database URL to use.
+
+   :returns: ``$PQ_DATABASE_URL`` when set, otherwise a SQLite URL for
+             :func:`default_database_path`.
+
+
+.. py:function:: create_engine_from_env(url: str | None = None, *, echo: bool = False) -> sqlalchemy.Engine
+
+   Build an engine, creating the SQLite parent directory if needed.
+
+   :param url: Database URL. Defaults to :func:`database_url`.
+   :param echo: Whether to log emitted SQL.
+
+   :returns: A configured engine.
+
+
+.. py:function:: init_db(engine: sqlalchemy.Engine) -> None
+
+   Create any missing tables.
+
+   Idempotent, so it is safe to call on every start.
+
+   :param engine: The engine to create tables on.
+
+
+.. py:function:: session_scope(engine: sqlalchemy.Engine) -> collections.abc.Iterator[sqlalchemy.orm.Session]
+
+   Yield a transactional session, committing on success.
+
+   :param engine: The engine to open a session on.
+
+   :Yields: An open session.
+
+   :raises Exception: Whatever the body raised, after rolling back.
+
+

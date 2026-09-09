@@ -1,0 +1,237 @@
+personality_questionnaire.db.models
+===================================
+
+.. py:module:: personality_questionnaire.db.models
+
+.. autoapi-nested-parse::
+
+   The record schema.
+
+   Four tables. A participant has sessions; a session has one response per item and one
+   score per subscale. Reading a record back means loading a session and its children.
+
+   Two decisions shape everything here:
+
+   **Responses are rows, not a JSON blob.** One row per item costs nothing at this scale
+   and makes "what did everyone answer to item 5" a query rather than a decode loop over
+   every record -- which is exactly what a reliability coefficient needs.
+
+   **Scores are stored, not recomputed.** A stored score, next to the scoring version and
+   the hash of the instrument that produced it, is evidence of what a participant was
+   actually told. Recomputing on read would silently rewrite history whenever the scorer
+   changed.
+
+   String columns carry explicit lengths. SQLite ignores them; MySQL requires them on
+   any indexed column, and this is the only place the alternate backend shapes the code.
+
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   personality_questionnaire.db.models.Base
+   personality_questionnaire.db.models.Participant
+   personality_questionnaire.db.models.Session
+   personality_questionnaire.db.models.Response
+   personality_questionnaire.db.models.Score
+
+
+Module Contents
+---------------
+
+.. py:class:: Base
+
+   Bases: :py:obj:`sqlalchemy.orm.DeclarativeBase`
+
+
+   Declarative base for every table in this package.
+
+
+.. py:class:: Participant
+
+   Bases: :py:obj:`Base`
+
+
+   A person who answers questionnaires.
+
+   Identified by a study-local code rather than a name: this package stores
+   human-subject data, and a code keeps a record pseudonymous by default.
+
+   .. attribute:: id
+
+      Surrogate primary key.
+
+   .. attribute:: code
+
+      Study-local identifier, unique within the database.
+
+   .. attribute:: label
+
+      Optional human-readable note, e.g. a cohort or condition.
+
+   .. attribute:: notes
+
+      Optional free text.
+
+   .. attribute:: created_at
+
+      When the participant was first recorded.
+
+   .. attribute:: sessions
+
+      Every administration given to this participant.
+
+
+.. py:class:: Session
+
+   Bases: :py:obj:`Base`
+
+
+   One administration of one instrument to one participant.
+
+   .. attribute:: id
+
+      Surrogate primary key.
+
+   .. attribute:: participant_id
+
+      The participant who answered.
+
+   .. attribute:: questionnaire
+
+      Registry key of the instrument administered.
+
+   .. attribute:: tag
+
+      Free-form administration tag, e.g. ``"pre"`` or ``"post"``. Part of the
+      uniqueness constraint, which is what lets a paired instrument record two
+      sessions for the same participant.
+
+   .. attribute:: experiment
+
+      Optional study or condition name.
+
+   .. attribute:: started_at
+
+      When administration began.
+
+   .. attribute:: completed_at
+
+      When the last item was answered, or ``None`` if abandoned.
+
+   .. attribute:: source
+
+      How the record was collected -- ``"cli"``, ``"ui"`` or ``"import"``.
+
+   .. attribute:: package_version
+
+      Version of this package that scored the session.
+
+   .. attribute:: git_sha
+
+      Commit the scoring code came from, or ``None`` from an installed
+      wheel, which has no repository.
+
+   .. attribute:: git_dirty
+
+      Whether that checkout had uncommitted changes, in which case the
+      record cannot be reproduced from any commit.
+
+   .. attribute:: instrument_hash
+
+      Hash of the instrument definition as administered, so a
+      later wording fix cannot retroactively change what was asked.
+
+   .. attribute:: scoring_version
+
+      Version of the scoring arithmetic used.
+
+   .. attribute:: extra
+
+      Any additional study-specific metadata.
+
+   .. attribute:: participant
+
+      The participant who answered.
+
+   .. attribute:: responses
+
+      One row per item.
+
+   .. attribute:: scores
+
+      One row per subscale.
+
+
+.. py:class:: Response
+
+   Bases: :py:obj:`Base`
+
+
+   One item answered in one session.
+
+   .. attribute:: id
+
+      Surrogate primary key.
+
+   .. attribute:: session_id
+
+      The session this answer belongs to.
+
+   .. attribute:: item_number
+
+      The item's number in its instrument's own numbering.
+
+   .. attribute:: value
+
+      The response as given, before any reverse-keying.
+
+   .. attribute:: responded_at
+
+      When the item was answered, when the collector records it.
+
+   .. attribute:: session
+
+      The owning session.
+
+
+.. py:class:: Score
+
+   Bases: :py:obj:`Base`
+
+
+   One computed subscale value for one session.
+
+   .. attribute:: id
+
+      Surrogate primary key.
+
+   .. attribute:: session_id
+
+      The session scored.
+
+   .. attribute:: subscale
+
+      Name of the subscale.
+
+   .. attribute:: level
+
+      The subscale's level, e.g. ``"domain"`` or ``"facet"``.
+
+   .. attribute:: value
+
+      The computed score.
+
+   .. attribute:: normalized
+
+      Whether the value is rescaled to ``[0, 1]``. Part of the
+      uniqueness constraint, so a normalised score and a published total can
+      coexist for the same subscale.
+
+   .. attribute:: session
+
+      The owning session.
+
+
