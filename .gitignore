@@ -130,3 +130,21 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+# project specific
+dist/
+site/
+coverage_html/
+coverage.xml
+.coverage
+.venv/
+.venv-ci/
+.ruff_cache/
+
+# macOS
+.DS_Store
+
+# Participant data. Records are the operator's to keep and never enter git.
+data/
+*_answers_int.csv
+*_scores.csv

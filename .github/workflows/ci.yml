@@ -1,0 +1,67 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    name: Test (${{ matrix.os }}, py${{ matrix.python-version }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        python-version: ["3.12", "3.14"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+
+      - name: Install dependencies
+        run: uv pip install --system -e ".[ui,mysql,analysis,dev,docs]"
+
+      - name: Audit dependencies for vulnerabilities
+        run: uvx pip-audit
+        continue-on-error: true  # advisories are a warning, not a merge gate
+
+      - name: Ruff lint
+        run: ruff check .
+
+      - name: Ruff format
+        run: ruff format --check .
+
+      - name: Type check
+        run: ty check personality_questionnaire
+
+      - name: Test & coverage
+        env:
+          RUN_PACKAGING_TESTS: "1"
+        run: |
+          coverage run -m unittest discover -s tests -v
+          coverage report
+          coverage xml -o coverage.xml
+
+      - name: Build docs (warnings as errors)
+        run: sphinx-build -b html -W docs/ site/
+
+      - name: Upload coverage to Codecov
+        # Once per run, not once per matrix cell.
+        if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.13'
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: coverage.xml
+          fail_ci_if_error: false

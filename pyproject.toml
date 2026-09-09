@@ -1,32 +1,139 @@
 [build-system]
-requires = ["hatchling", "hatch-requirements-txt"]
+requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
 name = "personality_questionnaire"
-version = "1.1.2"
-description = "Personality and general experiment questionnaire processing methods."
-keywords = ["bfi-2", "vas-f", "personality", "questionnaire"]
-authors = [
-  { name = "fodorad", email = "foauaai@inf.elte.hu" },
+# Managed by release-please (release-type "python" updates this line itself) --
+# do not edit by hand. A `feat!:` commit becomes a `chore(main): release X.0.0`
+# PR; merging that PR tags the version and CD publishes to PyPI.
+version = "2.0.0"
+description = "Administer, score and record validated personality and affect questionnaires."
+keywords = [
+  "bfi-2",
+  "vas-f",
+  "big five",
+  "personality",
+  "psychometrics",
+  "questionnaire",
 ]
-readme = {"file" = "README.md", "content-type" = "text/markdown"}
-requires-python = ">=3.11"
+authors = [
+  { name = "fodorad", email = "fodorad201@gmail.com" },
+]
+readme = { "file" = "README.md", "content-type" = "text/markdown" }
+requires-python = ">=3.12"
 license = "MIT"
-dynamic = ["dependencies"]
+license-files = ["LICENSE"]
 classifiers = [
-  "Programming Language :: Python :: 3",
-  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "Programming Language :: Python :: 3.14",
   "Operating System :: OS Independent",
+  "Intended Audience :: Science/Research",
+  "Topic :: Scientific/Engineering",
+]
+# Deliberately tiny. Scoring is numpy and nothing else, so `pip install
+# personality_questionnaire` stays a seconds-long install for anyone who only
+# wants to score a CSV. The database and the web UI are opt-in extras.
+dependencies = [
+  "numpy",
+]
+
+[project.optional-dependencies]
+# The localhost data-collection application: SQL-backed, multi-participant.
+ui = [
+  "nicegui>=2.0",
+  "sqlalchemy>=2.0",
+]
+
+# MySQL/MariaDB instead of the default SQLite, for a shared lab machine.
+mysql = [
+  "pymysql>=1.1",
+]
+
+# Psychometric diagnostics over collected records.
+analysis = [
+  "scipy>=1.11",
+  "matplotlib",
+]
+
+dev = [
+  "ruff",
+  "ty",
+  "coverage",
+  "pre-commit",
+]
+
+docs = [
+  "sphinx>=8.0",
+  "furo",
+  "sphinx-autoapi",
+  "sphinx-autobuild",
+  "myst-parser",
 ]
 
 [project.scripts]
-personality-questionnaire = "personality_questionnaire.api:main"
+# `pq` is the short form; the long name has shipped since 1.1.0 and is kept so
+# existing scripts keep resolving.
+pq = "personality_questionnaire.cli.main:run"
+personality-questionnaire = "personality_questionnaire.cli.main:run"
 
 [project.urls]
-Documentation = "https://github.com/fodorad/personality_questionnaire#readme"
+Documentation = "https://fodorad.github.io/personality_questionnaire/"
 Issues = "https://github.com/fodorad/personality_questionnaire/issues"
 Source = "https://github.com/fodorad/personality_questionnaire"
 
-[tool.hatch.metadata.hooks.requirements_txt]
-files = ["requirements.txt"]
+[tool.hatch.build.targets.wheel]
+packages = ["personality_questionnaire"]
+
+[tool.hatch.build.targets.sdist]
+packages = ["personality_questionnaire"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "TCH", "ARG", "PIE", "D"]
+ignore = ["D107", "D203", "D213"]
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"
+
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["D104"]
+"tests/**/*.py" = ["D", "S", "ARG"]
+"docs/conf.py" = ["D", "ARG"]
+
+[tool.ty.environment]
+python-version = "3.13"
+
+[tool.ty.rules]
+# The compatibility shims re-export names for their side effect on the public
+# surface; ty reads those as unused.
+unused-ignore-comment = "ignore"
+
+[tool.coverage.run]
+source = ["personality_questionnaire"]
+omit = [
+  "*/tests/*",
+  "*/__init__.py",
+]
+
+[tool.coverage.report]
+fail_under = 90
+show_missing = true
+skip_covered = false
+exclude_also = [
+  # Console-script guards: executed by the installed entry point, never by an
+  # import, so covering them would mean testing the interpreter.
+  "if __name__ == .__main__.:",
+]
+
+[tool.coverage.html]
+directory = "coverage_html"

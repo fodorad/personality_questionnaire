@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="personality_questionnaire">
+  <!-- Five rows of five discrete response options: a Likert grid, which is what a
+       participant actually sees. Rows are the Big Five; the filled marks trace one
+       person's answers. The ochre mark is the item being answered now.
+
+       Row and column positions are solved so the ink sits 4 units from every edge.
+       The spacing is not uniform because the outer marks differ in radius: the
+       right-hand column carries a filled r=5.6 mark while the left carries an r=3
+       dot, so equal centre spacing would leave visibly unequal margins.
+
+       The rounded plate is a faint tint rather than an outline: at favicon size a
+       stroke competes with the dots, while a wash still reads as a silhouette. The
+       page behind it stays transparent. -->
+  <rect x="0" y="0" width="64" height="64" rx="14" ry="14" fill="#0F4C5C" opacity="0.07"/>
+  <g fill="#0F4C5C" opacity="0.22">
+    <circle cx="7.0" cy="9.6" r="3"/><circle cx="18.85" cy="9.6" r="3"/><circle cx="30.7" cy="9.6" r="3"/><circle cx="42.55" cy="9.6" r="3"/><circle cx="54.4" cy="9.6" r="3"/>
+    <circle cx="7.0" cy="20.8" r="3"/><circle cx="18.85" cy="20.8" r="3"/><circle cx="30.7" cy="20.8" r="3"/><circle cx="42.55" cy="20.8" r="3"/><circle cx="54.4" cy="20.8" r="3"/>
+    <circle cx="7.0" cy="32.0" r="3"/><circle cx="18.85" cy="32.0" r="3"/><circle cx="30.7" cy="32.0" r="3"/><circle cx="42.55" cy="32.0" r="3"/><circle cx="54.4" cy="32.0" r="3"/>
+    <circle cx="7.0" cy="43.2" r="3"/><circle cx="18.85" cy="43.2" r="3"/><circle cx="30.7" cy="43.2" r="3"/><circle cx="42.55" cy="43.2" r="3"/><circle cx="54.4" cy="43.2" r="3"/>
+    <circle cx="7.0" cy="54.4" r="3"/><circle cx="18.85" cy="54.4" r="3"/><circle cx="30.7" cy="54.4" r="3"/><circle cx="42.55" cy="54.4" r="3"/><circle cx="54.4" cy="54.4" r="3"/>
+  </g>
+  <g fill="#0F4C5C"><circle cx="42.55" cy="9.6" r="5.6"/><circle cx="18.85" cy="20.8" r="5.6"/><circle cx="54.4" cy="43.2" r="5.6"/><circle cx="30.7" cy="54.4" r="5.6"/></g>
+  <circle cx="30.7" cy="32.0" r="6.8" fill="#A9521F"/>
+</svg>
