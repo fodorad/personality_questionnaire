@@ -569,6 +569,21 @@
     <span class="k">return</span> <span class="n">EXIT_OK</span>
 
 
+<span class="k">def</span><span class="w"> </span><span class="nf">_cmd_demo</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="n">argparse</span><span class="o">.</span><span class="n">Namespace</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Start the public, no-storage demo.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        args: Parsed arguments.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        An exit code. In practice the server runs until interrupted.</span>
+<span class="sd">    """</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">demo.app</span><span class="w"> </span><span class="kn">import</span> <span class="n">launch</span>
+
+    <span class="n">launch</span><span class="p">(</span><span class="n">host</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">host</span><span class="p">,</span> <span class="n">port</span><span class="o">=</span><span class="n">args</span><span class="o">.</span><span class="n">port</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">EXIT_OK</span>
+
+
 <span class="k">def</span><span class="w"> </span><span class="nf">_cmd_records</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="n">argparse</span><span class="o">.</span><span class="n">Namespace</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""List stored records.</span>
 
@@ -794,6 +809,13 @@
     <span class="n">ui_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">"--db"</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">"database URL"</span><span class="p">)</span>
     <span class="n">ui_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">"--show"</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s2">"store_true"</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">"open a browser on start"</span><span class="p">)</span>
     <span class="n">ui_parser</span><span class="o">.</span><span class="n">set_defaults</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="n">_cmd_ui</span><span class="p">)</span>
+
+    <span class="n">demo_parser</span> <span class="o">=</span> <span class="n">subparsers</span><span class="o">.</span><span class="n">add_parser</span><span class="p">(</span>
+        <span class="s2">"demo"</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">"start the public no-storage demo (requires the demo extra)"</span>
+    <span class="p">)</span>
+    <span class="n">demo_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">"--host"</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="s2">"127.0.0.1"</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">"address to bind"</span><span class="p">)</span>
+    <span class="n">demo_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">"--port"</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">int</span><span class="p">,</span> <span class="n">default</span><span class="o">=</span><span class="mi">7860</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">"port to listen on"</span><span class="p">)</span>
+    <span class="n">demo_parser</span><span class="o">.</span><span class="n">set_defaults</span><span class="p">(</span><span class="n">func</span><span class="o">=</span><span class="n">_cmd_demo</span><span class="p">)</span>
 
     <span class="n">score_parser</span> <span class="o">=</span> <span class="n">subparsers</span><span class="o">.</span><span class="n">add_parser</span><span class="p">(</span><span class="s2">"score"</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">"score responses from a file"</span><span class="p">)</span>
     <span class="n">score_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s2">"questionnaire"</span><span class="p">,</span> <span class="n">choices</span><span class="o">=</span><span class="n">registry</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="n">help</span><span class="o">=</span><span class="s2">"instrument used"</span><span class="p">)</span>

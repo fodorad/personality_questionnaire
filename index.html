@@ -433,6 +433,19 @@ network:</p>
 <p>Five tabs: an overview, setup, the questionnaire itself, the computed scores, and
 every record collected so far with its exports. See <a class="reference external" href="https://github.com/fodorad/personality_questionnaire/blob/main/docs/ui.md">docs/ui.md</a>.</p>
 </section>
+<section id="try-it-without-installing-anything">
+<h2>Try it without installing anything<a class="headerlink" href="#try-it-without-installing-anything" title="Link to this heading">¶</a></h2>
+<p>A separate, stateless Gradio demo – pick an instrument, answer it, see the scores
+plotted (a radar for the Big Five forms, a bar chart for PANAS and VAS-F). Nothing
+entered is stored: <code class="docutils literal notranslate"><span class="pre">demo/</span></code> never imports the database layer above, and
+<code class="docutils literal notranslate"><span class="pre">tests/demo/test_isolation.py</span></code> enforces that at CI time, not just in prose.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span><span class="s2">"personality_questionnaire[demo]"</span>
+pq<span class="w"> </span>demo<span class="w">        </span><span class="c1"># http://127.0.0.1:7860</span>
+</pre></div>
+</div>
+<p>Deployable as a CPU-only Hugging Face Space (<code class="docutils literal notranslate"><span class="pre">sdk:</span> <span class="pre">docker</span></code>) via <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">push-space</span></code>;
+see <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code> and <code class="docutils literal notranslate"><span class="pre">demo/README.md</span></code>.</p>
+</section>
 <section id="how-it-works">
 <h2>How it works<a class="headerlink" href="#how-it-works" title="Link to this heading">¶</a></h2>
 <div class="highlight-mermaid notranslate"><div class="highlight"><pre><span></span>flowchart LR
