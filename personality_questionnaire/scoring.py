@@ -17,6 +17,8 @@ from typing import TYPE_CHECKING
 
 import numpy as np
 
+from personality_questionnaire.registry import Aggregation
+
 if TYPE_CHECKING:
     from collections.abc import Sequence
 
@@ -140,6 +142,9 @@ def _weight_matrix(questionnaire: Questionnaire) -> tuple[np.ndarray, np.ndarray
     constant ``(min + max) / k`` gathered into the offset vector. Scoring is then
     ``answers @ weights + offsets``.
 
+    A subscale declaring :attr:`Aggregation.SUM` uses ``k = 1``, so the same matrix
+    multiplication produces a total instead of a mean.
+
     Args:
         questionnaire: The instrument to build the matrix for.
 
@@ -156,7 +161,7 @@ def _weight_matrix(questionnaire: Questionnaire) -> tuple[np.ndarray, np.ndarray
     offsets = np.zeros(len(questionnaire.subscales), dtype=float)
 
     for column, subscale in enumerate(questionnaire.subscales):
-        share = 1.0 / len(subscale.items)
+        share = 1.0 if subscale.aggregation is Aggregation.SUM else 1.0 / len(subscale.items)
         for number in subscale.items:
             if number in subscale.reverse:
                 weights[number - 1, column] = -share
@@ -224,7 +229,9 @@ class ScoreResult:
             with ``names``.
         names: Subscale names, aligned with the columns of ``values``.
         normalized: Whether ``values`` is rescaled to ``[0, 1]`` or left on the
-            instrument's own response scale.
+            instrument's own response scale. Subscales declaring
+            :attr:`~personality_questionnaire.registry.Aggregation.SUM` are never
+            rescaled, whatever this says.
     """
 
     questionnaire: Questionnaire
@@ -326,8 +333,15 @@ def score(
 
     should_normalize = questionnaire.normalize if normalize is None else normalize
     if should_normalize:
+        # A subscale published as a total is left alone: rescaling it would destroy
+        # the number the instrument's norms are stated in.
         low, high = questionnaire.minimum, questionnaire.maximum
-        values = (values - low) / (high - low)
+        scalable = np.array([s.aggregation is not Aggregation.SUM for s in questionnaire.subscales])
+        values = np.where(scalable, (values - low) / (high - low), values)
+        # The weight/offset split accumulates rounding, so a scale sitting exactly at
+        # its floor lands on -2.8e-17 rather than 0 and prints as "-0.000", which
+        # reads as an error in a score report. Snap values that round-trip cleanly.
+        values = np.where(scalable, np.round(values, 12) + 0.0, values)
 
     return ScoreResult(
         questionnaire=questionnaire,

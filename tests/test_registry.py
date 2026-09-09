@@ -54,7 +54,7 @@ class TestRegisteredInstruments(unittest.TestCase):
     """Every shipped instrument must be internally consistent."""
 
     def test_registry_is_populated(self):
-        self.assertEqual(set(registry.keys()), {"bfi2", "bfi2-xs", "bfi10", "vasf"})
+        self.assertEqual(set(registry.keys()), {"bfi2", "bfi2-xs", "bfi10", "panas", "vasf"})
 
     def test_every_big_five_form_reports_the_same_domains(self):
         """The three Big Five forms must be interchangeable at the domain level.
