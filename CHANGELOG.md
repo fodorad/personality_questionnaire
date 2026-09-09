@@ -10,6 +10,13 @@ Commits.
 
 ---
 
+## [2.4.0](https://github.com/fodorad/personality_questionnaire/compare/v2.3.0...v2.4.0) (2026-09-09)
+
+
+### Features
+
+* **ui:** add a five-tab NiceGUI application ([#21](https://github.com/fodorad/personality_questionnaire/issues/21)) ([6b675f2](https://github.com/fodorad/personality_questionnaire/commit/6b675f28da2568ea64d31a51f3ddb403f431628a))
+
 ## [2.3.0](https://github.com/fodorad/personality_questionnaire/compare/v2.2.0...v2.3.0) (2026-09-09)
 
 
