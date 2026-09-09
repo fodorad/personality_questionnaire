@@ -49,7 +49,13 @@ full citations and licence notes.</sub>
 
 <div align="center">
 
+<br>
+<b>Landing page of the Personality Questionnaire application:</b>
+
 <img src="https://raw.githubusercontent.com/fodorad/personality_questionnaire/main/docs/assets/screenshot-overview.png" alt="Landing page of the Personality Questionnaire application" width="720"/>
+
+<br>
+<b>BFI-10 loaded on the Questionnaire tab:</b>
 
 <img src="https://raw.githubusercontent.com/fodorad/personality_questionnaire/main/docs/assets/screenshot-questionnaire.png" alt="BFI-10 loaded on the Questionnaire tab" width="720"/>
 
@@ -104,18 +110,46 @@ every record collected so far with its exports. See [docs/ui.md](docs/ui.md).
 
 # Try it without installing anything
 
-A separate, stateless Gradio demo -- pick an instrument, answer it, see the scores
-plotted (a radar for the Big Five forms, a bar chart for PANAS and VAS-F). Nothing
-entered is stored: `demo/` never imports the database layer above, and
-`tests/demo/test_isolation.py` enforces that at CI time, not just in prose.
+A separate, stateless demo -- pick an instrument, answer it, see the scores
+plotted (a radar for the Big Five forms, a bar chart for PANAS and VAS-F).
+Nothing entered is stored. **Local-first is the primary, supported way to run
+it** -- both Hugging Face Space deployments below exist as optional extras
+and currently sit unpublished (see note).
+
+Gradio version (`demo/` -- never imports the database layer above, and
+`tests/demo_app/test_isolation.py` enforces that at CI time, not just in
+prose):
 
 ```bash
 pip install "personality_questionnaire[demo]"
 pq demo        # http://127.0.0.1:7860
 ```
 
-Deployable as a CPU-only Hugging Face Space (`sdk: docker`) via `make push-space`;
-see `Dockerfile` and `demo/README.md`.
+React/TypeScript version (`demo-react/` -- scoring reimplemented in
+TypeScript rather than running Python client-side; see
+[docs/design.md](docs/design.md) for why):
+
+```bash
+make react-demo   # http://localhost:5173
+```
+
+<div align="center">
+
+<img src="https://raw.githubusercontent.com/fodorad/personality_questionnaire/main/docs/assets/screenshot-demo-gradio.jpg" alt="Gradio demo: BFI-10 scored as a Big Five radar chart" width="360"/>
+<img src="https://raw.githubusercontent.com/fodorad/personality_questionnaire/main/docs/assets/screenshot-demo-react.jpg" alt="React demo: BFI-10 scored as a Big Five radar chart" width="360"/>
+
+<sub>Gradio demo (left) and React/TypeScript demo (right), both scoring the same BFI-10 responses.</sub>
+
+</div>
+
+Both are deployable to Hugging Face Spaces (`make push-space` for the Docker
+Gradio Space, `make push-space-react` for the static React Space), and both
+paths are implemented and tested. **Deployment is currently on hold**: as of
+2026-09, Hugging Face requires billing credits on the account to run a
+Space's build step, even on the nominally-free static SDK tier, so neither
+Space is published right now. Once credits are added (or the React Space is
+switched to shipping a pre-built `dist/` with no build step), either `make`
+target above publishes it.
 
 # How it works
 

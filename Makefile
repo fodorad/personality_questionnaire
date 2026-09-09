@@ -1,4 +1,4 @@
-.PHONY: help install dev install-docs fix lint type-check test audit docs docs-serve check check-ci clean build logo ui ui-demo gradio-demo push-space
+.PHONY: help install dev install-docs fix lint type-check test audit docs docs-serve check check-ci clean build logo ui ui-demo gradio-demo push-space export-instruments react-demo push-space-react
 
 EXTRAS := --all-extras
 
@@ -8,7 +8,8 @@ help:
 	@echo "CI parity:           check-ci"
 	@echo "Setup:               install | dev | install-docs"
 	@echo "Run:                 ui | ui-demo   (PORT=8080 DB=...)"
-	@echo "Public demo:         gradio-demo | push-space"
+	@echo "Public demo:         gradio-demo | push-space          (ZeroGPU/Docker, free with limits)"
+	@echo "React demo:          export-instruments | react-demo | push-space-react   (static, free)"
 	@echo "Docs:                docs-serve"
 	@echo "Package:             build | logo"
 	@echo "Cleanup:             clean"
@@ -139,6 +140,37 @@ push-space:
 	cp -r demo tmp/space-staging/demo
 	rm -rf tmp/space-staging/personality_questionnaire/__pycache__ tmp/space-staging/demo/__pycache__
 	hf upload-large-folder $(SPACE) --repo-type space --local-path tmp/space-staging
+
+# -- React demo (static Space, free with no PRO/ZeroGPU limits) --------------
+
+# Regenerate demo-react/src/instruments.json from the Python registry after
+# changing any instrument. tests/demo_react/test_instruments_export.py fails
+# CI if this drifts from what's checked in.
+export-instruments:
+	uv run python scripts/export_instruments.py
+
+# Fast local iteration loop -- separate from `ui-demo` (the Lab UI against a
+# throwaway database) and `gradio-demo` (the Gradio Space), which this does
+# not touch or depend on.
+react-demo:
+	cd demo-react && npm run dev
+
+# HF's static-Space build runs server-side from source
+# (package.json/vite.config.ts/src/), so this stages the source, not a local
+# `npm run build` artifact -- unlike push-space's Dockerfile path, which
+# builds the image itself. Requires the huggingface_hub CLI and a prior
+# `hf auth login`.
+SPACE_REACT ?= fodorad/personality-questionnaire-lite
+push-space-react:
+	cd demo-react && npm run build
+	@echo "React app builds. Preview locally: cd demo-react && npm run preview"
+	rm -rf tmp/space-react-staging
+	mkdir -p tmp/space-react-staging
+	cp demo-react/README.md tmp/space-react-staging/README.md
+	cp demo-react/package.json demo-react/package-lock.json demo-react/vite.config.ts demo-react/tsconfig.json demo-react/tsconfig.app.json demo-react/tsconfig.node.json demo-react/index.html tmp/space-react-staging/
+	cp -r demo-react/src tmp/space-react-staging/src
+	cp -r demo-react/public tmp/space-react-staging/public
+	hf upload $(SPACE_REACT) tmp/space-react-staging --repo-type space
 
 # -- Assets -------------------------------------------------------------------
 

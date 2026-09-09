@@ -68,3 +68,32 @@ jobs:
           files: coverage.xml
           # A failed upload is a broken report, not a passing build.
           fail_ci_if_error: true
+
+  demo-react:
+    name: React demo (build, test, lint)
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: demo-react/package-lock.json
+
+      - name: Install dependencies
+        working-directory: demo-react
+        run: npm ci
+
+      - name: Build (tsc -b && vite build)
+        working-directory: demo-react
+        run: npm run build
+
+      - name: Test (vitest -- scoring.ts against published fixtures)
+        working-directory: demo-react
+        run: npm run test
+
+      - name: Lint (oxlint)
+        working-directory: demo-react
+        run: npm run lint

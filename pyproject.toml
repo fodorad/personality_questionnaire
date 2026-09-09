@@ -120,7 +120,7 @@ python-version = "3.13"
 unused-ignore-comment = "ignore"
 
 [tool.coverage.run]
-source = ["personality_questionnaire", "demo"]
+source = ["personality_questionnaire", "demo", "scripts"]
 omit = [
   "*/tests/*",
   "*/__init__.py",
@@ -130,6 +130,11 @@ omit = [
   # Omitted because the logic was extracted, not because it was hard to reach.
   "personality_questionnaire/app.py",
   "personality_questionnaire/pages/*",
+  # Pre-existing, untested one-shot codegen script (predates this coverage
+  # scope's inclusion of scripts/) -- not covered by this repo's test suite.
+  # scripts/export_instruments.py, added alongside it, IS tested
+  # (tests/demo_react/test_instruments_export.py) and stays in scope.
+  "scripts/render_logo.py",
   # Same reasoning as app.py above: form.py and plots.py hold every decision
   # (widget kind, chart type, completeness) and are tested directly; this file
   # only wires Gradio callbacks together and needs a live server to exercise.
