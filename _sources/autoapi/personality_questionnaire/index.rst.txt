@@ -28,6 +28,7 @@ Submodules
 .. toctree::
    :maxdepth: 1
 
+   /autoapi/personality_questionnaire/analysis/index
    /autoapi/personality_questionnaire/api/index
    /autoapi/personality_questionnaire/app/index
    /autoapi/personality_questionnaire/bfi2/index

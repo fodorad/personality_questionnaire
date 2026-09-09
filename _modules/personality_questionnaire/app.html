@@ -213,6 +213,7 @@
 <p class="caption" role="heading"><span class="caption-text">Reference</span></p>
 <ul>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../autoapi/personality_questionnaire/index.html">personality_questionnaire</a><input aria-label="Toggle navigation of personality_questionnaire" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../../autoapi/personality_questionnaire/analysis/index.html">personality_questionnaire.analysis</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../autoapi/personality_questionnaire/api/index.html">personality_questionnaire.api</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../autoapi/personality_questionnaire/app/index.html">personality_questionnaire.app</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../autoapi/personality_questionnaire/bfi2/index.html">personality_questionnaire.bfi2</a></li>
@@ -247,6 +248,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../autoapi/personality_questionnaire/io/index.html">personality_questionnaire.io</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../autoapi/personality_questionnaire/pages/index.html">personality_questionnaire.pages</a><input aria-label="Toggle navigation of personality_questionnaire.pages" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../autoapi/personality_questionnaire/pages/analyze/index.html">personality_questionnaire.pages.analyze</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../autoapi/personality_questionnaire/pages/components/index.html">personality_questionnaire.pages.components</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../autoapi/personality_questionnaire/pages/db_picker/index.html">personality_questionnaire.pages.db_picker</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../autoapi/personality_questionnaire/pages/export/index.html">personality_questionnaire.pages.export</a></li>
@@ -321,6 +323,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">personality_questionnaire.core</span><span class="w"> </span><span class="kn">import</span> <span class="n">theme</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">personality_questionnaire.core.config</span><span class="w"> </span><span class="kn">import</span> <span class="n">settings</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">personality_questionnaire.core.state</span><span class="w"> </span><span class="kn">import</span> <span class="n">DraftRecord</span><span class="p">,</span> <span class="n">state</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">personality_questionnaire.pages</span><span class="w"> </span><span class="kn">import</span> <span class="n">analyze</span> <span class="k">as</span> <span class="n">analyze_page</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">personality_questionnaire.pages</span><span class="w"> </span><span class="kn">import</span> <span class="n">export</span> <span class="k">as</span> <span class="n">export_page</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">personality_questionnaire.pages</span><span class="w"> </span><span class="kn">import</span> <span class="n">overview</span> <span class="k">as</span> <span class="n">overview_page</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">personality_questionnaire.pages</span><span class="w"> </span><span class="kn">import</span> <span class="n">questionnaire</span> <span class="k">as</span> <span class="n">questionnaire_page</span>
@@ -342,6 +345,12 @@
     <span class="p">),</span>
     <span class="p">(</span><span class="s2">"export"</span><span class="p">,</span> <span class="s2">"save"</span><span class="p">,</span> <span class="s2">"Score"</span><span class="p">,</span> <span class="s2">"Review the computed scores and save the record."</span><span class="p">),</span>
     <span class="p">(</span><span class="s2">"records"</span><span class="p">,</span> <span class="s2">"table_view"</span><span class="p">,</span> <span class="s2">"Records"</span><span class="p">,</span> <span class="s2">"Browse and export everything collected."</span><span class="p">),</span>
+    <span class="p">(</span>
+        <span class="s2">"analyze"</span><span class="p">,</span>
+        <span class="s2">"analytics"</span><span class="p">,</span>
+        <span class="s2">"Analyze"</span><span class="p">,</span>
+        <span class="s2">"Reliability and descriptive statistics over what has been collected so far."</span><span class="p">,</span>
+    <span class="p">),</span>
 <span class="p">)</span>
 <span class="sd">"""The tab bar in display order: ``(name, icon, label, tooltip)``."""</span>
 
@@ -453,6 +462,8 @@
                 <span class="n">export_page</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">draft</span><span class="p">,</span> <span class="n">navigate</span><span class="p">,</span> <span class="n">on_saved</span><span class="p">)</span>
             <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">"records"</span><span class="p">:</span>
                 <span class="n">records_page</span><span class="o">.</span><span class="n">render</span><span class="p">(</span><span class="n">draft</span><span class="p">,</span> <span class="n">navigate</span><span class="p">,</span> <span class="n">sync_gating</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">name</span> <span class="o">==</span> <span class="s2">"analyze"</span><span class="p">:</span>
+                <span class="n">analyze_page</span><span class="o">.</span><span class="n">render</span><span class="p">()</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">on_saved</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""React to a record being stored."""</span>

@@ -1,0 +1,143 @@
+personality_questionnaire.analysis
+==================================
+
+.. py:module:: personality_questionnaire.analysis
+
+.. autoapi-nested-parse::
+
+   Psychometric diagnostics over collected records.
+
+   Scoring turns responses into subscale values; this module asks whether those
+   values were worth computing -- whether a subscale's items actually measure one
+   thing (Cronbach's alpha), which items pull their weight (item-total correlation),
+   and how a cohort's scores are distributed (descriptive statistics). Everything
+   here is read-only: it consumes responses and scores already produced by
+   :mod:`personality_questionnaire.scoring`, and writes nothing back.
+
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   personality_questionnaire.analysis.SubscaleReliability
+   personality_questionnaire.analysis.Descriptive
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   personality_questionnaire.analysis.cronbachs_alpha
+   personality_questionnaire.analysis.item_total_correlations
+   personality_questionnaire.analysis.subscale_reliability
+   personality_questionnaire.analysis.describe
+
+
+Module Contents
+---------------
+
+.. py:function:: cronbachs_alpha(items: numpy.ndarray) -> float
+
+   Compute Cronbach's alpha for a set of items.
+
+   :param items: Keyed responses, shape ``(n_participants, n_items)``. Any item this
+                 subscale reverse-keys must already be reflected -- alpha assumes every
+                 column points the same direction, and a mixed-polarity item silently
+                 produces a lower (sometimes negative) value instead of an error.
+
+   :returns: Alpha, unbounded above 1 and below 0 for a genuinely inconsistent scale.
+             ``0.0`` for a single-item scale, where internal consistency is undefined.
+
+
+.. py:function:: item_total_correlations(items: numpy.ndarray) -> numpy.ndarray
+
+   Compute each item's corrected item-total correlation.
+
+   An item is correlated against the sum of every *other* item in the same set --
+   correlating it against a total that includes itself would inflate the value,
+   especially for a scale with few items.
+
+   :param items: Keyed responses, shape ``(n_participants, n_items)``, reverse-keying
+                 already applied as in :func:`cronbachs_alpha`.
+
+   :returns: One correlation per item, shape ``(n_items,)``. ``0.0`` for an item with no
+             variance (every participant gave the same response), where correlation is
+             undefined.
+
+
+.. py:class:: SubscaleReliability
+
+   Internal-consistency diagnostics for one subscale.
+
+   .. attribute:: name
+
+      The subscale's display name.
+
+   .. attribute:: n_items
+
+      How many items it comprises.
+
+   .. attribute:: alpha
+
+      Cronbach's alpha over this cohort.
+
+   .. attribute:: item_total_correlations
+
+      One correlation per item, in the subscale's own
+      item order.
+
+
+.. py:function:: subscale_reliability(questionnaire: personality_questionnaire.registry.Questionnaire, answers: numpy.ndarray) -> dict[str, SubscaleReliability]
+
+   Compute reliability diagnostics for every subscale of an instrument.
+
+   :param questionnaire: The instrument the responses were collected with.
+   :param answers: Raw (unkeyed) responses, shape ``(n_participants, n_items)``.
+
+   :returns: Subscale name to its reliability diagnostics.
+
+
+.. py:class:: Descriptive
+
+   Summary statistics for one subscale's scores.
+
+   .. attribute:: name
+
+      The subscale's display name.
+
+   .. attribute:: n
+
+      Number of participants.
+
+   .. attribute:: mean
+
+      Sample mean.
+
+   .. attribute:: sd
+
+      Sample standard deviation (``ddof=1``); ``0.0`` for a single participant.
+
+   .. attribute:: minimum
+
+      Smallest observed value.
+
+   .. attribute:: maximum
+
+      Largest observed value.
+
+
+.. py:function:: describe(names: tuple[str, ...], values: numpy.ndarray) -> dict[str, Descriptive]
+
+   Compute descriptive statistics for a cohort's subscale scores.
+
+   :param names: Subscale names, aligned with the columns of ``values`` -- typically
+                 :attr:`~personality_questionnaire.scoring.ScoreResult.names`.
+   :param values: Subscale scores, shape ``(n_participants, n_subscales)`` --
+                  typically :attr:`~personality_questionnaire.scoring.ScoreResult.values`.
+
+   :returns: Subscale name to its descriptive statistics.
+
+

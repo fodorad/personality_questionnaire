@@ -74,3 +74,20 @@ The logging handler is rebuilt on each CLI invocation rather than left to
 `logging.basicConfig`, which binds `sys.stderr` once and ignores later calls. Without
 that, a redirected stream silently receives nothing — which is how the first version
 of the CLI tests passed while asserting on empty strings.
+
+## Reliability is computed per subscale, not from `ScoreResult.keyed`
+
+Cronbach's alpha needs items pointing the same direction, so it looks like it should
+reuse {attr}`~personality_questionnaire.scoring.ScoreResult.keyed` — which already
+reflects every reverse-keyed item. It cannot: `keyed` applies one global mask, built
+from every subscale's reverse set, and the same reasoning that rules it out for
+scoring (see "Reverse-keying belongs to the subscale" above) applies here too. An
+item that is forward-keyed in one subscale and reverse-keyed in another would be
+flipped for both, corrupting whichever one didn't ask for it.
+
+`personality_questionnaire.analysis.subscale_reliability` instead re-derives keying
+per subscale, exactly as `scoring.score` does internally, before computing alpha and
+item-total correlations on that subscale's own items alone. The cost is repeating a
+few lines of masking logic rather than reusing a shared array; the alternative is a
+diagnostic that is silently wrong for any instrument where one item serves two
+scales with opposite polarity.

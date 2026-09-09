@@ -23,6 +23,7 @@ Submodules
 .. toctree::
    :maxdepth: 1
 
+   /autoapi/personality_questionnaire/pages/analyze/index
    /autoapi/personality_questionnaire/pages/components/index
    /autoapi/personality_questionnaire/pages/db_picker/index
    /autoapi/personality_questionnaire/pages/export/index

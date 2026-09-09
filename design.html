@@ -214,6 +214,7 @@
 <p class="caption" role="heading"><span class="caption-text">Reference</span></p>
 <ul>
 <li class="toctree-l1 has-children"><a class="reference internal" href="autoapi/personality_questionnaire/index.html">personality_questionnaire</a><input aria-label="Toggle navigation of personality_questionnaire" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="autoapi/personality_questionnaire/analysis/index.html">personality_questionnaire.analysis</a></li>
 <li class="toctree-l2"><a class="reference internal" href="autoapi/personality_questionnaire/api/index.html">personality_questionnaire.api</a></li>
 <li class="toctree-l2"><a class="reference internal" href="autoapi/personality_questionnaire/app/index.html">personality_questionnaire.app</a></li>
 <li class="toctree-l2"><a class="reference internal" href="autoapi/personality_questionnaire/bfi2/index.html">personality_questionnaire.bfi2</a></li>
@@ -248,6 +249,7 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="autoapi/personality_questionnaire/io/index.html">personality_questionnaire.io</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="autoapi/personality_questionnaire/pages/index.html">personality_questionnaire.pages</a><input aria-label="Toggle navigation of personality_questionnaire.pages" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="autoapi/personality_questionnaire/pages/analyze/index.html">personality_questionnaire.pages.analyze</a></li>
 <li class="toctree-l3"><a class="reference internal" href="autoapi/personality_questionnaire/pages/components/index.html">personality_questionnaire.pages.components</a></li>
 <li class="toctree-l3"><a class="reference internal" href="autoapi/personality_questionnaire/pages/db_picker/index.html">personality_questionnaire.pages.db_picker</a></li>
 <li class="toctree-l3"><a class="reference internal" href="autoapi/personality_questionnaire/pages/export/index.html">personality_questionnaire.pages.export</a></li>
@@ -383,6 +385,22 @@ diagnostic and goes to <code class="docutils literal notranslate"><span class="p
 that, a redirected stream silently receives nothing — which is how the first version
 of the CLI tests passed while asserting on empty strings.</p>
 </section>
+<section id="reliability-is-computed-per-subscale-not-from-scoreresult-keyed">
+<h2>Reliability is computed per subscale, not from <code class="docutils literal notranslate"><span class="pre">ScoreResult.keyed</span></code><a class="headerlink" href="#reliability-is-computed-per-subscale-not-from-scoreresult-keyed" title="Link to this heading">¶</a></h2>
+<p>Cronbach’s alpha needs items pointing the same direction, so it looks like it should
+reuse <a class="reference internal" href="autoapi/personality_questionnaire/scoring/index.html#personality_questionnaire.scoring.ScoreResult.keyed" title="personality_questionnaire.scoring.ScoreResult.keyed"><code class="xref py py-attr docutils literal notranslate"><span class="pre">keyed</span></code></a> — which already
+reflects every reverse-keyed item. It cannot: <code class="docutils literal notranslate"><span class="pre">keyed</span></code> applies one global mask, built
+from every subscale’s reverse set, and the same reasoning that rules it out for
+scoring (see “Reverse-keying belongs to the subscale” above) applies here too. An
+item that is forward-keyed in one subscale and reverse-keyed in another would be
+flipped for both, corrupting whichever one didn’t ask for it.</p>
+<p><code class="docutils literal notranslate"><span class="pre">personality_questionnaire.analysis.subscale_reliability</span></code> instead re-derives keying
+per subscale, exactly as <code class="docutils literal notranslate"><span class="pre">scoring.score</span></code> does internally, before computing alpha and
+item-total correlations on that subscale’s own items alone. The cost is repeating a
+few lines of masking logic rather than reusing a shared array; the alternative is a
+diagnostic that is silently wrong for any instrument where one item serves two
+scales with opposite polarity.</p>
+</section>
 </section>
 
         </article>
@@ -447,6 +465,7 @@ of the CLI tests passed while asserting on empty strings.</p>
 <li><a class="reference internal" href="#polarity-is-data">Polarity is data</a></li>
 <li><a class="reference internal" href="#scores-are-computed-from-raw-responses">Scores are computed from raw responses</a></li>
 <li><a class="reference internal" href="#diagnostics-and-output-are-different-streams">Diagnostics and output are different streams</a></li>
+<li><a class="reference internal" href="#reliability-is-computed-per-subscale-not-from-scoreresult-keyed">Reliability is computed per subscale, not from <code class="docutils literal notranslate"><span class="pre">ScoreResult.keyed</span></code></a></li>
 </ul>
 </li>
 </ul>

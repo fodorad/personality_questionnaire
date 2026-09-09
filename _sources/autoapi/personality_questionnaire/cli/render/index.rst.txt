@@ -18,6 +18,8 @@ Functions
    personality_questionnaire.cli.render.format_instrument
    personality_questionnaire.cli.render.format_registry
    personality_questionnaire.cli.render.format_records
+   personality_questionnaire.cli.render.format_reliability
+   personality_questionnaire.cli.render.format_descriptives
 
 
 Module Contents
@@ -57,6 +59,28 @@ Module Contents
    Render the stored-record table.
 
    :param summaries: Record summaries, most recent first.
+
+   :returns: Lines to print.
+
+
+.. py:function:: format_reliability(questionnaire: personality_questionnaire.registry.Questionnaire, per_subscale: dict[str, personality_questionnaire.analysis.SubscaleReliability]) -> list[str]
+
+   Render internal-consistency diagnostics, grouped by subscale level.
+
+   :param questionnaire: The instrument the diagnostics were computed for.
+   :param per_subscale: Subscale name to its reliability diagnostics, as returned by
+                        :func:`personality_questionnaire.analysis.subscale_reliability`.
+
+   :returns: Lines to print.
+
+
+.. py:function:: format_descriptives(questionnaire: personality_questionnaire.registry.Questionnaire, per_subscale: dict[str, personality_questionnaire.analysis.Descriptive]) -> list[str]
+
+   Render descriptive statistics, grouped by subscale level.
+
+   :param questionnaire: The instrument the statistics were computed for.
+   :param per_subscale: Subscale name to its descriptive statistics, as returned by
+                        :func:`personality_questionnaire.analysis.describe`.
 
    :returns: Lines to print.
 

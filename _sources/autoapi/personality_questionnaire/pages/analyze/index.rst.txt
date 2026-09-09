@@ -1,0 +1,27 @@
+personality_questionnaire.pages.analyze
+=======================================
+
+.. py:module:: personality_questionnaire.pages.analyze
+
+.. autoapi-nested-parse::
+
+   The analyze tab: psychometric diagnostics over collected records.
+
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   personality_questionnaire.pages.analyze.render
+
+
+Module Contents
+---------------
+
+.. py:function:: render() -> None
+
+   Build the analyze tab.
+
+
