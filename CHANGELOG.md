@@ -10,6 +10,24 @@ Commits.
 
 ---
 
+## [2.3.0](https://github.com/fodorad/personality_questionnaire/compare/v2.2.0...v2.3.0) (2026-09-09)
+
+
+### Features
+
+* **cli:** add records and export commands, and persist completed runs ([341974b](https://github.com/fodorad/personality_questionnaire/commit/341974b509eb556cae94efe798f9b1c4bcf9b7fa))
+* **db:** persist records with reproducibility metadata ([#17](https://github.com/fodorad/personality_questionnaire/issues/17)) ([341974b](https://github.com/fodorad/personality_questionnaire/commit/341974b509eb556cae94efe798f9b1c4bcf9b7fa))
+
+
+### Bug Fixes
+
+* **cli:** stop treating --questionnaire on a subcommand as the legacy form ([341974b](https://github.com/fodorad/personality_questionnaire/commit/341974b509eb556cae94efe798f9b1c4bcf9b7fa))
+
+
+### Documentation
+
+* document the record schema, its design decisions and the export shapes ([341974b](https://github.com/fodorad/personality_questionnaire/commit/341974b509eb556cae94efe798f9b1c4bcf9b7fa))
+
 ## [2.2.0](https://github.com/fodorad/personality_questionnaire/compare/v2.1.0...v2.2.0) (2026-09-09)
 
 
