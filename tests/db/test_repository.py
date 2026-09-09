@@ -152,6 +152,101 @@ class TestDeletion(RepositoryTestCase):
         self.assertEqual(self.repo.participants(), ["P01"])
 
 
+class TestUpdate(RepositoryTestCase):
+    """Editing an existing record overwrites it in place."""
+
+    def test_preserves_the_session_id(self):
+        saved = self.save()
+        updated = self.repo.update(
+            saved.session_id,
+            Record(
+                participant_code="P01", questionnaire="bfi10", responses=answers_for("bfi10", 4)
+            ),
+        )
+        self.assertEqual(updated.session_id, saved.session_id)
+
+    def test_responses_are_replaced(self):
+        saved = self.save()
+        self.repo.update(
+            saved.session_id,
+            Record(
+                participant_code="P01", questionnaire="bfi10", responses=answers_for("bfi10", 5)
+            ),
+        )
+        loaded = self.repo.load(saved.session_id)
+        self.assertEqual(loaded.responses, answers_for("bfi10", 5))
+
+    def test_scores_are_recomputed(self):
+        saved = self.save(key="bfi2", responses=answers_for("bfi2", 3))
+        self.repo.update(
+            saved.session_id,
+            Record(participant_code="P01", questionnaire="bfi2", responses=answers_for("bfi2", 4)),
+        )
+        stored = self.repo.scores(saved.session_id)
+        fresh = pq.score(pq.get("bfi2"), [[4] * 60]).as_dict()
+        for name, value in fresh.items():
+            with self.subTest(subscale=name):
+                self.assertAlmostEqual(stored[name], value)
+
+    def test_identity_fields_on_the_input_are_ignored(self):
+        """participant_code, questionnaire and tag are locked to the existing row."""
+        saved = self.save(code="P01", key="bfi10", tag="pre")
+        updated = self.repo.update(
+            saved.session_id,
+            Record(
+                participant_code="someone-else",
+                questionnaire="panas",
+                tag="post",
+                responses=answers_for("bfi10", 5),
+            ),
+        )
+        self.assertEqual(updated.participant_code, "P01")
+        self.assertEqual(updated.questionnaire, "bfi10")
+        self.assertEqual(updated.tag, "pre")
+
+    def test_other_metadata_is_applied(self):
+        saved = self.save()
+        updated = self.repo.update(
+            saved.session_id,
+            Record(
+                participant_code="ignored",
+                questionnaire="ignored",
+                responses=answers_for("bfi10"),
+                experiment="fatigue-2026",
+            ),
+        )
+        self.assertEqual(updated.experiment, "fatigue-2026")
+
+    def test_provenance_is_refreshed_not_preserved(self):
+        saved = self.save()
+        original = self.repo.load(saved.session_id)
+        self.repo.update(
+            saved.session_id,
+            Record(
+                participant_code="P01", questionnaire="bfi10", responses=answers_for("bfi10", 4)
+            ),
+        )
+        updated = self.repo.load(saved.session_id)
+        self.assertGreaterEqual(updated.completed_at, original.started_at)
+
+    def test_raises_for_an_unknown_id(self):
+        with self.assertRaises(KeyError):
+            self.repo.update(
+                9999,
+                Record(
+                    participant_code="P01", questionnaire="bfi10", responses=answers_for("bfi10")
+                ),
+            )
+
+    def test_raises_for_an_incomplete_record(self):
+        saved = self.save()
+        with self.assertRaisesRegex(ValueError, "missing items"):
+            self.repo.update(
+                saved.session_id,
+                Record(participant_code="P01", questionnaire="bfi10", responses={1: 3}),
+            )
+
+
 class TestResponsesFor(RepositoryTestCase):
     """The analysis-shaped read returns a rectangular matrix."""
 

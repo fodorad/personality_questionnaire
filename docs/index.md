@@ -13,6 +13,7 @@ hide-toc: false
 
 instruments
 storage
+ui
 design
 migration
 changelog

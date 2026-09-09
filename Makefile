@@ -1,4 +1,4 @@
-.PHONY: help install dev install-docs fix lint type-check test audit docs docs-serve check check-ci clean build logo
+.PHONY: help install dev install-docs fix lint type-check test audit docs docs-serve check check-ci clean build logo ui ui-demo
 
 EXTRAS := --all-extras
 
@@ -7,6 +7,7 @@ help:
 	@echo "Checks (read-only):  audit | lint | type-check | test | docs | check"
 	@echo "CI parity:           check-ci"
 	@echo "Setup:               install | dev | install-docs"
+	@echo "Run:                 ui | ui-demo   (PORT=8080 DB=...)"
 	@echo "Docs:                docs-serve"
 	@echo "Package:             build | logo"
 	@echo "Cleanup:             clean"
@@ -94,6 +95,25 @@ check-ci:
 	@grep -oE "skipped '[^']+'" $(CI_VENV)/test.log | sort | uniq -c || echo "  none"
 	@echo ""
 	@echo "CI parity check passed -- the runner should agree."
+
+# -- Run ----------------------------------------------------------------------
+
+# The data-collection application. Binds to 127.0.0.1 by default; records go to
+# ~/.personality_questionnaire/records.db unless PQ_DATABASE_URL says otherwise.
+# Override either without editing this file:
+#   make ui PORT=9000
+#   make ui DB=sqlite:///$(PWD)/tmp/records.db
+PORT ?= 8080
+DB   ?=
+
+ui:
+	uv run $(EXTRAS) pq ui --port $(PORT) $(if $(DB),--db $(DB),)
+
+# The same application against a throwaway database, so a trial run cannot touch
+# real participant records.
+ui-demo:
+	@mkdir -p tmp
+	uv run $(EXTRAS) pq ui --port $(PORT) --db "sqlite:///$(CURDIR)/tmp/demo.db" --show
 
 # -- Assets -------------------------------------------------------------------
 
