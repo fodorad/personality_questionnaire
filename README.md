@@ -51,6 +51,8 @@ full citations and licence notes.</sub>
 
 <img src="https://raw.githubusercontent.com/fodorad/personality_questionnaire/main/docs/assets/screenshot-overview.png" alt="Landing page of the Personality Questionnaire application" width="720"/>
 
+<img src="https://raw.githubusercontent.com/fodorad/personality_questionnaire/main/docs/assets/screenshot-questionnaire.png" alt="BFI-10 loaded on the Questionnaire tab" width="720"/>
+
 </div>
 
 # Quickstart

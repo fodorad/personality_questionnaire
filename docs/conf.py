@@ -65,12 +65,12 @@ html_static_path = ["assets"]
 html_baseurl = "https://fodorad.github.io/personality_questionnaire/"
 html_theme_options = {
     "light_css_variables": {
-        "color-brand-primary": "#0F4C5C",
-        "color-brand-content": "#0F4C5C",
+        "color-brand-primary": "#12294B",
+        "color-brand-content": "#12294B",
     },
     "dark_css_variables": {
-        "color-brand-primary": "#7FB3C0",
-        "color-brand-content": "#7FB3C0",
+        "color-brand-primary": "#E8925C",
+        "color-brand-content": "#E8925C",
     },
     "source_repository": "https://github.com/fodorad/personality_questionnaire/",
     "source_branch": "main",
