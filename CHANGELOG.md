@@ -10,6 +10,13 @@ Commits.
 
 ---
 
+## [2.4.1](https://github.com/fodorad/personality_questionnaire/compare/v2.4.0...v2.4.1) (2026-09-09)
+
+
+### Documentation
+
+* add a second README/docs screenshot of the questionnaire tab ([9eaa00a](https://github.com/fodorad/personality_questionnaire/commit/9eaa00a083f83aedd2f3c2cb7c2de57576e8d8e7))
+
 ## [2.4.0](https://github.com/fodorad/personality_questionnaire/compare/v2.3.0...v2.4.0) (2026-09-09)
 
 
