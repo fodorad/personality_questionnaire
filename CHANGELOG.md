@@ -10,6 +10,13 @@ Commits.
 
 ---
 
+## [2.6.0](https://github.com/fodorad/personality_questionnaire/compare/v2.5.0...v2.6.0) (2026-09-09)
+
+
+### Features
+
+* **demo:** add a public, no-storage Gradio demo ([#26](https://github.com/fodorad/personality_questionnaire/issues/26)) ([6afc797](https://github.com/fodorad/personality_questionnaire/commit/6afc797a63e9abe2de6370adea734dba835b184c))
+
 ## [2.5.0](https://github.com/fodorad/personality_questionnaire/compare/v2.4.1...v2.5.0) (2026-09-09)
 
 
