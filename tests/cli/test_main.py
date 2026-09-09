@@ -9,6 +9,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
+from personality_questionnaire import registry
 from personality_questionnaire.cli.main import EXIT_MISSING_INPUT, EXIT_OK, main
 from tests.fixtures import FIXTURE_DIR
 
@@ -34,16 +35,26 @@ class TestList(unittest.TestCase):
     def test_lists_every_instrument(self):
         code, out, _ = run_cli(["list"])
         self.assertEqual(code, EXIT_OK)
-        self.assertIn("bfi2", out)
-        self.assertIn("vasf", out)
+        for key in registry.keys():
+            with self.subTest(instrument=key):
+                self.assertIn(key, out)
 
     def test_json_output_is_machine_readable(self):
+        """Derived from the registry, so adding an instrument does not break this."""
         code, out, _ = run_cli(["list", "--json"])
         self.assertEqual(code, EXIT_OK)
         payload = json.loads(out)
         keys = {entry["key"] for entry in payload}
-        self.assertEqual(keys, {"bfi2", "vasf"})
+        self.assertEqual(keys, set(registry.keys()))
         self.assertEqual(next(e for e in payload if e["key"] == "bfi2")["items"], 60)
+
+    def test_json_reports_each_instrument_faithfully(self):
+        _, out, _ = run_cli(["list", "--json"])
+        for entry in json.loads(out):
+            instrument = registry.get(entry["key"])
+            with self.subTest(instrument=entry["key"]):
+                self.assertEqual(entry["items"], instrument.n_items)
+                self.assertEqual(entry["subscales"], [s.name for s in instrument.subscales])
 
 
 class TestInfo(unittest.TestCase):

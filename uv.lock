@@ -1573,11 +1573,11 @@ requires-dist = [
     { name = "pre-commit", marker = "extra == 'dev'" },
     { name = "pymysql", marker = "extra == 'mysql'", specifier = ">=1.1" },
     { name = "ruff", marker = "extra == 'dev'" },
-    { name = "scipy", marker = "extra == 'analysis'", specifier = ">=1.11" },
-    { name = "sphinx", marker = "extra == 'docs'", specifier = ">=8.0" },
+    { name = "scipy", marker = "extra == 'analysis'", specifier = ">=1.18.1" },
+    { name = "sphinx", marker = "extra == 'docs'", specifier = ">=9.1.0" },
     { name = "sphinx-autoapi", marker = "extra == 'docs'" },
     { name = "sphinx-autobuild", marker = "extra == 'docs'" },
-    { name = "sqlalchemy", marker = "extra == 'ui'", specifier = ">=2.0" },
+    { name = "sqlalchemy", marker = "extra == 'ui'", specifier = ">=2.0.52" },
     { name = "ty", marker = "extra == 'dev'" },
 ]
 provides-extras = ["ui", "mysql", "analysis", "dev", "docs"]
