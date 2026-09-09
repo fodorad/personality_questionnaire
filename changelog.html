@@ -293,9 +293,56 @@ project adheres to <a class="reference external" href="https://semver.org/spec/v
 Commits.</p>
 <hr class="docutils" />
 <section id="id1">
-<h2>2.0.0<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
+<h2><a class="reference external" href="https://github.com/fodorad/personality_questionnaire/compare/v1.1.2...v2.0.0">2.0.0</a> (2026-09-09)<a class="headerlink" href="#id1" title="Link to this heading">¶</a></h2>
 <section id="breaking-changes">
 <h3>⚠ BREAKING CHANGES<a class="headerlink" href="#breaking-changes" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>restructure onto a questionnaire registry and correct BFI-2 scoring (<a class="reference external" href="https://github.com/fodorad/personality_questionnaire/issues/1">#1</a>)</p></li>
+<li><p>the three Negative Emotionality facets change sign. Pass legacy_facet_polarity=True to bfi2() to restore pre-2.0 values; domain scores are unaffected. DATA_DIR and PROJECT_DIR now warn and do not resolve from an installed wheel – DATA_DIR pointed at a directory beside site-packages that was never shipped, so the 1.x wheel was already broken for any consumer that touched it; use personality_questionnaire.asset() instead. DOMAIN_SCALES_AS_FACET_SCALES is removed, having never been read by any code path. The minimum supported Python is now 3.12. Every other published name – bfi2(), bfi2_trait(), flip_trait_dimension(), vasf(), DOMAIN_SCALES, FACET_SCALES, ANSWER, BFI2_QUESTIONNAIRE, VASF_QUESTIONNAIRE and ANSWER_DIMS – keeps its exact signature and return value.</p></li>
+</ul>
+</section>
+<section id="features">
+<h3>Features<a class="headerlink" href="#features" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>cli:</strong> replace the –questionnaire flag with list, info, run and score subcommands (<a class="reference external" href="https://github.com/fodorad/personality_questionnaire/commit/2179b138047505d0ede5bd9b6d0cddff614b5223">2179b13</a>)</p></li>
+<li><p><strong>core:</strong> add a theme module with a WCAG AA verified palette and repository mark (<a class="reference external" href="https://github.com/fodorad/personality_questionnaire/commit/2179b138047505d0ede5bd9b6d0cddff614b5223">2179b13</a>)</p></li>
+<li><p><strong>instruments:</strong> give the VAS-F its own Fatigue and Energy subscales (<a class="reference external" href="https://github.com/fodorad/personality_questionnaire/commit/2179b138047505d0ede5bd9b6d0cddff614b5223">2179b13</a>)</p></li>
+<li><p>record package version, git SHA and instrument hash with every scoring run (<a class="reference external" href="https://github.com/fodorad/personality_questionnaire/commit/2179b138047505d0ede5bd9b6d0cddff614b5223">2179b13</a>)</p></li>
+<li><p>restructure onto a questionnaire registry and correct BFI-2 scoring (<a class="reference external" href="https://github.com/fodorad/personality_questionnaire/issues/1">#1</a>) (<a class="reference external" href="https://github.com/fodorad/personality_questionnaire/commit/2179b138047505d0ede5bd9b6d0cddff614b5223">2179b13</a>)</p></li>
+<li><p>ship py.typed so downstream type checkers see the annotations (<a class="reference external" href="https://github.com/fodorad/personality_questionnaire/commit/2179b138047505d0ede5bd9b6d0cddff614b5223">2179b13</a>)</p></li>
+</ul>
+</section>
+<section id="bug-fixes">
+<h3>Bug Fixes<a class="headerlink" href="#bug-fixes" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p><strong>cli:</strong> default –output-dir to writing nothing instead of the tracked data directory (<a class="reference external" href="https://github.com/fodorad/personality_questionnaire/commit/2179b138047505d0ede5bd9b6d0cddff614b5223">2179b13</a>)</p></li>
+<li><p><strong>cli:</strong> exit rather than block forever when input ends mid-questionnaire (<a class="reference external" href="https://github.com/fodorad/personality_questionnaire/commit/2179b138047505d0ede5bd9b6d0cddff614b5223">2179b13</a>)</p></li>
+<li><p><strong>cli:</strong> stop returning a failure exit code from the VAS-F pre path (<a class="reference external" href="https://github.com/fodorad/personality_questionnaire/commit/2179b138047505d0ede5bd9b6d0cddff614b5223">2179b13</a>)</p></li>
+<li><p><strong>instruments:</strong> compose VAS-F prompts in the instrument, correcting an anchor typo (<a class="reference external" href="https://github.com/fodorad/personality_questionnaire/commit/2179b138047505d0ede5bd9b6d0cddff614b5223">2179b13</a>)</p></li>
+<li><p><strong>io:</strong> report the offending line number instead of raising an opaque numpy error (<a class="reference external" href="https://github.com/fodorad/personality_questionnaire/commit/2179b138047505d0ede5bd9b6d0cddff614b5223">2179b13</a>)</p></li>
+<li><p><strong>io:</strong> set an explicit encoding and newline so CSV rows are not double-spaced (<a class="reference external" href="https://github.com/fodorad/personality_questionnaire/commit/2179b138047505d0ede5bd9b6d0cddff614b5223">2179b13</a>)</p></li>
+<li><p>ship instrument data inside the wheel via importlib.resources (<a class="reference external" href="https://github.com/fodorad/personality_questionnaire/commit/2179b138047505d0ede5bd9b6d0cddff614b5223">2179b13</a>)</p></li>
+</ul>
+</section>
+<section id="documentation">
+<h3>Documentation<a class="headerlink" href="#documentation" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>add a README, instrument reference, design notes and migration guide (<a class="reference external" href="https://github.com/fodorad/personality_questionnaire/commit/2179b138047505d0ede5bd9b6d0cddff614b5223">2179b13</a>)</p></li>
+<li><p>add the coverage badge and correct the Python badge to 3.12-3.14 (<a class="reference external" href="https://github.com/fodorad/personality_questionnaire/commit/2179b138047505d0ede5bd9b6d0cddff614b5223">2179b13</a>)</p></li>
+<li><p>publish the Sphinx site to GitHub Pages (<a class="reference external" href="https://github.com/fodorad/personality_questionnaire/commit/2179b138047505d0ede5bd9b6d0cddff614b5223">2179b13</a>)</p></li>
+</ul>
+</section>
+<section id="build-system">
+<h3>Build System<a class="headerlink" href="#build-system" title="Link to this heading">¶</a></h3>
+<ul class="simple">
+<li><p>raise the minimum supported Python to 3.12 (<a class="reference external" href="https://github.com/fodorad/personality_questionnaire/commit/2179b138047505d0ede5bd9b6d0cddff614b5223">2179b13</a>)</p></li>
+</ul>
+</section>
+</section>
+<section id="id2">
+<h2>2.0.0<a class="headerlink" href="#id2" title="Link to this heading">¶</a></h2>
+<section id="id3">
+<h3>⚠ BREAKING CHANGES<a class="headerlink" href="#id3" title="Link to this heading">¶</a></h3>
 <section id="negative-emotionality-facets-changed-sign">
 <h4>Negative Emotionality facets changed sign<a class="headerlink" href="#negative-emotionality-facets-changed-sign" title="Link to this heading">¶</a></h4>
 <p>The Anxiety, Depression and Emotional Volatility facets are now scored in the
@@ -328,8 +375,8 @@ consumer that touched it. Use <code class="docutils literal notranslate"><span c
 </ul>
 </section>
 </section>
-<section id="features">
-<h3>Features<a class="headerlink" href="#features" title="Link to this heading">¶</a></h3>
+<section id="id4">
+<h3>Features<a class="headerlink" href="#id4" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>Instruments are now data: <code class="docutils literal notranslate"><span class="pre">Item</span></code>, <code class="docutils literal notranslate"><span class="pre">Subscale</span></code> and <code class="docutils literal notranslate"><span class="pre">Questionnaire</span></code> dataclasses with a
 registry, and a single vectorised scorer shared by every instrument. Adding an
@@ -347,8 +394,8 @@ localhost application. Every foreground/background pairing meets WCAG AA, assert
 in <code class="docutils literal notranslate"><span class="pre">tests/core/test_theme.py</span></code>.</p></li>
 </ul>
 </section>
-<section id="bug-fixes">
-<h3>Bug Fixes<a class="headerlink" href="#bug-fixes" title="Link to this heading">¶</a></h3>
+<section id="id5">
+<h3>Bug Fixes<a class="headerlink" href="#id5" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>Instrument data ships inside the wheel via <code class="docutils literal notranslate"><span class="pre">importlib.resources</span></code>.</p></li>
 <li><p>The VAS-F <code class="docutils literal notranslate"><span class="pre">pre</span></code> path no longer exits with status 1 on success.</p></li>
@@ -366,8 +413,8 @@ and names the item it stopped at, because a partial questionnaire cannot be scor
 Piping answers in remains supported.</p></li>
 </ul>
 </section>
-<section id="documentation">
-<h3>Documentation<a class="headerlink" href="#documentation" title="Link to this heading">¶</a></h3>
+<section id="id6">
+<h3>Documentation<a class="headerlink" href="#id6" title="Link to this heading">¶</a></h3>
 <ul class="simple">
 <li><p>New README, plus <code class="docutils literal notranslate"><span class="pre">docs/instruments.md</span></code>, <code class="docutils literal notranslate"><span class="pre">docs/design.md</span></code> and <code class="docutils literal notranslate"><span class="pre">docs/migration.md</span></code>,
 published to GitHub Pages via Sphinx.</p></li>
@@ -445,15 +492,23 @@ CI/CD, release-please, pre-commit, CodeQL, Dependabot and Codecov.</p></li>
           <div class="toc-tree">
             <ul>
 <li><a class="reference internal" href="#">Changelog</a><ul>
-<li><a class="reference internal" href="#id1">2.0.0</a><ul>
-<li><a class="reference internal" href="#breaking-changes">⚠ BREAKING CHANGES</a><ul>
+<li><a class="reference internal" href="#id1">2.0.0 (2026-09-09)</a><ul>
+<li><a class="reference internal" href="#breaking-changes">⚠ BREAKING CHANGES</a></li>
+<li><a class="reference internal" href="#features">Features</a></li>
+<li><a class="reference internal" href="#bug-fixes">Bug Fixes</a></li>
+<li><a class="reference internal" href="#documentation">Documentation</a></li>
+<li><a class="reference internal" href="#build-system">Build System</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#id2">2.0.0</a><ul>
+<li><a class="reference internal" href="#id3">⚠ BREAKING CHANGES</a><ul>
 <li><a class="reference internal" href="#negative-emotionality-facets-changed-sign">Negative Emotionality facets changed sign</a></li>
 <li><a class="reference internal" href="#other-breaking-changes">Other breaking changes</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#features">Features</a></li>
-<li><a class="reference internal" href="#bug-fixes">Bug Fixes</a></li>
-<li><a class="reference internal" href="#documentation">Documentation</a></li>
+<li><a class="reference internal" href="#id4">Features</a></li>
+<li><a class="reference internal" href="#id5">Bug Fixes</a></li>
+<li><a class="reference internal" href="#id6">Documentation</a></li>
 <li><a class="reference internal" href="#continuous-integration">Continuous Integration</a></li>
 </ul>
 </li>
