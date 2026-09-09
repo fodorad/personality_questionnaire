@@ -38,6 +38,7 @@ def make_questionnaire(**overrides) -> Questionnaire:
     base = {
         "key": "synthetic",
         "name": "Synthetic",
+        "abbreviation": "SYN",
         "scale": ScaleType.LIKERT,
         "minimum": 1,
         "maximum": 5,
@@ -136,6 +137,11 @@ class TestRegisteredInstruments(unittest.TestCase):
                 with self.subTest(instrument=key, item=item.number):
                     self.assertNotIn("while and", item.prompt)
 
+    def test_every_instrument_has_a_distinct_abbreviation(self):
+        abbreviations = [registry.get(key).abbreviation for key in registry.keys()]
+        self.assertTrue(all(abbreviations))
+        self.assertEqual(len(abbreviations), len(set(abbreviations)))
+
     def test_get_reports_available_keys(self):
         with self.assertRaises(KeyError) as caught:
             registry.get("nope")
@@ -181,6 +187,11 @@ class TestValidation(unittest.TestCase):
     def test_rejects_missing_parent(self):
         bad = make_questionnaire(subscales=(Subscale(name="Total", items=(1, 2), parent="ghost"),))
         with self.assertRaisesRegex(ValueError, "missing parent"):
+            bad.validate()
+
+    def test_rejects_blank_abbreviation(self):
+        bad = make_questionnaire(abbreviation="  ")
+        with self.assertRaisesRegex(ValueError, "abbreviation must not be blank"):
             bad.validate()
 
     def test_rejects_empty_range(self):

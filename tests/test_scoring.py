@@ -77,6 +77,7 @@ class TestVectorisation(unittest.TestCase):
         fatigue_only = registry.Questionnaire(
             key="no-reverse",
             name="No Reverse",
+            abbreviation="NR",
             scale=vasf.scale,
             minimum=0,
             maximum=10,
