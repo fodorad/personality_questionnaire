@@ -10,6 +10,24 @@ Commits.
 
 ---
 
+## [2.2.0](https://github.com/fodorad/personality_questionnaire/compare/v2.1.0...v2.2.0) (2026-09-09)
+
+
+### Features
+
+* **instruments:** add the PANAS affect schedule ([#15](https://github.com/fodorad/personality_questionnaire/issues/15)) ([b395cda](https://github.com/fodorad/personality_questionnaire/commit/b395cda6d7c52704cf0dcb2db912f488da1ce553))
+* **scoring:** let a subscale declare how it aggregates its items ([b395cda](https://github.com/fodorad/personality_questionnaire/commit/b395cda6d7c52704cf0dcb2db912f488da1ce553))
+
+
+### Bug Fixes
+
+* **scoring:** report a clean zero at the floor of a normalised scale ([b395cda](https://github.com/fodorad/personality_questionnaire/commit/b395cda6d7c52704cf0dcb2db912f488da1ce553))
+
+
+### Documentation
+
+* document the PANAS, its two reported forms and its time frame ([b395cda](https://github.com/fodorad/personality_questionnaire/commit/b395cda6d7c52704cf0dcb2db912f488da1ce553))
+
 ## [2.1.0](https://github.com/fodorad/personality_questionnaire/compare/v2.0.0...v2.1.0) (2026-09-09)
 
 

@@ -41,7 +41,7 @@ from personality_questionnaire.scoring import (
 if TYPE_CHECKING:
     from importlib.resources.abc import Traversable
 
-__version__ = "2.1.0"
+__version__ = "2.2.0"
 """The installed package version.
 
 Managed by release-please; do not edit by hand.
