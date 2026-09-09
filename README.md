@@ -102,6 +102,21 @@ pq ui        # http://127.0.0.1:8080
 Five tabs: an overview, setup, the questionnaire itself, the computed scores, and
 every record collected so far with its exports. See [docs/ui.md](docs/ui.md).
 
+# Try it without installing anything
+
+A separate, stateless Gradio demo -- pick an instrument, answer it, see the scores
+plotted (a radar for the Big Five forms, a bar chart for PANAS and VAS-F). Nothing
+entered is stored: `demo/` never imports the database layer above, and
+`tests/demo/test_isolation.py` enforces that at CI time, not just in prose.
+
+```bash
+pip install "personality_questionnaire[demo]"
+pq demo        # http://127.0.0.1:7860
+```
+
+Deployable as a CPU-only Hugging Face Space (`sdk: docker`) via `make push-space`;
+see `Dockerfile` and `demo/README.md`.
+
 # How it works
 
 ```mermaid

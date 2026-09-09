@@ -1,4 +1,4 @@
-.PHONY: help install dev install-docs fix lint type-check test audit docs docs-serve check check-ci clean build logo ui ui-demo
+.PHONY: help install dev install-docs fix lint type-check test audit docs docs-serve check check-ci clean build logo ui ui-demo gradio-demo push-space
 
 EXTRAS := --all-extras
 
@@ -8,6 +8,7 @@ help:
 	@echo "CI parity:           check-ci"
 	@echo "Setup:               install | dev | install-docs"
 	@echo "Run:                 ui | ui-demo   (PORT=8080 DB=...)"
+	@echo "Public demo:         gradio-demo | push-space"
 	@echo "Docs:                docs-serve"
 	@echo "Package:             build | logo"
 	@echo "Cleanup:             clean"
@@ -72,7 +73,7 @@ check-ci:
 	@echo "-- Building CI-equivalent environment ($(CI_VENV), python $(CI_PY)) --"
 	@rm -rf $(CI_VENV)
 	@uv venv $(CI_VENV) --python $(CI_PY) --seed >/dev/null
-	@VIRTUAL_ENV=$(CI_VENV) uv pip install --quiet -e ".[ui,mysql,analysis,dev,docs]"
+	@VIRTUAL_ENV=$(CI_VENV) uv pip install --quiet -e ".[ui,mysql,demo,dev,docs]"
 	@echo "-- Audit dependencies --"
 	@PIPAPI_PYTHON_LOCATION=$(CURDIR)/$(CI_VENV)/bin/python \
 	  VIRTUAL_ENV=$(CI_VENV) uvx pip-audit || \
@@ -114,6 +115,30 @@ ui:
 ui-demo:
 	@mkdir -p tmp
 	uv run $(EXTRAS) pq ui --port $(PORT) --db "sqlite:///$(CURDIR)/tmp/demo.db" --show
+
+# The public, no-storage Gradio demo -- a separate application from the Lab UI
+# above, so this deliberately does not reuse PORT/DB.
+gradio-demo:
+	uv run --extra demo pq demo --host 127.0.0.1 --port 7860
+
+# Builds the same image a Space would, so a broken container is caught before it
+# is pushed, then stages only what the Space needs -- pyproject.toml,
+# personality_questionnaire/, demo/, and Dockerfile -- into a scratch directory and
+# uploads that, never this repository's full tree (tests, git history, the Lab UI
+# code the Space never runs). Requires the huggingface_hub CLI and a prior
+# `hf auth login`.
+SPACE ?= fodorad/personality-questionnaire
+push-space:
+	docker build -t personality-questionnaire-demo .
+	@echo "Image builds. Try it locally: docker run -p 7860:7860 personality-questionnaire-demo"
+	rm -rf tmp/space-staging
+	mkdir -p tmp/space-staging
+	cp Dockerfile pyproject.toml tmp/space-staging/
+	cp demo/README.md tmp/space-staging/README.md
+	cp -r personality_questionnaire tmp/space-staging/personality_questionnaire
+	cp -r demo tmp/space-staging/demo
+	rm -rf tmp/space-staging/personality_questionnaire/__pycache__ tmp/space-staging/demo/__pycache__
+	hf upload-large-folder $(SPACE) --repo-type space --local-path tmp/space-staging
 
 # -- Assets -------------------------------------------------------------------
 
