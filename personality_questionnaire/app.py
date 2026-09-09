@@ -19,6 +19,7 @@ from personality_questionnaire import __version__
 from personality_questionnaire.core import theme
 from personality_questionnaire.core.config import settings
 from personality_questionnaire.core.state import DraftRecord, state
+from personality_questionnaire.pages import analyze as analyze_page
 from personality_questionnaire.pages import export as export_page
 from personality_questionnaire.pages import overview as overview_page
 from personality_questionnaire.pages import questionnaire as questionnaire_page
@@ -40,6 +41,12 @@ _TABS: tuple[tuple[str, str, str, str], ...] = (
     ),
     ("export", "save", "Score", "Review the computed scores and save the record."),
     ("records", "table_view", "Records", "Browse and export everything collected."),
+    (
+        "analyze",
+        "analytics",
+        "Analyze",
+        "Reliability and descriptive statistics over what has been collected so far.",
+    ),
 )
 """The tab bar in display order: ``(name, icon, label, tooltip)``."""
 
@@ -149,6 +156,8 @@ def build() -> None:
                 export_page.render(draft, navigate, on_saved)
             elif name == "records":
                 records_page.render(draft, navigate, sync_gating)
+            elif name == "analyze":
+                analyze_page.render()
 
     def on_saved() -> None:
         """React to a record being stored."""
