@@ -1,0 +1,1788 @@
+{
+  "bfi10": {
+    "key": "bfi10",
+    "name": "Big Five Inventory-10",
+    "abbreviation": "BFI-10",
+    "scale": "likert",
+    "minimum": 1,
+    "maximum": 5,
+    "citation": "Rammstedt, B., & John, O. P. (2007). Measuring personality in one minute or less: A 10-item short version of the Big Five Inventory in English and German. Journal of Research in Personality, 41, 203-212.",
+    "labels": {
+      "Disagree strongly": 1,
+      "Disagree a little": 2,
+      "Neither agree nor disagree": 3,
+      "Agree a little": 4,
+      "Agree strongly": 5
+    },
+    "paired": false,
+    "normalize": true,
+    "items": [
+      {
+        "number": 1,
+        "text": "is reserved",
+        "prompt": "I see myself as someone who... is reserved",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 2,
+        "text": "is generally trusting",
+        "prompt": "I see myself as someone who... is generally trusting",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 3,
+        "text": "tends to be lazy",
+        "prompt": "I see myself as someone who... tends to be lazy",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 4,
+        "text": "is relaxed, handles stress well",
+        "prompt": "I see myself as someone who... is relaxed, handles stress well",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 5,
+        "text": "has few artistic interests",
+        "prompt": "I see myself as someone who... has few artistic interests",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 6,
+        "text": "is outgoing, sociable",
+        "prompt": "I see myself as someone who... is outgoing, sociable",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 7,
+        "text": "tends to find fault with others",
+        "prompt": "I see myself as someone who... tends to find fault with others",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 8,
+        "text": "does a thorough job",
+        "prompt": "I see myself as someone who... does a thorough job",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 9,
+        "text": "gets nervous easily",
+        "prompt": "I see myself as someone who... gets nervous easily",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 10,
+        "text": "has an active imagination",
+        "prompt": "I see myself as someone who... has an active imagination",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      }
+    ],
+    "subscales": [
+      {
+        "name": "openness",
+        "items": [
+          5,
+          10
+        ],
+        "reverse": [
+          5
+        ],
+        "level": "domain",
+        "parent": null,
+        "higherIs": "more open to experience",
+        "aggregation": "mean"
+      },
+      {
+        "name": "conscientiousness",
+        "items": [
+          3,
+          8
+        ],
+        "reverse": [
+          3
+        ],
+        "level": "domain",
+        "parent": null,
+        "higherIs": "more conscientious",
+        "aggregation": "mean"
+      },
+      {
+        "name": "extraversion",
+        "items": [
+          1,
+          6
+        ],
+        "reverse": [
+          1
+        ],
+        "level": "domain",
+        "parent": null,
+        "higherIs": "more extraverted",
+        "aggregation": "mean"
+      },
+      {
+        "name": "agreeableness",
+        "items": [
+          2,
+          7
+        ],
+        "reverse": [
+          7
+        ],
+        "level": "domain",
+        "parent": null,
+        "higherIs": "more agreeable",
+        "aggregation": "mean"
+      },
+      {
+        "name": "neuroticism",
+        "items": [
+          4,
+          9
+        ],
+        "reverse": [
+          4
+        ],
+        "level": "domain",
+        "parent": null,
+        "higherIs": "more neurotic",
+        "aggregation": "mean"
+      }
+    ]
+  },
+  "bfi2": {
+    "key": "bfi2",
+    "name": "Big Five Inventory-2",
+    "abbreviation": "BFI-2",
+    "scale": "likert",
+    "minimum": 1,
+    "maximum": 5,
+    "citation": "Soto, C. J., & John, O. P. (2017). The next Big Five Inventory (BFI-2): Developing and assessing a hierarchical model with 15 facets to enhance bandwidth, fidelity, and predictive power. Journal of Personality and Social Psychology, 113, 117-143.",
+    "labels": {
+      "Disagree strongly": 1,
+      "Disagree a little": 2,
+      "Neutral; no opinion": 3,
+      "Agree a little": 4,
+      "Agree strongly": 5
+    },
+    "paired": false,
+    "normalize": true,
+    "items": [
+      {
+        "number": 1,
+        "text": "Is outgoing, sociable.",
+        "prompt": "I am someone who... Is outgoing, sociable.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 2,
+        "text": "Is compassionate, has a soft heart.",
+        "prompt": "I am someone who... Is compassionate, has a soft heart.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 3,
+        "text": "Tends to be disorganized.",
+        "prompt": "I am someone who... Tends to be disorganized.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 4,
+        "text": "Is relaxed, handles stress well.",
+        "prompt": "I am someone who... Is relaxed, handles stress well.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 5,
+        "text": "Has few artistic interests.",
+        "prompt": "I am someone who... Has few artistic interests.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 6,
+        "text": "Has an assertive personality.",
+        "prompt": "I am someone who... Has an assertive personality.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 7,
+        "text": "Is respectful, treats others with respect.",
+        "prompt": "I am someone who... Is respectful, treats others with respect.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 8,
+        "text": "Tends to be lazy.",
+        "prompt": "I am someone who... Tends to be lazy.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 9,
+        "text": "Stays optimistic after experiencing a setback.",
+        "prompt": "I am someone who... Stays optimistic after experiencing a setback.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 10,
+        "text": "Is curious about many different things.",
+        "prompt": "I am someone who... Is curious about many different things.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 11,
+        "text": "Rarely feels excited or eager.",
+        "prompt": "I am someone who... Rarely feels excited or eager.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 12,
+        "text": "Tends to find fault with others.",
+        "prompt": "I am someone who... Tends to find fault with others.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 13,
+        "text": "Is dependable, steady.",
+        "prompt": "I am someone who... Is dependable, steady.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 14,
+        "text": "Is moody, has up and down mood swings.",
+        "prompt": "I am someone who... Is moody, has up and down mood swings.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 15,
+        "text": "Is inventive, finds clever ways to do things.",
+        "prompt": "I am someone who... Is inventive, finds clever ways to do things.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 16,
+        "text": "Tends to be quiet.",
+        "prompt": "I am someone who... Tends to be quiet.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 17,
+        "text": "Feels little sympathy for others.",
+        "prompt": "I am someone who... Feels little sympathy for others.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 18,
+        "text": "Is systematic, likes to keep things in order.",
+        "prompt": "I am someone who... Is systematic, likes to keep things in order.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 19,
+        "text": "Can be tense.",
+        "prompt": "I am someone who... Can be tense.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 20,
+        "text": "Is fascinated by art, music, or literature.",
+        "prompt": "I am someone who... Is fascinated by art, music, or literature.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 21,
+        "text": "Is dominant, acts as a leader.",
+        "prompt": "I am someone who... Is dominant, acts as a leader.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 22,
+        "text": "Starts arguments with others.",
+        "prompt": "I am someone who... Starts arguments with others.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 23,
+        "text": "Has difficulty getting started on tasks.",
+        "prompt": "I am someone who... Has difficulty getting started on tasks.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 24,
+        "text": "Feels secure, comfortable with self.",
+        "prompt": "I am someone who... Feels secure, comfortable with self.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 25,
+        "text": "Avoids intellectual, philosophical discussions.",
+        "prompt": "I am someone who... Avoids intellectual, philosophical discussions.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 26,
+        "text": "Is less active than other people.",
+        "prompt": "I am someone who... Is less active than other people.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 27,
+        "text": "Has a forgiving nature.",
+        "prompt": "I am someone who... Has a forgiving nature.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 28,
+        "text": "Can be somewhat careless.",
+        "prompt": "I am someone who... Can be somewhat careless.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 29,
+        "text": "Is emotionally stable, not easily upset.",
+        "prompt": "I am someone who... Is emotionally stable, not easily upset.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 30,
+        "text": "Has little creativity.",
+        "prompt": "I am someone who... Has little creativity.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 31,
+        "text": "Is sometimes shy, introverted.",
+        "prompt": "I am someone who... Is sometimes shy, introverted.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 32,
+        "text": "Is helpful and unselfish with others.",
+        "prompt": "I am someone who... Is helpful and unselfish with others.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 33,
+        "text": "Keeps things neat and tidy.",
+        "prompt": "I am someone who... Keeps things neat and tidy.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 34,
+        "text": "Worries a lot.",
+        "prompt": "I am someone who... Worries a lot.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 35,
+        "text": "Values art and beauty.",
+        "prompt": "I am someone who... Values art and beauty.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 36,
+        "text": "Finds it hard to influence people.",
+        "prompt": "I am someone who... Finds it hard to influence people.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 37,
+        "text": "Is sometimes rude to others.",
+        "prompt": "I am someone who... Is sometimes rude to others.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 38,
+        "text": "Is efficient, gets things done.",
+        "prompt": "I am someone who... Is efficient, gets things done.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 39,
+        "text": "Often feels sad.",
+        "prompt": "I am someone who... Often feels sad.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 40,
+        "text": "Is complex, a deep thinker.",
+        "prompt": "I am someone who... Is complex, a deep thinker.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 41,
+        "text": "Is full of energy.",
+        "prompt": "I am someone who... Is full of energy.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 42,
+        "text": "Is suspicious of others' intentions.",
+        "prompt": "I am someone who... Is suspicious of others' intentions.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 43,
+        "text": "Is reliable, can always be counted on.",
+        "prompt": "I am someone who... Is reliable, can always be counted on.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 44,
+        "text": "Keeps their emotions under control.",
+        "prompt": "I am someone who... Keeps their emotions under control.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 45,
+        "text": "Has difficulty imagining things.",
+        "prompt": "I am someone who... Has difficulty imagining things.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 46,
+        "text": "Is talkative.",
+        "prompt": "I am someone who... Is talkative.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 47,
+        "text": "Can be cold and uncaring.",
+        "prompt": "I am someone who... Can be cold and uncaring.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 48,
+        "text": "Leaves a mess, doesn't clean up.",
+        "prompt": "I am someone who... Leaves a mess, doesn't clean up.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 49,
+        "text": "Rarely feels anxious or afraid.",
+        "prompt": "I am someone who... Rarely feels anxious or afraid.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 50,
+        "text": "Thinks poetry and plays are boring.",
+        "prompt": "I am someone who... Thinks poetry and plays are boring.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 51,
+        "text": "Prefers to have others take charge.",
+        "prompt": "I am someone who... Prefers to have others take charge.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 52,
+        "text": "Is polite, courteous to others.",
+        "prompt": "I am someone who... Is polite, courteous to others.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 53,
+        "text": "Is persistent, works until the task is finished.",
+        "prompt": "I am someone who... Is persistent, works until the task is finished.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 54,
+        "text": "Tends to feel depressed, blue.",
+        "prompt": "I am someone who... Tends to feel depressed, blue.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 55,
+        "text": "Has little interest in abstract ideas.",
+        "prompt": "I am someone who... Has little interest in abstract ideas.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 56,
+        "text": "Shows a lot of enthusiasm.",
+        "prompt": "I am someone who... Shows a lot of enthusiasm.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 57,
+        "text": "Assumes the best about people.",
+        "prompt": "I am someone who... Assumes the best about people.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 58,
+        "text": "Sometimes behaves irresponsibly.",
+        "prompt": "I am someone who... Sometimes behaves irresponsibly.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 59,
+        "text": "Is temperamental, gets emotional easily.",
+        "prompt": "I am someone who... Is temperamental, gets emotional easily.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      },
+      {
+        "number": 60,
+        "text": "Is original, comes up with new ideas.",
+        "prompt": "I am someone who... Is original, comes up with new ideas.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": null
+      }
+    ],
+    "subscales": [
+      {
+        "name": "openness",
+        "items": [
+          5,
+          10,
+          15,
+          20,
+          25,
+          30,
+          35,
+          40,
+          45,
+          50,
+          55,
+          60
+        ],
+        "reverse": [
+          5,
+          25,
+          30,
+          45,
+          50,
+          55
+        ],
+        "level": "domain",
+        "parent": null,
+        "higherIs": "more open-minded",
+        "aggregation": "mean"
+      },
+      {
+        "name": "conscientiousness",
+        "items": [
+          3,
+          8,
+          13,
+          18,
+          23,
+          28,
+          33,
+          38,
+          43,
+          48,
+          53,
+          58
+        ],
+        "reverse": [
+          3,
+          8,
+          23,
+          28,
+          48,
+          58
+        ],
+        "level": "domain",
+        "parent": null,
+        "higherIs": "more conscientious",
+        "aggregation": "mean"
+      },
+      {
+        "name": "extraversion",
+        "items": [
+          1,
+          6,
+          11,
+          16,
+          21,
+          26,
+          31,
+          36,
+          41,
+          46,
+          51,
+          56
+        ],
+        "reverse": [
+          11,
+          16,
+          26,
+          31,
+          36,
+          51
+        ],
+        "level": "domain",
+        "parent": null,
+        "higherIs": "more extraverted",
+        "aggregation": "mean"
+      },
+      {
+        "name": "agreeableness",
+        "items": [
+          2,
+          7,
+          12,
+          17,
+          22,
+          27,
+          32,
+          37,
+          42,
+          47,
+          52,
+          57
+        ],
+        "reverse": [
+          12,
+          17,
+          22,
+          37,
+          42,
+          47
+        ],
+        "level": "domain",
+        "parent": null,
+        "higherIs": "more agreeable",
+        "aggregation": "mean"
+      },
+      {
+        "name": "neuroticism",
+        "items": [
+          4,
+          9,
+          14,
+          19,
+          24,
+          29,
+          34,
+          39,
+          44,
+          49,
+          54,
+          59
+        ],
+        "reverse": [
+          4,
+          9,
+          24,
+          29,
+          44,
+          49
+        ],
+        "level": "domain",
+        "parent": null,
+        "higherIs": "more neurotic",
+        "aggregation": "mean"
+      },
+      {
+        "name": "Sociability",
+        "items": [
+          1,
+          16,
+          31,
+          46
+        ],
+        "reverse": [
+          16,
+          31
+        ],
+        "level": "facet",
+        "parent": "extraversion",
+        "higherIs": "more sociable",
+        "aggregation": "mean"
+      },
+      {
+        "name": "Assertiveness",
+        "items": [
+          6,
+          21,
+          36,
+          51
+        ],
+        "reverse": [
+          36,
+          51
+        ],
+        "level": "facet",
+        "parent": "extraversion",
+        "higherIs": "more assertive",
+        "aggregation": "mean"
+      },
+      {
+        "name": "Energy Level",
+        "items": [
+          11,
+          26,
+          41,
+          56
+        ],
+        "reverse": [
+          11,
+          26
+        ],
+        "level": "facet",
+        "parent": "extraversion",
+        "higherIs": "more energetic",
+        "aggregation": "mean"
+      },
+      {
+        "name": "Compassion",
+        "items": [
+          2,
+          17,
+          32,
+          47
+        ],
+        "reverse": [
+          17,
+          47
+        ],
+        "level": "facet",
+        "parent": "agreeableness",
+        "higherIs": "more compassionate",
+        "aggregation": "mean"
+      },
+      {
+        "name": "Respectfulness",
+        "items": [
+          7,
+          22,
+          37,
+          52
+        ],
+        "reverse": [
+          22,
+          37
+        ],
+        "level": "facet",
+        "parent": "agreeableness",
+        "higherIs": "more respectful",
+        "aggregation": "mean"
+      },
+      {
+        "name": "Trust",
+        "items": [
+          12,
+          27,
+          42,
+          57
+        ],
+        "reverse": [
+          12,
+          42
+        ],
+        "level": "facet",
+        "parent": "agreeableness",
+        "higherIs": "more trusting",
+        "aggregation": "mean"
+      },
+      {
+        "name": "Organization",
+        "items": [
+          3,
+          18,
+          33,
+          48
+        ],
+        "reverse": [
+          3,
+          48
+        ],
+        "level": "facet",
+        "parent": "conscientiousness",
+        "higherIs": "more organized",
+        "aggregation": "mean"
+      },
+      {
+        "name": "Productiveness",
+        "items": [
+          8,
+          23,
+          38,
+          53
+        ],
+        "reverse": [
+          8,
+          23
+        ],
+        "level": "facet",
+        "parent": "conscientiousness",
+        "higherIs": "more productive",
+        "aggregation": "mean"
+      },
+      {
+        "name": "Responsibility",
+        "items": [
+          13,
+          28,
+          43,
+          58
+        ],
+        "reverse": [
+          28,
+          58
+        ],
+        "level": "facet",
+        "parent": "conscientiousness",
+        "higherIs": "more responsible",
+        "aggregation": "mean"
+      },
+      {
+        "name": "Anxiety",
+        "items": [
+          4,
+          19,
+          34,
+          49
+        ],
+        "reverse": [
+          4,
+          49
+        ],
+        "level": "facet",
+        "parent": "neuroticism",
+        "higherIs": "more anxious",
+        "aggregation": "mean"
+      },
+      {
+        "name": "Depression",
+        "items": [
+          9,
+          24,
+          39,
+          54
+        ],
+        "reverse": [
+          9,
+          24
+        ],
+        "level": "facet",
+        "parent": "neuroticism",
+        "higherIs": "more depressed",
+        "aggregation": "mean"
+      },
+      {
+        "name": "Emotional Volatility",
+        "items": [
+          14,
+          29,
+          44,
+          59
+        ],
+        "reverse": [
+          29,
+          44
+        ],
+        "level": "facet",
+        "parent": "neuroticism",
+        "higherIs": "more emotionally volatile",
+        "aggregation": "mean"
+      },
+      {
+        "name": "Intellectual Curiosity",
+        "items": [
+          10,
+          25,
+          40,
+          55
+        ],
+        "reverse": [
+          25,
+          55
+        ],
+        "level": "facet",
+        "parent": "openness",
+        "higherIs": "more intellectually curious",
+        "aggregation": "mean"
+      },
+      {
+        "name": "Aesthetic Sensitivity",
+        "items": [
+          5,
+          20,
+          35,
+          50
+        ],
+        "reverse": [
+          5,
+          50
+        ],
+        "level": "facet",
+        "parent": "openness",
+        "higherIs": "more aesthetically sensitive",
+        "aggregation": "mean"
+      },
+      {
+        "name": "Creative Imagination",
+        "items": [
+          15,
+          30,
+          45,
+          60
+        ],
+        "reverse": [
+          30,
+          45
+        ],
+        "level": "facet",
+        "parent": "openness",
+        "higherIs": "more creatively imaginative",
+        "aggregation": "mean"
+      }
+    ]
+  },
+  "bfi2-xs": {
+    "key": "bfi2-xs",
+    "name": "Big Five Inventory-2 Extra-Short Form",
+    "abbreviation": "BFI-2-XS",
+    "scale": "likert",
+    "minimum": 1,
+    "maximum": 5,
+    "citation": "Soto, C. J., & John, O. P. (2017). Short and extra-short forms of the Big Five Inventory-2: The BFI-2-S and BFI-2-XS. Journal of Research in Personality, 68, 69-81.",
+    "labels": {
+      "Disagree strongly": 1,
+      "Disagree a little": 2,
+      "Neutral; no opinion": 3,
+      "Agree a little": 4,
+      "Agree strongly": 5
+    },
+    "paired": false,
+    "normalize": true,
+    "items": [
+      {
+        "number": 1,
+        "text": "Tends to be quiet.",
+        "prompt": "I am someone who... Tends to be quiet.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": 16
+      },
+      {
+        "number": 2,
+        "text": "Is compassionate, has a soft heart.",
+        "prompt": "I am someone who... Is compassionate, has a soft heart.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": 2
+      },
+      {
+        "number": 3,
+        "text": "Tends to be disorganized.",
+        "prompt": "I am someone who... Tends to be disorganized.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": 3
+      },
+      {
+        "number": 4,
+        "text": "Worries a lot.",
+        "prompt": "I am someone who... Worries a lot.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": 34
+      },
+      {
+        "number": 5,
+        "text": "Is fascinated by art, music, or literature.",
+        "prompt": "I am someone who... Is fascinated by art, music, or literature.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": 20
+      },
+      {
+        "number": 6,
+        "text": "Is dominant, acts as a leader.",
+        "prompt": "I am someone who... Is dominant, acts as a leader.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": 21
+      },
+      {
+        "number": 7,
+        "text": "Is sometimes rude to others.",
+        "prompt": "I am someone who... Is sometimes rude to others.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": 37
+      },
+      {
+        "number": 8,
+        "text": "Has difficulty getting started on tasks.",
+        "prompt": "I am someone who... Has difficulty getting started on tasks.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": 23
+      },
+      {
+        "number": 9,
+        "text": "Tends to feel depressed, blue.",
+        "prompt": "I am someone who... Tends to feel depressed, blue.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": 54
+      },
+      {
+        "number": 10,
+        "text": "Has little interest in abstract ideas.",
+        "prompt": "I am someone who... Has little interest in abstract ideas.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": 55
+      },
+      {
+        "number": 11,
+        "text": "Is full of energy.",
+        "prompt": "I am someone who... Is full of energy.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": 41
+      },
+      {
+        "number": 12,
+        "text": "Assumes the best about people.",
+        "prompt": "I am someone who... Assumes the best about people.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": 57
+      },
+      {
+        "number": 13,
+        "text": "Is reliable, can always be counted on.",
+        "prompt": "I am someone who... Is reliable, can always be counted on.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": 43
+      },
+      {
+        "number": 14,
+        "text": "Is emotionally stable, not easily upset.",
+        "prompt": "I am someone who... Is emotionally stable, not easily upset.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": 29
+      },
+      {
+        "number": 15,
+        "text": "Is original, comes up with new ideas.",
+        "prompt": "I am someone who... Is original, comes up with new ideas.",
+        "lowAnchor": "Disagree strongly",
+        "highAnchor": "Agree strongly",
+        "sourceNumber": 60
+      }
+    ],
+    "subscales": [
+      {
+        "name": "openness",
+        "items": [
+          5,
+          10,
+          15
+        ],
+        "reverse": [
+          10
+        ],
+        "level": "domain",
+        "parent": null,
+        "higherIs": "more open-minded",
+        "aggregation": "mean"
+      },
+      {
+        "name": "conscientiousness",
+        "items": [
+          3,
+          8,
+          13
+        ],
+        "reverse": [
+          3,
+          8
+        ],
+        "level": "domain",
+        "parent": null,
+        "higherIs": "more conscientious",
+        "aggregation": "mean"
+      },
+      {
+        "name": "extraversion",
+        "items": [
+          1,
+          6,
+          11
+        ],
+        "reverse": [
+          1
+        ],
+        "level": "domain",
+        "parent": null,
+        "higherIs": "more extraverted",
+        "aggregation": "mean"
+      },
+      {
+        "name": "agreeableness",
+        "items": [
+          2,
+          7,
+          12
+        ],
+        "reverse": [
+          7
+        ],
+        "level": "domain",
+        "parent": null,
+        "higherIs": "more agreeable",
+        "aggregation": "mean"
+      },
+      {
+        "name": "neuroticism",
+        "items": [
+          4,
+          9,
+          14
+        ],
+        "reverse": [
+          14
+        ],
+        "level": "domain",
+        "parent": null,
+        "higherIs": "more neurotic",
+        "aggregation": "mean"
+      }
+    ]
+  },
+  "panas": {
+    "key": "panas",
+    "name": "Positive and Negative Affect Schedule",
+    "abbreviation": "PANAS",
+    "scale": "likert",
+    "minimum": 1,
+    "maximum": 5,
+    "citation": "Watson, D., Clark, L. A., & Tellegen, A. (1988). Development and validation of brief measures of positive and negative affect: the PANAS scales. Journal of Personality and Social Psychology, 54(6), 1063-1070.",
+    "labels": {
+      "Very slightly or not at all": 1,
+      "A little": 2,
+      "Moderately": 3,
+      "Quite a bit": 4,
+      "Extremely": 5
+    },
+    "paired": false,
+    "normalize": true,
+    "items": [
+      {
+        "number": 1,
+        "text": "Interested",
+        "prompt": "Indicate the extent you have felt this way over the past week: Interested",
+        "lowAnchor": "Very slightly or not at all",
+        "highAnchor": "Extremely",
+        "sourceNumber": null
+      },
+      {
+        "number": 2,
+        "text": "Distressed",
+        "prompt": "Indicate the extent you have felt this way over the past week: Distressed",
+        "lowAnchor": "Very slightly or not at all",
+        "highAnchor": "Extremely",
+        "sourceNumber": null
+      },
+      {
+        "number": 3,
+        "text": "Excited",
+        "prompt": "Indicate the extent you have felt this way over the past week: Excited",
+        "lowAnchor": "Very slightly or not at all",
+        "highAnchor": "Extremely",
+        "sourceNumber": null
+      },
+      {
+        "number": 4,
+        "text": "Upset",
+        "prompt": "Indicate the extent you have felt this way over the past week: Upset",
+        "lowAnchor": "Very slightly or not at all",
+        "highAnchor": "Extremely",
+        "sourceNumber": null
+      },
+      {
+        "number": 5,
+        "text": "Strong",
+        "prompt": "Indicate the extent you have felt this way over the past week: Strong",
+        "lowAnchor": "Very slightly or not at all",
+        "highAnchor": "Extremely",
+        "sourceNumber": null
+      },
+      {
+        "number": 6,
+        "text": "Guilty",
+        "prompt": "Indicate the extent you have felt this way over the past week: Guilty",
+        "lowAnchor": "Very slightly or not at all",
+        "highAnchor": "Extremely",
+        "sourceNumber": null
+      },
+      {
+        "number": 7,
+        "text": "Scared",
+        "prompt": "Indicate the extent you have felt this way over the past week: Scared",
+        "lowAnchor": "Very slightly or not at all",
+        "highAnchor": "Extremely",
+        "sourceNumber": null
+      },
+      {
+        "number": 8,
+        "text": "Hostile",
+        "prompt": "Indicate the extent you have felt this way over the past week: Hostile",
+        "lowAnchor": "Very slightly or not at all",
+        "highAnchor": "Extremely",
+        "sourceNumber": null
+      },
+      {
+        "number": 9,
+        "text": "Enthusiastic",
+        "prompt": "Indicate the extent you have felt this way over the past week: Enthusiastic",
+        "lowAnchor": "Very slightly or not at all",
+        "highAnchor": "Extremely",
+        "sourceNumber": null
+      },
+      {
+        "number": 10,
+        "text": "Proud",
+        "prompt": "Indicate the extent you have felt this way over the past week: Proud",
+        "lowAnchor": "Very slightly or not at all",
+        "highAnchor": "Extremely",
+        "sourceNumber": null
+      },
+      {
+        "number": 11,
+        "text": "Irritable",
+        "prompt": "Indicate the extent you have felt this way over the past week: Irritable",
+        "lowAnchor": "Very slightly or not at all",
+        "highAnchor": "Extremely",
+        "sourceNumber": null
+      },
+      {
+        "number": 12,
+        "text": "Alert",
+        "prompt": "Indicate the extent you have felt this way over the past week: Alert",
+        "lowAnchor": "Very slightly or not at all",
+        "highAnchor": "Extremely",
+        "sourceNumber": null
+      },
+      {
+        "number": 13,
+        "text": "Ashamed",
+        "prompt": "Indicate the extent you have felt this way over the past week: Ashamed",
+        "lowAnchor": "Very slightly or not at all",
+        "highAnchor": "Extremely",
+        "sourceNumber": null
+      },
+      {
+        "number": 14,
+        "text": "Inspired",
+        "prompt": "Indicate the extent you have felt this way over the past week: Inspired",
+        "lowAnchor": "Very slightly or not at all",
+        "highAnchor": "Extremely",
+        "sourceNumber": null
+      },
+      {
+        "number": 15,
+        "text": "Nervous",
+        "prompt": "Indicate the extent you have felt this way over the past week: Nervous",
+        "lowAnchor": "Very slightly or not at all",
+        "highAnchor": "Extremely",
+        "sourceNumber": null
+      },
+      {
+        "number": 16,
+        "text": "Determined",
+        "prompt": "Indicate the extent you have felt this way over the past week: Determined",
+        "lowAnchor": "Very slightly or not at all",
+        "highAnchor": "Extremely",
+        "sourceNumber": null
+      },
+      {
+        "number": 17,
+        "text": "Attentive",
+        "prompt": "Indicate the extent you have felt this way over the past week: Attentive",
+        "lowAnchor": "Very slightly or not at all",
+        "highAnchor": "Extremely",
+        "sourceNumber": null
+      },
+      {
+        "number": 18,
+        "text": "Jittery",
+        "prompt": "Indicate the extent you have felt this way over the past week: Jittery",
+        "lowAnchor": "Very slightly or not at all",
+        "highAnchor": "Extremely",
+        "sourceNumber": null
+      },
+      {
+        "number": 19,
+        "text": "Active",
+        "prompt": "Indicate the extent you have felt this way over the past week: Active",
+        "lowAnchor": "Very slightly or not at all",
+        "highAnchor": "Extremely",
+        "sourceNumber": null
+      },
+      {
+        "number": 20,
+        "text": "Afraid",
+        "prompt": "Indicate the extent you have felt this way over the past week: Afraid",
+        "lowAnchor": "Very slightly or not at all",
+        "highAnchor": "Extremely",
+        "sourceNumber": null
+      }
+    ],
+    "subscales": [
+      {
+        "name": "Positive Affect",
+        "items": [
+          1,
+          3,
+          5,
+          9,
+          10,
+          12,
+          14,
+          16,
+          17,
+          19
+        ],
+        "reverse": [],
+        "level": "scale",
+        "parent": null,
+        "higherIs": "more positive affect",
+        "aggregation": "mean"
+      },
+      {
+        "name": "Negative Affect",
+        "items": [
+          2,
+          4,
+          6,
+          7,
+          8,
+          11,
+          13,
+          15,
+          18,
+          20
+        ],
+        "reverse": [],
+        "level": "scale",
+        "parent": null,
+        "higherIs": "more negative affect",
+        "aggregation": "mean"
+      },
+      {
+        "name": "Positive Affect (sum)",
+        "items": [
+          1,
+          3,
+          5,
+          9,
+          10,
+          12,
+          14,
+          16,
+          17,
+          19
+        ],
+        "reverse": [],
+        "level": "published total",
+        "parent": null,
+        "higherIs": "more positive affect",
+        "aggregation": "sum"
+      },
+      {
+        "name": "Negative Affect (sum)",
+        "items": [
+          2,
+          4,
+          6,
+          7,
+          8,
+          11,
+          13,
+          15,
+          18,
+          20
+        ],
+        "reverse": [],
+        "level": "published total",
+        "parent": null,
+        "higherIs": "more negative affect",
+        "aggregation": "sum"
+      }
+    ]
+  },
+  "vasf": {
+    "key": "vasf",
+    "name": "Visual Analogue Scale to Evaluate Fatigue Severity",
+    "abbreviation": "VAS-F",
+    "scale": "vas",
+    "minimum": 0,
+    "maximum": 10,
+    "citation": "Lee, K. A., Hicks, G., & Nino-Murcia, G. (1991). Validity and reliability of a scale to assess fatigue. Psychiatry Research, 36(3), 291-298.",
+    "labels": {},
+    "paired": true,
+    "normalize": true,
+    "items": [
+      {
+        "number": 1,
+        "text": "tired",
+        "prompt": "0 means \"not at all tired\", 10 means \"extremely tired\"",
+        "lowAnchor": "not at all",
+        "highAnchor": "extremely",
+        "sourceNumber": null
+      },
+      {
+        "number": 2,
+        "text": "sleepy",
+        "prompt": "0 means \"not at all sleepy\", 10 means \"extremely sleepy\"",
+        "lowAnchor": "not at all",
+        "highAnchor": "extremely",
+        "sourceNumber": null
+      },
+      {
+        "number": 3,
+        "text": "drowsy",
+        "prompt": "0 means \"not at all drowsy\", 10 means \"extremely drowsy\"",
+        "lowAnchor": "not at all",
+        "highAnchor": "extremely",
+        "sourceNumber": null
+      },
+      {
+        "number": 4,
+        "text": "fatigued",
+        "prompt": "0 means \"not at all fatigued\", 10 means \"extremely fatigued\"",
+        "lowAnchor": "not at all",
+        "highAnchor": "extremely",
+        "sourceNumber": null
+      },
+      {
+        "number": 5,
+        "text": "worn out",
+        "prompt": "0 means \"not at all worn out\", 10 means \"extremely worn out\"",
+        "lowAnchor": "not at all",
+        "highAnchor": "extremely",
+        "sourceNumber": null
+      },
+      {
+        "number": 6,
+        "text": "energetic",
+        "prompt": "0 means \"not at all energetic\", 10 means \"extremely energetic\"",
+        "lowAnchor": "not at all",
+        "highAnchor": "extremely",
+        "sourceNumber": null
+      },
+      {
+        "number": 7,
+        "text": "active",
+        "prompt": "0 means \"not at all active\", 10 means \"extremely active\"",
+        "lowAnchor": "not at all",
+        "highAnchor": "extremely",
+        "sourceNumber": null
+      },
+      {
+        "number": 8,
+        "text": "vigorous",
+        "prompt": "0 means \"not at all vigorous\", 10 means \"extremely vigorous\"",
+        "lowAnchor": "not at all",
+        "highAnchor": "extremely",
+        "sourceNumber": null
+      },
+      {
+        "number": 9,
+        "text": "efficient",
+        "prompt": "0 means \"not at all efficient\", 10 means \"extremely efficient\"",
+        "lowAnchor": "not at all",
+        "highAnchor": "extremely",
+        "sourceNumber": null
+      },
+      {
+        "number": 10,
+        "text": "lively",
+        "prompt": "0 means \"not at all lively\", 10 means \"extremely lively\"",
+        "lowAnchor": "not at all",
+        "highAnchor": "extremely",
+        "sourceNumber": null
+      },
+      {
+        "number": 11,
+        "text": "bushed",
+        "prompt": "0 means \"not at all bushed\", 10 means \"totally bushed\"",
+        "lowAnchor": "not at all",
+        "highAnchor": "totally",
+        "sourceNumber": null
+      },
+      {
+        "number": 12,
+        "text": "exhausted",
+        "prompt": "0 means \"not at all exhausted\", 10 means \"totally exhausted\"",
+        "lowAnchor": "not at all",
+        "highAnchor": "totally",
+        "sourceNumber": null
+      },
+      {
+        "number": 13,
+        "text": "keeping my eyes open",
+        "prompt": "0 means \"keeping my eyes open is no effort at all\", 10 means \"keeping my eyes open is a tremendous chore\"",
+        "lowAnchor": "is no effort at all",
+        "highAnchor": "is a tremendous chore",
+        "sourceNumber": null
+      },
+      {
+        "number": 14,
+        "text": "moving my body",
+        "prompt": "0 means \"moving my body is no effort at all\", 10 means \"moving my body is a tremendous chore\"",
+        "lowAnchor": "is no effort at all",
+        "highAnchor": "is a tremendous chore",
+        "sourceNumber": null
+      },
+      {
+        "number": 15,
+        "text": "concentrating",
+        "prompt": "0 means \"concentrating is no effort at all\", 10 means \"concentrating is a tremendous chore\"",
+        "lowAnchor": "is no effort at all",
+        "highAnchor": "is a tremendous chore",
+        "sourceNumber": null
+      },
+      {
+        "number": 16,
+        "text": "carrying on a conversation",
+        "prompt": "0 means \"carrying on a conversation is no effort at all\", 10 means \"carrying on a conversation is a tremendous chore\"",
+        "lowAnchor": "is no effort at all",
+        "highAnchor": "is a tremendous chore",
+        "sourceNumber": null
+      },
+      {
+        "number": 17,
+        "text": "desire to close my eyes",
+        "prompt": "0 means \"I have absolutely no desire to close my eyes\", 10 means \"I have a tremendous desire to close my eyes\"",
+        "lowAnchor": "I have absolutely no",
+        "highAnchor": "I have a tremendous",
+        "sourceNumber": null
+      },
+      {
+        "number": 18,
+        "text": "desire to lie down",
+        "prompt": "0 means \"I have absolutely no desire to lie down\", 10 means \"I have a tremendous desire to lie down\"",
+        "lowAnchor": "I have absolutely no",
+        "highAnchor": "I have a tremendous",
+        "sourceNumber": null
+      }
+    ],
+    "subscales": [
+      {
+        "name": "Fatigue",
+        "items": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18
+        ],
+        "reverse": [],
+        "level": "subscale",
+        "parent": null,
+        "higherIs": "more fatigued",
+        "aggregation": "mean"
+      },
+      {
+        "name": "Energy",
+        "items": [
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "reverse": [],
+        "level": "subscale",
+        "parent": null,
+        "higherIs": "more energetic",
+        "aggregation": "mean"
+      },
+      {
+        "name": "Fatigue (composite)",
+        "items": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18
+        ],
+        "reverse": [
+          6,
+          7,
+          8,
+          9,
+          10
+        ],
+        "level": "composite",
+        "parent": null,
+        "higherIs": "more fatigued",
+        "aggregation": "mean"
+      }
+    ]
+  }
+}

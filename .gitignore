@@ -1,6 +1,11 @@
 # Project
 .vscode
 
+# demo-react (Node/Vite)
+node_modules/
+demo-react/dist/
+*.tsbuildinfo
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
