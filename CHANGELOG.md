@@ -10,6 +10,18 @@ Commits.
 
 ---
 
+## [2.1.0](https://github.com/fodorad/personality_questionnaire/compare/v2.0.0...v2.1.0) (2026-09-09)
+
+
+### Features
+
+* **instruments:** add the BFI-2-XS and BFI-10 short forms ([#13](https://github.com/fodorad/personality_questionnaire/issues/13)) ([eb995e0](https://github.com/fodorad/personality_questionnaire/commit/eb995e0f4b0fadf3f118ca32ab7fb06bff117435))
+
+
+### Documentation
+
+* document the short forms and when to choose each Big Five form ([eb995e0](https://github.com/fodorad/personality_questionnaire/commit/eb995e0f4b0fadf3f118ca32ab7fb06bff117435))
+
 ## [2.0.0](https://github.com/fodorad/personality_questionnaire/compare/v1.1.2...v2.0.0) (2026-09-09)
 
 
