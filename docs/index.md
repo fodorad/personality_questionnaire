@@ -12,6 +12,7 @@ hide-toc: false
 :hidden:
 
 instruments
+storage
 design
 migration
 changelog

@@ -8,7 +8,7 @@ if TYPE_CHECKING:
     from personality_questionnaire.registry import Questionnaire
     from personality_questionnaire.scoring import ScoreResult
 
-__all__ = ["format_instrument", "format_registry", "format_scores"]
+__all__ = ["format_instrument", "format_records", "format_registry", "format_scores"]
 
 
 def format_scores(result: ScoreResult, row: int = 0, *, decimals: int = 3) -> list[str]:
@@ -95,5 +95,35 @@ def format_registry(questionnaires: list[Questionnaire]) -> list[str]:
         lines.append(
             f"  {questionnaire.key:<{key_width}}  {questionnaire.name:<{name_width}}  "
             f"{questionnaire.n_items:>5}  {len(questionnaire.subscales):>9}"
+        )
+    return lines
+
+
+def format_records(summaries: list) -> list[str]:
+    """Render the stored-record table.
+
+    Args:
+        summaries: Record summaries, most recent first.
+
+    Returns:
+        Lines to print.
+    """
+    if not summaries:
+        return ["No records stored."]
+
+    code_width = max(len(s.participant_code) for s in summaries)
+    key_width = max(len(s.questionnaire) for s in summaries)
+
+    lines = [
+        f"  {'ID':>4}  {'PARTICIPANT':<{code_width}}  {'INSTRUMENT':<{key_width}}  "
+        f"{'TAG':<6}  {'ITEMS':>5}  COLLECTED"
+    ]
+    for summary in summaries:
+        collected = summary.started_at.strftime("%Y-%m-%d %H:%M") if summary.started_at else ""
+        marker = "" if summary.complete else "  (incomplete)"
+        lines.append(
+            f"  {summary.session_id:>4}  {summary.participant_code:<{code_width}}  "
+            f"{summary.questionnaire:<{key_width}}  {summary.tag or '-':<6}  "
+            f"{summary.n_responses:>5}  {collected}{marker}"
         )
     return lines

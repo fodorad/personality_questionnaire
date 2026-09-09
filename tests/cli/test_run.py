@@ -21,7 +21,7 @@ from personality_questionnaire.cli.main import (
 )
 
 
-def administer(argv: list[str], responses: list[str]) -> tuple[int, str]:
+def administer(argv: list[str], responses: list[str], *, db: str | None = None) -> tuple[int, str]:
     """Run ``pq run`` with a scripted participant.
 
     Drives the injected ``read``/``write`` seam rather than patching anything, so
@@ -36,6 +36,10 @@ def administer(argv: list[str], responses: list[str]) -> tuple[int, str]:
     """
     lines = iter(responses)
     transcript: list[str] = []
+
+    # `run` persists by default. Every test gets a throwaway database so a run can
+    # never touch the operator's real records.
+    argv = [*argv, "--db", db or "sqlite://"] if "--db" not in argv else argv
 
     args = build_parser().parse_args(argv)
     args.read = lambda _: next(lines)
