@@ -53,7 +53,7 @@ mysql = [
 
 # Psychometric diagnostics over collected records.
 analysis = [
-  "scipy>=1.11",
+  "scipy>=1.18.1",
   "matplotlib",
 ]
 
