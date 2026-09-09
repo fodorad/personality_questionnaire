@@ -164,6 +164,11 @@ def _cmd_run(args: argparse.Namespace) -> int:
     print("")
     _emit(render.format_scores(result))
 
+    if not args.no_save:
+        saved = _save_record(args, questionnaire, responses)
+        print("")
+        print(f"Saved record {saved.session_id} for {saved.participant_code}.")
+
     provenance = capture()
     log.info(
         "scored %s for %s (version %s, git %s%s)",
@@ -186,6 +191,109 @@ def _cmd_run(args: argparse.Namespace) -> int:
         print("")
         for path in written:
             print(f"Wrote {path}")
+
+    return EXIT_OK
+
+
+def _repository(args: argparse.Namespace):
+    """Open the record store named by the arguments or the environment.
+
+    Args:
+        args: Parsed arguments, whose ``db`` may name a database URL.
+
+    Returns:
+        A repository bound to that database.
+    """
+    from personality_questionnaire.db import Repository, create_engine_from_env
+
+    url = getattr(args, "db", None)
+    engine = create_engine_from_env(url)
+    log.debug("using database %s", engine.url)
+    return Repository(engine)
+
+
+def _save_record(
+    args: argparse.Namespace,
+    questionnaire: registry.Questionnaire,
+    responses: list[int],
+):
+    """Persist one completed administration.
+
+    Args:
+        args: Parsed arguments.
+        questionnaire: The instrument administered.
+        responses: The participant's answers, in item order.
+
+    Returns:
+        The saved record, carrying its new session id.
+    """
+    from personality_questionnaire.db import Record
+
+    record = Record(
+        participant_code=args.participant,
+        questionnaire=questionnaire.key,
+        responses={n: v for n, v in enumerate(responses, start=1)},
+        tag=args.tag,
+        experiment=args.experiment or None,
+        source="cli",
+    )
+    return _repository(args).save(record)
+
+
+def _cmd_records(args: argparse.Namespace) -> int:
+    """List stored records.
+
+    Args:
+        args: Parsed arguments.
+
+    Returns:
+        An exit code.
+    """
+    summaries = _repository(args).list(
+        participant=args.participant,
+        questionnaire=args.questionnaire,
+        experiment=args.experiment,
+    )
+    _emit(render.format_records(summaries))
+    return EXIT_OK
+
+
+def _cmd_export(args: argparse.Namespace) -> int:
+    """Export stored records to a file or stdout.
+
+    Args:
+        args: Parsed arguments.
+
+    Returns:
+        An exit code.
+    """
+    import json as _json
+
+    from personality_questionnaire.db import export as export_module
+
+    repository = _repository(args)
+    summaries = repository.list(
+        participant=args.participant,
+        questionnaire=args.questionnaire,
+        experiment=args.experiment,
+    )
+    session_ids = [s.session_id for s in summaries if s.complete]
+
+    if not session_ids:
+        log.error("no complete records match that selection")
+        return EXIT_MISSING_INPUT
+
+    if args.shape == "json":
+        text = _json.dumps(export_module.to_json(repository, session_ids), indent=2) + "\n"
+    else:
+        text = export_module.to_csv(repository.engine, session_ids, shape=args.shape)
+
+    if args.output is None:
+        print(text, end="")
+    else:
+        Path(args.output).parent.mkdir(parents=True, exist_ok=True)
+        Path(args.output).write_text(text, encoding="utf-8")
+        print(f"Wrote {len(session_ids)} record(s) to {args.output}")
 
     return EXIT_OK
 
@@ -260,6 +368,8 @@ def _add_run_parser(subparsers: argparse._SubParsersAction) -> None:
         default=None,
         help="write response and score CSVs into this directory",
     )
+    parser.add_argument("--db", default=None, help="database URL (default: $PQ_DATABASE_URL)")
+    parser.add_argument("--no-save", action="store_true", help="score without storing the record")
     parser.set_defaults(func=_cmd_run)
 
 
@@ -288,6 +398,28 @@ def build_parser() -> argparse.ArgumentParser:
     info.set_defaults(func=_cmd_info)
 
     _add_run_parser(subparsers)
+
+    records = subparsers.add_parser("records", help="list stored records")
+    records.add_argument("--participant", default=None, help="restrict to one participant")
+    records.add_argument(
+        "--questionnaire", default=None, choices=registry.keys(), help="restrict to one instrument"
+    )
+    records.add_argument("--experiment", default=None, help="restrict to one experiment")
+    records.add_argument("--db", default=None, help="database URL")
+    records.set_defaults(func=_cmd_records)
+
+    export_parser = subparsers.add_parser("export", help="export stored records")
+    export_parser.add_argument("--participant", default=None, help="restrict to one participant")
+    export_parser.add_argument(
+        "--questionnaire", default=None, choices=registry.keys(), help="restrict to one instrument"
+    )
+    export_parser.add_argument("--experiment", default=None, help="restrict to one experiment")
+    export_parser.add_argument(
+        "--shape", default="wide", choices=("wide", "long", "json"), help="output shape"
+    )
+    export_parser.add_argument("--output", default=None, help="write here instead of stdout")
+    export_parser.add_argument("--db", default=None, help="database URL")
+    export_parser.set_defaults(func=_cmd_export)
 
     score_parser = subparsers.add_parser("score", help="score responses from a file")
     score_parser.add_argument("questionnaire", choices=registry.keys(), help="instrument used")
@@ -333,9 +465,17 @@ def _translate_legacy(argv: list[str]) -> list[str] | None:
         argv: Arguments after the program name.
 
     Returns:
-        The rewritten arguments, or ``None`` if this is not the legacy form.
+        The rewritten arguments, or ``None`` if this is not the legacy form -- which
+        includes any invocation that already names a subcommand.
     """
     if "--questionnaire" not in argv:
+        return None
+
+    # `records` and `export` take a --questionnaire filter of their own, so the flag
+    # alone no longer identifies the legacy form. Only a command line that names no
+    # subcommand at all can be the pre-2.0 one.
+    subcommands = {"list", "info", "run", "score", "records", "export"}
+    if any(token in subcommands for token in argv):
         return None
 
     values = {}

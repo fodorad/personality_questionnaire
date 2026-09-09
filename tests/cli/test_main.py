@@ -168,6 +168,18 @@ class TestLegacyTranslation(unittest.TestCase):
         self.assertIn("--tag", translated)
         self.assertIn("pre", translated)
 
+    def test_ignores_a_questionnaire_filter_on_a_subcommand(self):
+        """`records` and `export` take a --questionnaire filter of their own.
+
+        Treating the flag alone as the legacy marker turned `pq records
+        --questionnaire panas` into an interactive run, which blocked on stdin.
+        """
+        from personality_questionnaire.cli.main import _translate_legacy
+
+        for command in ("records", "export"):
+            with self.subTest(command=command):
+                self.assertIsNone(_translate_legacy([command, "--questionnaire", "panas"]))
+
     def test_leaves_the_new_form_alone(self):
         from personality_questionnaire.cli.main import _translate_legacy
 

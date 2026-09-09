@@ -68,9 +68,21 @@ Administer one at the terminal:
 ```bash
 pq list                                  # what is available
 pq info bfi2                             # items, subscales, citation
-pq run bfi2 --participant P01            # ask the questions, score the answers
+pq run bfi2 --participant P01            # ask, score, and store
 pq score bfi2 --input answers.csv        # score a file
 ```
+
+Collect and export a study:
+
+```bash
+pip install "personality_questionnaire[ui]"          # adds the record store
+pq run bfi2 --participant P01 --experiment study-a
+pq records                                            # what is stored
+pq export --shape long --output study-a.csv
+```
+
+Records go to `~/.personality_questionnaire/records.db` unless `PQ_DATABASE_URL`
+says otherwise. See [docs/storage.md](docs/storage.md).
 
 # How it works
 
@@ -90,7 +102,8 @@ flowchart LR
 | `scoring.py` | The single scorer: reverse-keying, subscale means, normalisation, pre/post deltas |
 | `io.py` | Reading and writing responses and scores |
 | `provenance.py` | Package version, git SHA, instrument hash for each record |
-| `cli/` | `pq list \| info \| run \| score` |
+| `db/` | SQLAlchemy record store, and the JSON/wide/long export shapes |
+| `cli/` | `pq list \| info \| run \| score \| records \| export` |
 
 # Design decisions
 
