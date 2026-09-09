@@ -1,0 +1,34 @@
+personality_questionnaire.pages.overview
+========================================
+
+.. py:module:: personality_questionnaire.pages.overview
+
+.. autoapi-nested-parse::
+
+   The landing tab: what this collects, and where to start.
+
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   personality_questionnaire.pages.overview.render
+
+
+Module Contents
+---------------
+
+.. py:function:: render(navigate: collections.abc.Callable[[str], None]) -> None
+
+   Build the overview tab.
+
+   A landing page and nothing more: no live database numbers here, since a
+   first-time visitor has not yet chosen a participant or an instrument for any
+   count to mean something. Records and participant totals belong on the Records
+   tab, where they are meaningful.
+
+   :param navigate: Switches to another tab by name.
+
+

@@ -15,6 +15,10 @@ Submodules
 .. toctree::
    :maxdepth: 1
 
+   /autoapi/personality_questionnaire/core/config/index
+   /autoapi/personality_questionnaire/core/dbpath/index
+   /autoapi/personality_questionnaire/core/recent_databases/index
+   /autoapi/personality_questionnaire/core/state/index
    /autoapi/personality_questionnaire/core/theme/index
 
 

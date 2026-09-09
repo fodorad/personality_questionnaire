@@ -46,6 +46,7 @@ Functions
 
 .. autoapisummary::
 
+   personality_questionnaire.core.theme.domain_color
    personality_questionnaire.core.theme.color
    personality_questionnaire.core.theme.contrast_ratio
 
@@ -114,6 +115,24 @@ Module Contents
 
    Shared by the application's chips and the analysis plots, so a domain keeps the same
    colour wherever a reader meets it.
+
+.. py:function:: domain_color(subscale_name: str, parent: str | None) -> str
+
+   Resolve a subscale's colour by the domain it belongs to.
+
+   A domain-level subscale resolves through its own name. A facet resolves
+   through ``parent`` -- its owning domain's name -- so it inherits the same
+   colour as that domain rather than falling through to :data:`PRIMARY`, which is
+   what a lookup keyed on the facet's own name would do (``DOMAIN_COLORS`` only
+   has the five domain names as keys). Anything with no domain at all -- a PANAS
+   scale, the VAS-F composite -- has no match either way and falls back to
+   :data:`PRIMARY`, unchanged from before.
+
+   :param subscale_name: The subscale's own name.
+   :param parent: The name of its owning domain, or ``None`` if it has none.
+
+   :returns: The resolved colour.
+
 
 .. py:function:: color(name: ColorName) -> str
 

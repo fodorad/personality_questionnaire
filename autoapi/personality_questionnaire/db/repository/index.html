@@ -206,6 +206,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../../instruments.html">Instruments</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../storage.html">Storing records</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ui.html">The data-collection application</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../design.html">Design decisions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../migration.html">Migrating to 2.0</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../changelog.html">Changelog</a></li>
@@ -214,6 +215,7 @@
 <ul class="current">
 <li class="toctree-l1 current has-children"><a class="reference internal" href="../../index.html">personality_questionnaire</a><input aria-label="Toggle navigation of personality_questionnaire" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../../api/index.html">personality_questionnaire.api</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../app/index.html">personality_questionnaire.app</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../bfi2/index.html">personality_questionnaire.bfi2</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../cli/index.html">personality_questionnaire.cli</a><input aria-label="Toggle navigation of personality_questionnaire.cli" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../cli/main/index.html">personality_questionnaire.cli.main</a></li>
@@ -222,6 +224,10 @@
 </ul>
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../core/index.html">personality_questionnaire.core</a><input aria-label="Toggle navigation of personality_questionnaire.core" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../core/config/index.html">personality_questionnaire.core.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../core/dbpath/index.html">personality_questionnaire.core.dbpath</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../core/recent_databases/index.html">personality_questionnaire.core.recent_databases</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../core/state/index.html">personality_questionnaire.core.state</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../core/theme/index.html">personality_questionnaire.core.theme</a></li>
 </ul>
 </li>
@@ -241,6 +247,16 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../io/index.html">personality_questionnaire.io</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../pages/index.html">personality_questionnaire.pages</a><input aria-label="Toggle navigation of personality_questionnaire.pages" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../pages/components/index.html">personality_questionnaire.pages.components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../pages/db_picker/index.html">personality_questionnaire.pages.db_picker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../pages/export/index.html">personality_questionnaire.pages.export</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../pages/overview/index.html">personality_questionnaire.pages.overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../pages/questionnaire/index.html">personality_questionnaire.pages.questionnaire</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../pages/records/index.html">personality_questionnaire.pages.records</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../pages/setup/index.html">personality_questionnaire.pages.setup</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="../../provenance/index.html">personality_questionnaire.provenance</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../registry/index.html">personality_questionnaire.registry</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../scoring/index.html">personality_questionnaire.scoring</a></li>
@@ -540,6 +556,44 @@ registered.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="personality_questionnaire.db.repository.Repository.update">
+<span class="sig-name descname"><span class="pre">update</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">record</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#personality_questionnaire.db.repository.Record" title="personality_questionnaire.db.repository.Record"><span class="pre">Record</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#personality_questionnaire.db.repository.Record" title="personality_questionnaire.db.repository.Record"><span class="pre">Record</span></a></span></span><a class="reference internal" href="../../../../_modules/personality_questionnaire/db/repository.html#Repository.update"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#personality_questionnaire.db.repository.Repository.update" title="Link to this definition">¶</a></dt>
+<dd><p>Overwrite an existing session’s responses and scores in place.</p>
+<p>The session’s identity – <code class="docutils literal notranslate"><span class="pre">participant_code</span></code>, <code class="docutils literal notranslate"><span class="pre">questionnaire</span></code> and
+<code class="docutils literal notranslate"><span class="pre">tag</span></code> – is locked to what the row already has; the same three fields on
+<code class="docutils literal notranslate"><span class="pre">record</span></code> are ignored, because changing them would make this a different
+administration rather than an edit of this one, and they participate in
+the table’s uniqueness constraint.</p>
+<p>Provenance (<code class="docutils literal notranslate"><span class="pre">package_version</span></code>, <code class="docutils literal notranslate"><span class="pre">git_sha</span></code>, <code class="docutils literal notranslate"><span class="pre">git_dirty</span></code>,
+<code class="docutils literal notranslate"><span class="pre">instrument_hash</span></code>, <code class="docutils literal notranslate"><span class="pre">scoring_version</span></code>) and <code class="docutils literal notranslate"><span class="pre">completed_at</span></code> are
+re-captured from the <em>current</em> environment rather than preserved from the
+original save: an edit is a new act of recording, and what is stored
+should be evidence of what actually happened, not a patch that silently
+keeps stale metadata from before. This mirrors the “scores are stored, not
+recomputed” rule the schema already follows – see <code class="docutils literal notranslate"><span class="pre">docs/storage.md</span></code>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>session_id</strong> – The session to overwrite.</p></li>
+<li><p><strong>record</strong> – The new responses and metadata. Its <code class="docutils literal notranslate"><span class="pre">participant_code</span></code>,
+<code class="docutils literal notranslate"><span class="pre">questionnaire</span></code> and <code class="docutils literal notranslate"><span class="pre">tag</span></code> are ignored.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The updated record, reflecting what was actually stored – including
+the locked identity fields, which come from the existing row rather
+than from <code class="docutils literal notranslate"><span class="pre">record</span></code>.</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>KeyError</strong> – If no session carries that id.</p></li>
+<li><p><strong>ValueError</strong> – If <code class="docutils literal notranslate"><span class="pre">record</span></code> is missing responses for the instrument.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="personality_questionnaire.db.repository.Repository.load">
 <span class="sig-name descname"><span class="pre">load</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">session_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="#personality_questionnaire.db.repository.Record" title="personality_questionnaire.db.repository.Record"><span class="pre">Record</span></a></span></span><a class="reference internal" href="../../../../_modules/personality_questionnaire/db/repository.html#Repository.load"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#personality_questionnaire.db.repository.Repository.load" title="Link to this definition">¶</a></dt>
 <dd><p>Load one record by its database id.</p>
@@ -728,6 +782,7 @@ participant code for each row.</p>
 <li><a class="reference internal" href="#personality_questionnaire.db.repository.Repository.engine"><code class="docutils literal notranslate"><span class="pre">Repository.engine</span></code></a></li>
 <li><a class="reference internal" href="#personality_questionnaire.db.repository.Repository.close"><code class="docutils literal notranslate"><span class="pre">Repository.close()</span></code></a></li>
 <li><a class="reference internal" href="#personality_questionnaire.db.repository.Repository.save"><code class="docutils literal notranslate"><span class="pre">Repository.save()</span></code></a></li>
+<li><a class="reference internal" href="#personality_questionnaire.db.repository.Repository.update"><code class="docutils literal notranslate"><span class="pre">Repository.update()</span></code></a></li>
 <li><a class="reference internal" href="#personality_questionnaire.db.repository.Repository.load"><code class="docutils literal notranslate"><span class="pre">Repository.load()</span></code></a></li>
 <li><a class="reference internal" href="#personality_questionnaire.db.repository.Repository.list"><code class="docutils literal notranslate"><span class="pre">Repository.list()</span></code></a></li>
 <li><a class="reference internal" href="#personality_questionnaire.db.repository.Repository.delete"><code class="docutils literal notranslate"><span class="pre">Repository.delete()</span></code></a></li>

@@ -1,0 +1,85 @@
+personality_questionnaire.core.config
+=====================================
+
+.. py:module:: personality_questionnaire.core.config
+
+.. autoapi-nested-parse::
+
+   Runtime settings for the data-collection application.
+
+   Everything is read from ``PQ_*`` environment variables, so no absolute path is ever
+   baked into the repository and an operator configures a lab machine without editing
+   code.
+
+   The host default is deliberate: participant self-reports are consent-restricted, and
+   this application is built for a machine in a lab rather than a service on a network.
+   Binding to loopback is the safe default, and moving off it is an explicit act.
+
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   personality_questionnaire.core.config.settings
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   personality_questionnaire.core.config.Settings
+
+
+Module Contents
+---------------
+
+.. py:class:: Settings
+
+   Where the application listens and what it writes to.
+
+   .. attribute:: host
+
+      Address to bind. Defaults to loopback.
+
+   .. attribute:: port
+
+      Port to listen on.
+
+   .. attribute:: database_url
+
+      Record store, or ``None`` to use the package default.
+
+   .. attribute:: title
+
+      Browser title and header text.
+
+   .. attribute:: show
+
+      Whether to open a browser on start.
+
+
+   .. py:property:: is_loopback
+      :type: bool
+
+
+      Whether the configured host keeps the application off the network.
+
+
+   .. py:property:: exposure_warning
+      :type: str | None
+
+
+      A warning to log when the application is reachable from other machines.
+
+      :returns: The warning text, or ``None`` when bound to loopback.
+
+
+.. py:data:: settings
+
+   The process-wide settings instance.
+
+   Mutate its fields to change behaviour at runtime without re-importing.
+

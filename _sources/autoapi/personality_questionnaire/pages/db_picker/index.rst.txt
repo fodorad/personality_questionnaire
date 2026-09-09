@@ -1,0 +1,40 @@
+personality_questionnaire.pages.db_picker
+=========================================
+
+.. py:module:: personality_questionnaire.pages.db_picker
+
+.. autoapi-nested-parse::
+
+   An async modal database picker.
+
+   This package runs locally, so the browser and the filesystem are the same machine:
+   the operator can navigate the real directory tree and pick a ``.db`` file instead of
+   typing its path. A thin NiceGUI view over the pure helpers in
+   :mod:`personality_questionnaire.core.dbpath`, following the same shape as Annie's
+   folder picker (open a dialog immediately with a spinner, resolve the listing off the
+   event loop, submit the chosen path through the dialog's own return value).
+
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   personality_questionnaire.pages.db_picker.pick_database
+
+
+Module Contents
+---------------
+
+.. py:function:: pick_database(start: pathlib.Path) -> str | None
+   :async:
+
+
+   Open a dialog for choosing an existing database or a location for a new one.
+
+   :param start: The directory to open the listing at.
+
+   :returns: A ``sqlite:///...`` URL for the chosen file, or ``None`` if cancelled.
+
+

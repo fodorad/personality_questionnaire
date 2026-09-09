@@ -1,0 +1,74 @@
+personality_questionnaire.core.recent_databases
+===============================================
+
+.. py:module:: personality_questionnaire.core.recent_databases
+
+.. autoapi-nested-parse::
+
+   Remembering which databases an operator has recently used.
+
+   A lab operator plausibly switches between a few SQLite files across sessions --
+   per-study databases, or a shared-drive copy versus a local scratch copy -- so the
+   Setup tab's database picker offers a short most-recently-used list alongside
+   browsing. The list is a convenience, not a correctness requirement: a write
+   failure here is logged and swallowed rather than blocking a database switch.
+
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   personality_questionnaire.core.recent_databases.MAX_ENTRIES
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   personality_questionnaire.core.recent_databases.recent_databases_path
+   personality_questionnaire.core.recent_databases.load_recent
+   personality_questionnaire.core.recent_databases.remember_database
+
+
+Module Contents
+---------------
+
+.. py:data:: MAX_ENTRIES
+   :value: 8
+
+
+   How many recent database URLs to keep.
+
+.. py:function:: recent_databases_path() -> pathlib.Path
+
+   Return where the most-recently-used database list is stored.
+
+   Sits beside the default database file, under the same ``$PQ_HOME`` (or
+   ``~/.personality_questionnaire``) directory used elsewhere in this package.
+
+   :returns: The path to the MRU JSON file.
+
+
+.. py:function:: load_recent(path: pathlib.Path | None = None) -> list[str]
+
+   Return remembered database URLs, most-recently-used first.
+
+   :param path: The MRU file to read. Defaults to :func:`recent_databases_path`.
+
+   :returns: The remembered URLs, or an empty list if the file is missing, unreadable,
+             or not valid JSON -- a corrupt MRU file is a non-event, not an error.
+
+
+.. py:function:: remember_database(url: str, path: pathlib.Path | None = None) -> list[str]
+
+   Move ``url`` to the front of the recent list, capped and de-duplicated.
+
+   :param url: The database URL just switched to.
+   :param path: The MRU file to update. Defaults to :func:`recent_databases_path`.
+
+   :returns: The updated list, most-recently-used first.
+
+

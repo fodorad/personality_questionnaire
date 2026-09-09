@@ -1,0 +1,34 @@
+personality_questionnaire.pages
+===============================
+
+.. py:module:: personality_questionnaire.pages
+
+.. autoapi-nested-parse::
+
+   The tab bodies of the data-collection application.
+
+   Each module here builds elements and nothing else. Every decision these pages
+   present -- whether a draft is ready, what remains unanswered, how a score is
+   formatted -- is computed in :mod:`personality_questionnaire.core.state` or
+   :mod:`personality_questionnaire.cli.render`, which are tested directly.
+
+   That split is deliberate: these modules are excluded from coverage because their
+   logic was extracted, not because it was hard to reach.
+
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/personality_questionnaire/pages/components/index
+   /autoapi/personality_questionnaire/pages/db_picker/index
+   /autoapi/personality_questionnaire/pages/export/index
+   /autoapi/personality_questionnaire/pages/overview/index
+   /autoapi/personality_questionnaire/pages/questionnaire/index
+   /autoapi/personality_questionnaire/pages/records/index
+   /autoapi/personality_questionnaire/pages/setup/index
+
+

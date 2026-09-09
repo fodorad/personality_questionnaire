@@ -1,0 +1,304 @@
+personality_questionnaire.core.state
+====================================
+
+.. py:module:: personality_questionnaire.core.state
+
+.. autoapi-nested-parse::
+
+   Application state.
+
+   Two layers, kept apart on purpose:
+
+   * :class:`AppState` is process-wide -- the record store and the cached listing that
+     every browser connection shares.
+   * :class:`DraftRecord` is per-connection: one participant part-way through one
+     questionnaire. Two browser tabs are two independent drafts.
+
+   All the logic the interface needs lives here rather than in ``pages/``: progress,
+   completeness, which items remain. That is what lets the page modules stay thin
+   element-building code, and it is why they are excluded from coverage while this
+   module is tested directly.
+
+
+
+Attributes
+----------
+
+.. autoapisummary::
+
+   personality_questionnaire.core.state.state
+
+
+Classes
+-------
+
+.. autoapisummary::
+
+   personality_questionnaire.core.state.DraftRecord
+   personality_questionnaire.core.state.AppState
+
+
+Module Contents
+---------------
+
+.. py:class:: DraftRecord
+
+   One questionnaire in progress, owned by a single browser connection.
+
+   .. attribute:: participant_code
+
+      Study-local identifier for the person answering.
+
+   .. attribute:: participant_label
+
+      Optional note, e.g. a cohort.
+
+   .. attribute:: experiment
+
+      Optional study or condition name.
+
+   .. attribute:: tag
+
+      Administration tag, e.g. ``"pre"``.
+
+   .. attribute:: questionnaire_key
+
+      Registry key of the chosen instrument.
+
+   .. attribute:: responses
+
+      Item number to response value, filled in as the participant goes.
+
+   .. attribute:: started_at
+
+      When the first item was answered.
+
+   .. attribute:: notes
+
+      Free text the operator can attach.
+
+   .. attribute:: read_only
+
+      Whether this draft was loaded from storage for viewing rather
+      than answering. A freshly-started draft is never read-only.
+
+   .. attribute:: loaded_session_id
+
+      The database id this draft was loaded from, if any. A
+      later save updates that session in place instead of inserting a new
+      one.
+
+
+   .. py:property:: instrument
+      :type: personality_questionnaire.registry.Questionnaire | None
+
+
+      The chosen instrument, or ``None`` if none has been chosen.
+
+
+   .. py:property:: ready
+      :type: bool
+
+
+      Whether setup is complete enough to begin answering.
+
+
+   .. py:property:: n_items
+      :type: int
+
+
+      How many items the chosen instrument has, or zero if none is chosen.
+
+
+   .. py:property:: answered
+      :type: int
+
+
+      How many items have been answered.
+
+
+   .. py:property:: missing
+      :type: tuple[int, ...]
+
+
+      Item numbers still unanswered, in order.
+
+
+   .. py:property:: complete
+      :type: bool
+
+
+      Whether every item has been answered.
+
+
+   .. py:property:: progress
+      :type: float
+
+
+      Fraction of items answered, from 0.0 to 1.0.
+
+
+   .. py:method:: answer(number: int, value: int) -> None
+
+      Record one response.
+
+      :param number: The item's number.
+      :param value: The response given.
+
+      :raises ValueError: If the draft is read-only, no instrument is chosen, the
+          item does not exist, or the value falls outside the instrument's
+          response range.
+
+
+
+   .. py:method:: score() -> personality_questionnaire.scoring.ScoreResult
+
+      Score the draft as it stands.
+
+      :returns: The computed scores.
+
+      :raises ValueError: If the draft is incomplete.
+
+
+
+   .. py:method:: to_record() -> personality_questionnaire.db.Record
+
+      Convert the draft into a storable record.
+
+      :returns: The record.
+
+      :raises ValueError: If the draft is incomplete.
+
+
+
+   .. py:method:: clear_responses() -> None
+
+      Discard every answer, keeping the participant and instrument.
+
+
+
+   .. py:method:: reset() -> None
+
+      Return the draft to its initial state, ready for a new participant.
+
+
+
+   .. py:method:: load_from(record: personality_questionnaire.db.Record, *, read_only: bool = True) -> None
+
+      Populate every field from a stored record, for viewing or editing.
+
+      Replaces the draft's participant identity, instrument, responses, tag,
+      experiment and notes with the record's own, and remembers
+      ``record.session_id`` so a later save updates that session instead of
+      inserting a new one.
+
+      :param record: The stored record to load.
+      :param read_only: Whether the draft should render inert until explicitly
+                        unlocked. Defaults to True: a loaded record is always viewed
+                        before it can be edited.
+
+      :raises ValueError: If ``record.session_id`` is ``None`` -- an unsaved record
+          cannot be "loaded back".
+
+
+
+   .. py:method:: unlock() -> None
+
+      Allow a loaded draft to be edited.
+
+      Identity fields (participant, instrument, tag) are not re-exposed by this
+      alone -- the questionnaire tab is the only place an unlocked draft is
+      edited, and it never shows those fields -- this just clears the flag that
+      keeps answers from being changed.
+
+
+
+.. py:class:: AppState
+
+   Process-wide services shared by every connection.
+
+   .. attribute:: database_url
+
+      The record store in use, or ``None`` for the package default.
+
+
+   .. py:property:: repository
+      :type: personality_questionnaire.db.Repository
+
+
+      The record store, opened on first use.
+
+
+   .. py:method:: records() -> list[personality_questionnaire.db.RecordSummary]
+
+      Return every stored record, newest first.
+
+      Read fresh every time rather than cached. The database is shared -- the CLI
+      writes to it, and a second machine may too -- so a cached listing goes stale
+      the moment anything outside this process saves a record, and showing an
+      operator "no records yet" when the database holds several is worse than the
+      cost of a query against a table this size.
+
+      :returns: The stored records.
+
+
+
+   .. py:method:: invalidate() -> None
+
+      Retained for callers that signal a write; listings are already uncached.
+
+
+
+   .. py:method:: save(record: personality_questionnaire.db.Record) -> personality_questionnaire.db.Record
+
+      Store a record and refresh the listing.
+
+      :param record: The record to store.
+
+      :returns: The saved record, carrying its new id.
+
+
+
+   .. py:method:: update(session_id: int, record: personality_questionnaire.db.Record) -> personality_questionnaire.db.Record
+
+      Update a stored record in place and refresh the listing.
+
+      :param session_id: The existing session to overwrite.
+      :param record: The new responses and metadata.
+
+      :returns: The updated record.
+
+
+
+   .. py:method:: set_database(url: str) -> None
+
+      Switch to a different record store, closing the previous one.
+
+      The new database is opened eagerly (not left to the next lazy access) so a
+      bad path or a permission error surfaces here, in the setup handler that
+      triggered the switch, rather than on some unrelated later call.
+
+      :param url: The new database URL, e.g. ``sqlite:///path/to/file.db``.
+
+
+
+   .. py:method:: delete(session_id: int) -> bool
+
+      Delete a record and refresh the listing.
+
+      :param session_id: The record's id.
+
+      :returns: True if a record was deleted.
+
+
+
+   .. py:method:: close() -> None
+
+      Release the record store.
+
+
+
+.. py:data:: state
+
+   The single shared application state.
+

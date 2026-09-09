@@ -1,0 +1,31 @@
+personality_questionnaire.pages.export
+======================================
+
+.. py:module:: personality_questionnaire.pages.export
+
+.. autoapi-nested-parse::
+
+   The scoring tab: show what was computed, then commit the record.
+
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   personality_questionnaire.pages.export.render
+
+
+Module Contents
+---------------
+
+.. py:function:: render(draft: personality_questionnaire.core.state.DraftRecord, navigate: collections.abc.Callable[[str], None], on_change: collections.abc.Callable[[], None]) -> None
+
+   Build the export tab.
+
+   :param draft: The connection's draft record.
+   :param navigate: Switches to another tab by name.
+   :param on_change: Called after saving, so other tabs pick up the new record.
+
+

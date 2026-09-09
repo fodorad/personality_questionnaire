@@ -1,0 +1,73 @@
+personality_questionnaire.core.dbpath
+=====================================
+
+.. py:module:: personality_questionnaire.core.dbpath
+
+.. autoapi-nested-parse::
+
+   Pure filesystem helpers behind the database picker.
+
+   Scoped deliberately narrow: this package has exactly one picker call site and one
+   target file type (SQLite databases), so a general folder/file browser -- the kind a
+   video-annotation tool needs -- would buy nothing here. Kept separate from the picker
+   dialog itself (in ``pages/db_picker.py``) so the logic is covered directly rather
+   than through the UI layer, matching every other module under ``core/``.
+
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   personality_questionnaire.core.dbpath.scan_databases
+   personality_questionnaire.core.dbpath.parent_of
+   personality_questionnaire.core.dbpath.resolve_start_dir
+   personality_questionnaire.core.dbpath.is_valid_sqlite_url
+
+
+Module Contents
+---------------
+
+.. py:function:: scan_databases(directory: pathlib.Path) -> tuple[list[pathlib.Path], list[pathlib.Path]]
+
+   List a directory's subdirectories and database files, for a picker to show.
+
+   :param directory: The directory to list.
+
+   :returns: Subdirectories and database files, each sorted by name. Both are empty if
+             the directory cannot be read -- browsing is best-effort, not guaranteed.
+
+
+.. py:function:: parent_of(directory: pathlib.Path) -> pathlib.Path | None
+
+   Return a directory's parent, or ``None`` if already at the filesystem root.
+
+   :param directory: The directory to find the parent of.
+
+   :returns: The parent directory, or ``None``.
+
+
+.. py:function:: resolve_start_dir(current_url: str | None) -> pathlib.Path
+
+   Choose where the database picker should open.
+
+   :param current_url: The active ``sqlite:///...`` URL, or ``None``.
+
+   :returns: The current database's directory if it names a local SQLite file, else the
+             default database's directory.
+
+
+.. py:function:: is_valid_sqlite_url(url: str) -> bool
+
+   Whether ``url`` is a plausible local SQLite URL this app could open.
+
+   Not a guarantee the file is a valid database -- SQLAlchemy discovers that on
+   first use -- only that the URL is shaped correctly and points somewhere this
+   process could plausibly read or create a file.
+
+   :param url: The candidate database URL.
+
+   :returns: True if the URL looks like a usable local SQLite target.
+
+

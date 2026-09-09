@@ -1,0 +1,32 @@
+personality_questionnaire.pages.setup
+=====================================
+
+.. py:module:: personality_questionnaire.pages.setup
+
+.. autoapi-nested-parse::
+
+   The setup tab: who is answering, and which instrument.
+
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   personality_questionnaire.pages.setup.render
+
+
+Module Contents
+---------------
+
+.. py:function:: render(draft: personality_questionnaire.core.state.DraftRecord, navigate: collections.abc.Callable[[str], None], on_change: collections.abc.Callable[[], None]) -> None
+
+   Build the setup tab.
+
+   :param draft: The connection's draft record, written to as fields change.
+   :param navigate: Switches to another tab by name.
+   :param on_change: Called whenever the draft's readiness may have changed, so the
+                     tab bar can enable or disable the questionnaire tab.
+
+

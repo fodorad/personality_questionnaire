@@ -199,6 +199,14 @@ Module Contents
 
       Full human-readable name.
 
+   .. attribute:: abbreviation
+
+      The instrument's conventional short form, as printed in the
+      literature, e.g. ``"BFI-2-XS"`` or ``"VAS-F"``. Distinct from ``key``,
+      which is the lowercase registry/CLI token -- the mapping between them
+      isn't mechanical (``vasf`` is ``"VAS-F"``, not ``"VASF"``), so this is
+      supplied per instrument rather than derived.
+
    .. attribute:: scale
 
       How items are answered.
@@ -309,8 +317,8 @@ Module Contents
       :raises ValueError: If item numbering is not ``1..n``, if a subscale references
           an unknown item, if a reverse key is not among its own subscale's
           items, if an item belongs to no subscale, if a subscale name is
-          duplicated, if a declared parent does not exist, or if the response
-          range is empty.
+          duplicated, if a declared parent does not exist, if the response
+          range is empty, or if the abbreviation is blank.
 
 
 

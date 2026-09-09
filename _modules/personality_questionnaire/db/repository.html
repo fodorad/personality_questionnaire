@@ -205,6 +205,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../instruments.html">Instruments</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../storage.html">Storing records</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ui.html">The data-collection application</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../design.html">Design decisions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../migration.html">Migrating to 2.0</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Changelog</a></li>
@@ -213,6 +214,7 @@
 <ul>
 <li class="toctree-l1 has-children"><a class="reference internal" href="../../../autoapi/personality_questionnaire/index.html">personality_questionnaire</a><input aria-label="Toggle navigation of personality_questionnaire" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l2"><a class="reference internal" href="../../../autoapi/personality_questionnaire/api/index.html">personality_questionnaire.api</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../../autoapi/personality_questionnaire/app/index.html">personality_questionnaire.app</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../autoapi/personality_questionnaire/bfi2/index.html">personality_questionnaire.bfi2</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../../autoapi/personality_questionnaire/cli/index.html">personality_questionnaire.cli</a><input aria-label="Toggle navigation of personality_questionnaire.cli" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../../autoapi/personality_questionnaire/cli/main/index.html">personality_questionnaire.cli.main</a></li>
@@ -221,6 +223,10 @@
 </ul>
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../../autoapi/personality_questionnaire/core/index.html">personality_questionnaire.core</a><input aria-label="Toggle navigation of personality_questionnaire.core" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../autoapi/personality_questionnaire/core/config/index.html">personality_questionnaire.core.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../autoapi/personality_questionnaire/core/dbpath/index.html">personality_questionnaire.core.dbpath</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../autoapi/personality_questionnaire/core/recent_databases/index.html">personality_questionnaire.core.recent_databases</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../autoapi/personality_questionnaire/core/state/index.html">personality_questionnaire.core.state</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../../../autoapi/personality_questionnaire/core/theme/index.html">personality_questionnaire.core.theme</a></li>
 </ul>
 </li>
@@ -240,6 +246,16 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../../autoapi/personality_questionnaire/io/index.html">personality_questionnaire.io</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../../autoapi/personality_questionnaire/pages/index.html">personality_questionnaire.pages</a><input aria-label="Toggle navigation of personality_questionnaire.pages" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../../autoapi/personality_questionnaire/pages/components/index.html">personality_questionnaire.pages.components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../autoapi/personality_questionnaire/pages/db_picker/index.html">personality_questionnaire.pages.db_picker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../autoapi/personality_questionnaire/pages/export/index.html">personality_questionnaire.pages.export</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../autoapi/personality_questionnaire/pages/overview/index.html">personality_questionnaire.pages.overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../autoapi/personality_questionnaire/pages/questionnaire/index.html">personality_questionnaire.pages.questionnaire</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../autoapi/personality_questionnaire/pages/records/index.html">personality_questionnaire.pages.records</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../../autoapi/personality_questionnaire/pages/setup/index.html">personality_questionnaire.pages.setup</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="../../../autoapi/personality_questionnaire/provenance/index.html">personality_questionnaire.provenance</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../autoapi/personality_questionnaire/registry/index.html">personality_questionnaire.registry</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../../autoapi/personality_questionnaire/scoring/index.html">personality_questionnaire.scoring</a></li>
@@ -297,6 +313,7 @@
 <span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">UTC</span><span class="p">,</span> <span class="n">datetime</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">TYPE_CHECKING</span><span class="p">,</span> <span class="n">Any</span>
 
+<span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy</span><span class="w"> </span><span class="kn">import</span> <span class="n">delete</span> <span class="k">as</span> <span class="n">sql_delete</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy</span><span class="w"> </span><span class="kn">import</span> <span class="n">func</span><span class="p">,</span> <span class="n">select</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sqlalchemy.orm</span><span class="w"> </span><span class="kn">import</span> <span class="n">selectinload</span>
 
@@ -538,6 +555,99 @@
             <span class="n">session_id</span> <span class="o">=</span> <span class="n">row</span><span class="o">.</span><span class="n">id</span>
 
         <span class="k">return</span> <span class="n">replace</span><span class="p">(</span><span class="n">record</span><span class="p">,</span> <span class="n">session_id</span><span class="o">=</span><span class="n">session_id</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Repository.update">
+<a class="viewcode-back" href="../../../autoapi/personality_questionnaire/db/repository/index.html#personality_questionnaire.db.repository.Repository.update">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session_id</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">record</span><span class="p">:</span> <span class="n">Record</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Record</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Overwrite an existing session's responses and scores in place.</span>
+
+<span class="sd">        The session's identity -- ``participant_code``, ``questionnaire`` and</span>
+<span class="sd">        ``tag`` -- is locked to what the row already has; the same three fields on</span>
+<span class="sd">        ``record`` are ignored, because changing them would make this a different</span>
+<span class="sd">        administration rather than an edit of this one, and they participate in</span>
+<span class="sd">        the table's uniqueness constraint.</span>
+
+<span class="sd">        Provenance (``package_version``, ``git_sha``, ``git_dirty``,</span>
+<span class="sd">        ``instrument_hash``, ``scoring_version``) and ``completed_at`` are</span>
+<span class="sd">        re-captured from the *current* environment rather than preserved from the</span>
+<span class="sd">        original save: an edit is a new act of recording, and what is stored</span>
+<span class="sd">        should be evidence of what actually happened, not a patch that silently</span>
+<span class="sd">        keeps stale metadata from before. This mirrors the "scores are stored, not</span>
+<span class="sd">        recomputed" rule the schema already follows -- see ``docs/storage.md``.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            session_id: The session to overwrite.</span>
+<span class="sd">            record: The new responses and metadata. Its ``participant_code``,</span>
+<span class="sd">                ``questionnaire`` and ``tag`` are ignored.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            The updated record, reflecting what was actually stored -- including</span>
+<span class="sd">            the locked identity fields, which come from the existing row rather</span>
+<span class="sd">            than from ``record``.</span>
+
+<span class="sd">        Raises:</span>
+<span class="sd">            KeyError: If no session carries that id.</span>
+<span class="sd">            ValueError: If ``record`` is missing responses for the instrument.</span>
+<span class="sd">        """</span>
+        <span class="k">with</span> <span class="n">session_scope</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">)</span> <span class="k">as</span> <span class="n">session</span><span class="p">:</span>
+            <span class="n">row</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">Session</span><span class="p">,</span> <span class="n">session_id</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">row</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"no record with id </span><span class="si">{</span><span class="n">session_id</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+            <span class="n">instrument</span> <span class="o">=</span> <span class="n">registry</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">row</span><span class="o">.</span><span class="n">questionnaire</span><span class="p">)</span>
+            <span class="n">missing</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">instrument</span><span class="o">.</span><span class="n">n_items</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="k">if</span> <span class="n">n</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">record</span><span class="o">.</span><span class="n">responses</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">missing</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">instrument</span><span class="o">.</span><span class="n">key</span><span class="si">}</span><span class="s2"> record for session </span><span class="si">{</span><span class="n">session_id</span><span class="si">}</span><span class="s2"> is missing items </span><span class="si">{</span><span class="n">missing</span><span class="si">}</span><span class="s2">"</span>
+                <span class="p">)</span>
+            <span class="n">answers</span> <span class="o">=</span> <span class="p">[</span><span class="n">record</span><span class="o">.</span><span class="n">responses</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">instrument</span><span class="o">.</span><span class="n">n_items</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
+
+            <span class="n">result</span> <span class="o">=</span> <span class="n">scoring</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">instrument</span><span class="p">,</span> <span class="p">[</span><span class="n">answers</span><span class="p">])</span>
+            <span class="n">provenance</span> <span class="o">=</span> <span class="n">capture</span><span class="p">()</span>
+
+            <span class="k">if</span> <span class="n">record</span><span class="o">.</span><span class="n">participant_label</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">row</span><span class="o">.</span><span class="n">participant</span><span class="o">.</span><span class="n">label</span><span class="p">:</span>
+                <span class="n">row</span><span class="o">.</span><span class="n">participant</span><span class="o">.</span><span class="n">label</span> <span class="o">=</span> <span class="n">record</span><span class="o">.</span><span class="n">participant_label</span>
+            <span class="n">row</span><span class="o">.</span><span class="n">experiment</span> <span class="o">=</span> <span class="n">record</span><span class="o">.</span><span class="n">experiment</span>
+            <span class="n">row</span><span class="o">.</span><span class="n">source</span> <span class="o">=</span> <span class="n">record</span><span class="o">.</span><span class="n">source</span>
+            <span class="n">row</span><span class="o">.</span><span class="n">completed_at</span> <span class="o">=</span> <span class="n">provenance</span><span class="o">.</span><span class="n">captured_at</span>
+            <span class="n">row</span><span class="o">.</span><span class="n">package_version</span> <span class="o">=</span> <span class="n">provenance</span><span class="o">.</span><span class="n">package_version</span>
+            <span class="n">row</span><span class="o">.</span><span class="n">git_sha</span> <span class="o">=</span> <span class="n">provenance</span><span class="o">.</span><span class="n">git_sha</span>
+            <span class="n">row</span><span class="o">.</span><span class="n">git_dirty</span> <span class="o">=</span> <span class="n">provenance</span><span class="o">.</span><span class="n">git_dirty</span>
+            <span class="n">row</span><span class="o">.</span><span class="n">instrument_hash</span> <span class="o">=</span> <span class="n">instrument_hash</span><span class="p">(</span><span class="n">instrument</span><span class="p">)</span>
+            <span class="n">row</span><span class="o">.</span><span class="n">scoring_version</span> <span class="o">=</span> <span class="n">scoring</span><span class="o">.</span><span class="n">SCORING_VERSION</span>
+            <span class="n">row</span><span class="o">.</span><span class="n">extra</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">record</span><span class="o">.</span><span class="n">extra</span><span class="p">)</span>
+
+            <span class="n">session</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql_delete</span><span class="p">(</span><span class="n">Response</span><span class="p">)</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">Response</span><span class="o">.</span><span class="n">session_id</span> <span class="o">==</span> <span class="n">session_id</span><span class="p">))</span>
+            <span class="n">session</span><span class="o">.</span><span class="n">execute</span><span class="p">(</span><span class="n">sql_delete</span><span class="p">(</span><span class="n">Score</span><span class="p">)</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">Score</span><span class="o">.</span><span class="n">session_id</span> <span class="o">==</span> <span class="n">session_id</span><span class="p">))</span>
+            <span class="n">session</span><span class="o">.</span><span class="n">add_all</span><span class="p">(</span>
+                <span class="n">Response</span><span class="p">(</span><span class="n">session_id</span><span class="o">=</span><span class="n">session_id</span><span class="p">,</span> <span class="n">item_number</span><span class="o">=</span><span class="n">number</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">number</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">record</span><span class="o">.</span><span class="n">responses</span><span class="o">.</span><span class="n">items</span><span class="p">())</span>
+            <span class="p">)</span>
+            <span class="n">session</span><span class="o">.</span><span class="n">add_all</span><span class="p">(</span>
+                <span class="n">Score</span><span class="p">(</span>
+                    <span class="n">session_id</span><span class="o">=</span><span class="n">session_id</span><span class="p">,</span>
+                    <span class="n">subscale</span><span class="o">=</span><span class="n">subscale</span><span class="o">.</span><span class="n">name</span><span class="p">,</span>
+                    <span class="n">level</span><span class="o">=</span><span class="n">subscale</span><span class="o">.</span><span class="n">level</span><span class="p">,</span>
+                    <span class="n">value</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">index</span><span class="p">]),</span>
+                    <span class="n">normalized</span><span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">normalized</span>
+                    <span class="ow">and</span> <span class="n">subscale</span><span class="o">.</span><span class="n">aggregation</span> <span class="ow">is</span> <span class="ow">not</span> <span class="n">registry</span><span class="o">.</span><span class="n">Aggregation</span><span class="o">.</span><span class="n">SUM</span><span class="p">,</span>
+                <span class="p">)</span>
+                <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">subscale</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">instrument</span><span class="o">.</span><span class="n">subscales</span><span class="p">)</span>
+            <span class="p">)</span>
+            <span class="n">session</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span>
+
+            <span class="n">questionnaire</span> <span class="o">=</span> <span class="n">row</span><span class="o">.</span><span class="n">questionnaire</span>
+            <span class="n">participant_code</span> <span class="o">=</span> <span class="n">row</span><span class="o">.</span><span class="n">participant</span><span class="o">.</span><span class="n">code</span>
+            <span class="n">tag</span> <span class="o">=</span> <span class="n">row</span><span class="o">.</span><span class="n">tag</span>
+
+        <span class="k">return</span> <span class="n">replace</span><span class="p">(</span>
+            <span class="n">record</span><span class="p">,</span>
+            <span class="n">session_id</span><span class="o">=</span><span class="n">session_id</span><span class="p">,</span>
+            <span class="n">questionnaire</span><span class="o">=</span><span class="n">questionnaire</span><span class="p">,</span>
+            <span class="n">participant_code</span><span class="o">=</span><span class="n">participant_code</span><span class="p">,</span>
+            <span class="n">tag</span><span class="o">=</span><span class="n">tag</span><span class="p">,</span>
+        <span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Repository.load">

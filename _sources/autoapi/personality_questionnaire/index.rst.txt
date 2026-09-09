@@ -29,12 +29,14 @@ Submodules
    :maxdepth: 1
 
    /autoapi/personality_questionnaire/api/index
+   /autoapi/personality_questionnaire/app/index
    /autoapi/personality_questionnaire/bfi2/index
    /autoapi/personality_questionnaire/cli/index
    /autoapi/personality_questionnaire/core/index
    /autoapi/personality_questionnaire/db/index
    /autoapi/personality_questionnaire/instruments/index
    /autoapi/personality_questionnaire/io/index
+   /autoapi/personality_questionnaire/pages/index
    /autoapi/personality_questionnaire/provenance/index
    /autoapi/personality_questionnaire/registry/index
    /autoapi/personality_questionnaire/scoring/index

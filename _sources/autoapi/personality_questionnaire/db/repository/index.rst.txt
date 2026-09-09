@@ -191,6 +191,37 @@ Module Contents
 
 
 
+   .. py:method:: update(session_id: int, record: Record) -> Record
+
+      Overwrite an existing session's responses and scores in place.
+
+      The session's identity -- ``participant_code``, ``questionnaire`` and
+      ``tag`` -- is locked to what the row already has; the same three fields on
+      ``record`` are ignored, because changing them would make this a different
+      administration rather than an edit of this one, and they participate in
+      the table's uniqueness constraint.
+
+      Provenance (``package_version``, ``git_sha``, ``git_dirty``,
+      ``instrument_hash``, ``scoring_version``) and ``completed_at`` are
+      re-captured from the *current* environment rather than preserved from the
+      original save: an edit is a new act of recording, and what is stored
+      should be evidence of what actually happened, not a patch that silently
+      keeps stale metadata from before. This mirrors the "scores are stored, not
+      recomputed" rule the schema already follows -- see ``docs/storage.md``.
+
+      :param session_id: The session to overwrite.
+      :param record: The new responses and metadata. Its ``participant_code``,
+                     ``questionnaire`` and ``tag`` are ignored.
+
+      :returns: The updated record, reflecting what was actually stored -- including
+                the locked identity fields, which come from the existing row rather
+                than from ``record``.
+
+      :raises KeyError: If no session carries that id.
+      :raises ValueError: If ``record`` is missing responses for the instrument.
+
+
+
    .. py:method:: load(session_id: int) -> Record
 
       Load one record by its database id.

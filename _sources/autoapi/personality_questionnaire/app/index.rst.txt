@@ -1,0 +1,41 @@
+personality_questionnaire.app
+=============================
+
+.. py:module:: personality_questionnaire.app
+
+.. autoapi-nested-parse::
+
+   The localhost data-collection application.
+
+   Built for a machine in a lab: it binds to loopback, stores to a local database, and
+   makes no outbound request. Participant self-reports are consent-restricted, so the
+   default is a tool that cannot be reached from the network at all.
+
+   The interface is built **per browser connection** through ``@ui.page("/")`` rather
+   than the shared auto-index, so two tabs are two independent drafts and each one has a
+   live client while it builds.
+
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   personality_questionnaire.app.build
+   personality_questionnaire.app.main
+
+
+Module Contents
+---------------
+
+.. py:function:: build() -> None
+
+   Build the tabbed interface for one connection.
+
+
+.. py:function:: main() -> None
+
+   Start the server.
+
+

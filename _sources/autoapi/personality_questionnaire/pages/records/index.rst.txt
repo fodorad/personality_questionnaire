@@ -1,0 +1,31 @@
+personality_questionnaire.pages.records
+=======================================
+
+.. py:module:: personality_questionnaire.pages.records
+
+.. autoapi-nested-parse::
+
+   The records tab: browse what has been collected, and export it.
+
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   personality_questionnaire.pages.records.render
+
+
+Module Contents
+---------------
+
+.. py:function:: render(draft: personality_questionnaire.core.state.DraftRecord, navigate: collections.abc.Callable[[str], None], on_change: collections.abc.Callable[[], None]) -> None
+
+   Build the records tab.
+
+   :param draft: The connection's draft, reset when starting a new record.
+   :param navigate: Switches to another tab by name.
+   :param on_change: Called after a change that affects other tabs.
+
+

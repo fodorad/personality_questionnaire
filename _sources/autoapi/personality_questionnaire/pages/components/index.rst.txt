@@ -1,0 +1,111 @@
+personality_questionnaire.pages.components
+==========================================
+
+.. py:module:: personality_questionnaire.pages.components
+
+.. autoapi-nested-parse::
+
+   Shared interface pieces.
+
+   Everything visual is built from theme tokens rather than literal colours, so a
+   redesign touches :mod:`personality_questionnaire.core.theme` alone.
+
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   personality_questionnaire.pages.components.card_style
+   personality_questionnaire.pages.components.section_title
+   personality_questionnaire.pages.components.abbreviation_chip
+   personality_questionnaire.pages.components.metric_grid
+   personality_questionnaire.pages.components.metric_card
+   personality_questionnaire.pages.components.feature_card
+   personality_questionnaire.pages.components.notify_detached
+
+
+Module Contents
+---------------
+
+.. py:function:: card_style() -> str
+
+   Return the inline style every list row and card carries.
+
+   :returns: A CSS declaration string.
+
+
+.. py:function:: section_title(text: str, *, hint: str = '') -> None
+
+   Render a section heading with an optional explanatory line.
+
+   :param text: The heading.
+   :param hint: A sentence shown beneath it, in the secondary colour.
+
+
+.. py:function:: abbreviation_chip(text: str, *, colour: str = theme.PRIMARY) -> None
+
+   Render a small formatted box for an instrument's literature abbreviation.
+
+   A citation-style label (``"BFI-2-XS"``) rather than a generic status pill, so
+   the instrument list reads as a reference table rather than a set of tags.
+
+   :param text: The abbreviation to show, e.g. ``"BFI-2-XS"``.
+   :param colour: The chip's accent colour.
+
+
+.. py:function:: metric_grid(min_column_width: str = '9rem') -> nicegui.ui.element
+
+   Build a CSS grid container for a row of equal-width metric cards.
+
+   A flex row with ``flex-wrap`` sizes each card to its own content, so a row of
+   differently-named subscales never lines up. Grid tracks are equal-width by
+   construction regardless of how many cards a given row holds -- 2 for VAS-F,
+   5 for the BFI-2 domains -- which is what "one row, because the traits are
+   equal" actually requires.
+
+   :param min_column_width: The narrowest a column may get before wrapping to a new
+                            row, e.g. ``"9rem"`` for a full domain row, smaller for a nested facet
+                            row.
+
+   :returns: The grid element. Add :func:`metric_card` calls inside a ``with`` block.
+
+
+.. py:function:: metric_card(title: str, value: str, colour: str) -> nicegui.ui.label
+
+   Render one statistic tile.
+
+   :param title: The caption above the number.
+   :param value: The number, already formatted.
+   :param colour: Caption colour, from the theme.
+
+   :returns: The value label, so a caller can update it in place.
+
+
+.. py:function:: feature_card(icon: str, accent: str, title: str, description: str, on_open: collections.abc.Callable[[], None]) -> None
+
+   Render one clickable capability card.
+
+   :param icon: Material icon name.
+   :param accent: Accent colour for the icon tile.
+   :param title: Card heading.
+   :param description: One sentence beneath the heading.
+   :param on_open: Called when the card is clicked.
+
+
+.. py:function:: notify_detached(client: nicegui.Client, message: str, *, colour: str) -> None
+
+   Show a toast from a handler that tore down the slot it ran in.
+
+   ``ui.notify`` resolves its client through the slot the handler runs in, which
+   NiceGUI takes from the sender's parent element. A handler that refreshes the
+   container holding its own button drops that parent, so a later notify dies with
+   "the parent element this slot belongs to has been deleted". Re-entering the
+   client lands in its long-lived content slot instead.
+
+   :param client: The connection to notify.
+   :param message: The text to show.
+   :param colour: Background colour, from the theme.
+
+

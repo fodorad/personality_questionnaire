@@ -206,6 +206,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../instruments.html">Instruments</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../storage.html">Storing records</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../ui.html">The data-collection application</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../design.html">Design decisions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../migration.html">Migrating to 2.0</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Changelog</a></li>
@@ -214,6 +215,7 @@
 <ul class="current">
 <li class="toctree-l1 current has-children"><a class="reference internal" href="../index.html">personality_questionnaire</a><input aria-label="Toggle navigation of personality_questionnaire" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../api/index.html">personality_questionnaire.api</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../app/index.html">personality_questionnaire.app</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../bfi2/index.html">personality_questionnaire.bfi2</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../cli/index.html">personality_questionnaire.cli</a><input aria-label="Toggle navigation of personality_questionnaire.cli" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../cli/main/index.html">personality_questionnaire.cli.main</a></li>
@@ -222,6 +224,10 @@
 </ul>
 </li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../core/index.html">personality_questionnaire.core</a><input aria-label="Toggle navigation of personality_questionnaire.core" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../core/config/index.html">personality_questionnaire.core.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/dbpath/index.html">personality_questionnaire.core.dbpath</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/recent_databases/index.html">personality_questionnaire.core.recent_databases</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../core/state/index.html">personality_questionnaire.core.state</a></li>
 <li class="toctree-l3"><a class="reference internal" href="../core/theme/index.html">personality_questionnaire.core.theme</a></li>
 </ul>
 </li>
@@ -241,6 +247,16 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../io/index.html">personality_questionnaire.io</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../pages/index.html">personality_questionnaire.pages</a><input aria-label="Toggle navigation of personality_questionnaire.pages" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../pages/components/index.html">personality_questionnaire.pages.components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pages/db_picker/index.html">personality_questionnaire.pages.db_picker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pages/export/index.html">personality_questionnaire.pages.export</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pages/overview/index.html">personality_questionnaire.pages.overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pages/questionnaire/index.html">personality_questionnaire.pages.questionnaire</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pages/records/index.html">personality_questionnaire.pages.records</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pages/setup/index.html">personality_questionnaire.pages.setup</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="../provenance/index.html">personality_questionnaire.provenance</a></li>
 <li class="toctree-l2 current current-page"><a class="current reference internal" href="#">personality_questionnaire.registry</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../scoring/index.html">personality_questionnaire.scoring</a></li>
@@ -530,6 +546,16 @@ reproduces the published number.</p>
 </dd></dl>
 
 <dl class="py attribute">
+<dt class="sig sig-object py" id="personality_questionnaire.registry.Questionnaire.abbreviation">
+<span class="sig-name descname"><span class="pre">abbreviation</span></span><a class="headerlink" href="#personality_questionnaire.registry.Questionnaire.abbreviation" title="Link to this definition">¶</a></dt>
+<dd><p>The instrument’s conventional short form, as printed in the
+literature, e.g. <code class="docutils literal notranslate"><span class="pre">&quot;BFI-2-XS&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;VAS-F&quot;</span></code>. Distinct from <code class="docutils literal notranslate"><span class="pre">key</span></code>,
+which is the lowercase registry/CLI token – the mapping between them
+isn’t mechanical (<code class="docutils literal notranslate"><span class="pre">vasf</span></code> is <code class="docutils literal notranslate"><span class="pre">&quot;VAS-F&quot;</span></code>, not <code class="docutils literal notranslate"><span class="pre">&quot;VASF&quot;</span></code>), so this is
+supplied per instrument rather than derived.</p>
+</dd></dl>
+
+<dl class="py attribute">
 <dt class="sig sig-object py" id="personality_questionnaire.registry.Questionnaire.scale">
 <span class="sig-name descname"><span class="pre">scale</span></span><a class="headerlink" href="#personality_questionnaire.registry.Questionnaire.scale" title="Link to this definition">¶</a></dt>
 <dd><p>How items are answered.</p>
@@ -670,8 +696,8 @@ subscale means to <code class="docutils literal notranslate"><span class="pre">[
 <dd class="field-odd"><p><strong>ValueError</strong> – If item numbering is not <code class="docutils literal notranslate"><span class="pre">1..n</span></code>, if a subscale references
 an unknown item, if a reverse key is not among its own subscale’s
 items, if an item belongs to no subscale, if a subscale name is
-duplicated, if a declared parent does not exist, or if the response
-range is empty.</p>
+duplicated, if a declared parent does not exist, if the response
+range is empty, or if the abbreviation is blank.</p>
 </dd>
 </dl>
 </dd></dl>
@@ -828,6 +854,7 @@ statement.</p>
 <li><a class="reference internal" href="#personality_questionnaire.registry.Questionnaire"><code class="docutils literal notranslate"><span class="pre">Questionnaire</span></code></a><ul>
 <li><a class="reference internal" href="#personality_questionnaire.registry.Questionnaire.key"><code class="docutils literal notranslate"><span class="pre">Questionnaire.key</span></code></a></li>
 <li><a class="reference internal" href="#personality_questionnaire.registry.Questionnaire.name"><code class="docutils literal notranslate"><span class="pre">Questionnaire.name</span></code></a></li>
+<li><a class="reference internal" href="#personality_questionnaire.registry.Questionnaire.abbreviation"><code class="docutils literal notranslate"><span class="pre">Questionnaire.abbreviation</span></code></a></li>
 <li><a class="reference internal" href="#personality_questionnaire.registry.Questionnaire.scale"><code class="docutils literal notranslate"><span class="pre">Questionnaire.scale</span></code></a></li>
 <li><a class="reference internal" href="#personality_questionnaire.registry.Questionnaire.minimum"><code class="docutils literal notranslate"><span class="pre">Questionnaire.minimum</span></code></a></li>
 <li><a class="reference internal" href="#personality_questionnaire.registry.Questionnaire.maximum"><code class="docutils literal notranslate"><span class="pre">Questionnaire.maximum</span></code></a></li>

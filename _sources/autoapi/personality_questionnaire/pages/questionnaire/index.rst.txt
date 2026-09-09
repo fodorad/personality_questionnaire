@@ -1,0 +1,36 @@
+personality_questionnaire.pages.questionnaire
+=============================================
+
+.. py:module:: personality_questionnaire.pages.questionnaire
+
+.. autoapi-nested-parse::
+
+   The administration tab: present every item and collect answers.
+
+   The widget follows the instrument's scale type -- radio buttons carrying the
+   published response labels for a Likert form, a slider between the item's own anchors
+   for a visual-analogue one -- so a participant sees the instrument as its authors
+   wrote it rather than a row of bare numbers.
+
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   personality_questionnaire.pages.questionnaire.render
+
+
+Module Contents
+---------------
+
+.. py:function:: render(draft: personality_questionnaire.core.state.DraftRecord, navigate: collections.abc.Callable[[str], None], on_change: collections.abc.Callable[[], None]) -> None
+
+   Build the questionnaire tab.
+
+   :param draft: The connection's draft record.
+   :param navigate: Switches to another tab by name.
+   :param on_change: Called after each answer, so gating and progress stay current.
+
+

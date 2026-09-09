@@ -3,7 +3,7 @@
   <head><meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
-<link rel="index" title="Index" href="../../../../genindex.html"><link rel="search" title="Search" href="../../../../search.html"><link rel="next" title="personality_questionnaire.db" href="../../db/index.html"><link rel="prev" title="personality_questionnaire.core" href="../index.html">
+<link rel="index" title="Index" href="../../../../genindex.html"><link rel="search" title="Search" href="../../../../search.html"><link rel="next" title="personality_questionnaire.db" href="../../db/index.html"><link rel="prev" title="personality_questionnaire.core.state" href="../state/index.html">
         <link rel="canonical" href="https://fodorad.github.io/personality_questionnaire/autoapi/personality_questionnaire/core/theme/index.html">
         <link rel="prefetch" href="../../../../_static/logo.svg" as="image">
 
@@ -206,6 +206,7 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../../../instruments.html">Instruments</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../storage.html">Storing records</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../ui.html">The data-collection application</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../design.html">Design decisions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../migration.html">Migrating to 2.0</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../changelog.html">Changelog</a></li>
@@ -214,6 +215,7 @@
 <ul class="current">
 <li class="toctree-l1 current has-children"><a class="reference internal" href="../../index.html">personality_questionnaire</a><input aria-label="Toggle navigation of personality_questionnaire" checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="../../api/index.html">personality_questionnaire.api</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../app/index.html">personality_questionnaire.app</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../bfi2/index.html">personality_questionnaire.bfi2</a></li>
 <li class="toctree-l2 has-children"><a class="reference internal" href="../../cli/index.html">personality_questionnaire.cli</a><input aria-label="Toggle navigation of personality_questionnaire.cli" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
 <li class="toctree-l3"><a class="reference internal" href="../../cli/main/index.html">personality_questionnaire.cli.main</a></li>
@@ -222,6 +224,10 @@
 </ul>
 </li>
 <li class="toctree-l2 current has-children"><a class="reference internal" href="../index.html">personality_questionnaire.core</a><input aria-label="Toggle navigation of personality_questionnaire.core" checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../config/index.html">personality_questionnaire.core.config</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dbpath/index.html">personality_questionnaire.core.dbpath</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../recent_databases/index.html">personality_questionnaire.core.recent_databases</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../state/index.html">personality_questionnaire.core.state</a></li>
 <li class="toctree-l3 current current-page"><a class="current reference internal" href="#">personality_questionnaire.core.theme</a></li>
 </ul>
 </li>
@@ -241,6 +247,16 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="../../io/index.html">personality_questionnaire.io</a></li>
+<li class="toctree-l2 has-children"><a class="reference internal" href="../../pages/index.html">personality_questionnaire.pages</a><input aria-label="Toggle navigation of personality_questionnaire.pages" class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><span class="icon"><svg><use href="#svg-arrow-right"></use></svg></span></label><ul>
+<li class="toctree-l3"><a class="reference internal" href="../../pages/components/index.html">personality_questionnaire.pages.components</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../pages/db_picker/index.html">personality_questionnaire.pages.db_picker</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../pages/export/index.html">personality_questionnaire.pages.export</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../pages/overview/index.html">personality_questionnaire.pages.overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../pages/questionnaire/index.html">personality_questionnaire.pages.questionnaire</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../pages/records/index.html">personality_questionnaire.pages.records</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../../pages/setup/index.html">personality_questionnaire.pages.setup</a></li>
+</ul>
+</li>
 <li class="toctree-l2"><a class="reference internal" href="../../provenance/index.html">personality_questionnaire.provenance</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../registry/index.html">personality_questionnaire.registry</a></li>
 <li class="toctree-l2"><a class="reference internal" href="../../scoring/index.html">personality_questionnaire.scoring</a></li>
@@ -355,10 +371,13 @@ icon and the localhost application.</p>
 <div class="table-wrapper autosummary longtable docutils container">
 <table class="autosummary longtable docutils align-default">
 <tbody>
-<tr class="row-odd"><td><p><a class="reference internal" href="#personality_questionnaire.core.theme.color" title="personality_questionnaire.core.theme.color"><code class="xref py py-obj docutils literal notranslate"><span class="pre">color</span></code></a>(→ str)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#personality_questionnaire.core.theme.domain_color" title="personality_questionnaire.core.theme.domain_color"><code class="xref py py-obj docutils literal notranslate"><span class="pre">domain_color</span></code></a>(→ str)</p></td>
+<td><p>Resolve a subscale's colour by the domain it belongs to.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#personality_questionnaire.core.theme.color" title="personality_questionnaire.core.theme.color"><code class="xref py py-obj docutils literal notranslate"><span class="pre">color</span></code></a>(→ str)</p></td>
 <td><p>Look up a semantic colour by name.</p></td>
 </tr>
-<tr class="row-even"><td><p><a class="reference internal" href="#personality_questionnaire.core.theme.contrast_ratio" title="personality_questionnaire.core.theme.contrast_ratio"><code class="xref py py-obj docutils literal notranslate"><span class="pre">contrast_ratio</span></code></a>(→ float)</p></td>
+<tr class="row-odd"><td><p><a class="reference internal" href="#personality_questionnaire.core.theme.contrast_ratio" title="personality_questionnaire.core.theme.contrast_ratio"><code class="xref py py-obj docutils literal notranslate"><span class="pre">contrast_ratio</span></code></a>(→ float)</p></td>
 <td><p>Compute the WCAG contrast ratio between two colours.</p></td>
 </tr>
 </tbody>
@@ -430,6 +449,30 @@ colour wherever a reader meets it.</p>
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="personality_questionnaire.core.theme.domain_color">
+<span class="sig-prename descclassname"><span class="pre">personality_questionnaire.core.theme.</span></span><span class="sig-name descname"><span class="pre">domain_color</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">subscale_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parent</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../../../../_modules/personality_questionnaire/core/theme.html#domain_color"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#personality_questionnaire.core.theme.domain_color" title="Link to this definition">¶</a></dt>
+<dd><p>Resolve a subscale’s colour by the domain it belongs to.</p>
+<p>A domain-level subscale resolves through its own name. A facet resolves
+through <code class="docutils literal notranslate"><span class="pre">parent</span></code> – its owning domain’s name – so it inherits the same
+colour as that domain rather than falling through to <a class="reference internal" href="#personality_questionnaire.core.theme.PRIMARY" title="personality_questionnaire.core.theme.PRIMARY"><code class="xref py py-data docutils literal notranslate"><span class="pre">PRIMARY</span></code></a>, which is
+what a lookup keyed on the facet’s own name would do (<code class="docutils literal notranslate"><span class="pre">DOMAIN_COLORS</span></code> only
+has the five domain names as keys). Anything with no domain at all – a PANAS
+scale, the VAS-F composite – has no match either way and falls back to
+<a class="reference internal" href="#personality_questionnaire.core.theme.PRIMARY" title="personality_questionnaire.core.theme.PRIMARY"><code class="xref py py-data docutils literal notranslate"><span class="pre">PRIMARY</span></code></a>, unchanged from before.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>subscale_name</strong> – The subscale’s own name.</p></li>
+<li><p><strong>parent</strong> – The name of its owning domain, or <code class="docutils literal notranslate"><span class="pre">None</span></code> if it has none.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The resolved colour.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="personality_questionnaire.core.theme.color">
 <span class="sig-prename descclassname"><span class="pre">personality_questionnaire.core.theme.</span></span><span class="sig-name descname"><span class="pre">color</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ColorName</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="reference internal" href="../../../../_modules/personality_questionnaire/core/theme.html#color"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#personality_questionnaire.core.theme.color" title="Link to this definition">¶</a></dt>
 <dd><p>Look up a semantic colour by name.</p>
@@ -496,14 +539,14 @@ matches <code class="docutils literal notranslate"><span class="pre">docs/assets
               </div>
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
             </a>
-          <a class="prev-page" href="../index.html">
+          <a class="prev-page" href="../state/index.html">
               <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
               <div class="page-info">
                 <div class="context">
                   <span>Previous</span>
                 </div>
                 
-                <div class="title">personality_questionnaire.core</div>
+                <div class="title">personality_questionnaire.core.state</div>
                 
               </div>
             </a>
@@ -551,6 +594,7 @@ matches <code class="docutils literal notranslate"><span class="pre">docs/assets
 <li><a class="reference internal" href="#personality_questionnaire.core.theme.INK"><code class="docutils literal notranslate"><span class="pre">INK</span></code></a></li>
 <li><a class="reference internal" href="#personality_questionnaire.core.theme.ROW_BORDER"><code class="docutils literal notranslate"><span class="pre">ROW_BORDER</span></code></a></li>
 <li><a class="reference internal" href="#personality_questionnaire.core.theme.DOMAIN_COLORS"><code class="docutils literal notranslate"><span class="pre">DOMAIN_COLORS</span></code></a></li>
+<li><a class="reference internal" href="#personality_questionnaire.core.theme.domain_color"><code class="docutils literal notranslate"><span class="pre">domain_color()</span></code></a></li>
 <li><a class="reference internal" href="#personality_questionnaire.core.theme.color"><code class="docutils literal notranslate"><span class="pre">color()</span></code></a></li>
 <li><a class="reference internal" href="#personality_questionnaire.core.theme.contrast_ratio"><code class="docutils literal notranslate"><span class="pre">contrast_ratio()</span></code></a></li>
 <li><a class="reference internal" href="#personality_questionnaire.core.theme.LOGO_MARK_SVG"><code class="docutils literal notranslate"><span class="pre">LOGO_MARK_SVG</span></code></a></li>
