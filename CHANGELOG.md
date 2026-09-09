@@ -10,6 +10,13 @@ Commits.
 
 ---
 
+## [2.7.0](https://github.com/fodorad/personality_questionnaire/compare/v2.6.0...v2.7.0) (2026-09-09)
+
+
+### Features
+
+* add React/TypeScript static demo alongside the Gradio Space ([#28](https://github.com/fodorad/personality_questionnaire/issues/28)) ([4ceb046](https://github.com/fodorad/personality_questionnaire/commit/4ceb04688455e57bf76935d28ab79bc2bdd558ca))
+
 ## [2.6.0](https://github.com/fodorad/personality_questionnaire/compare/v2.5.0...v2.6.0) (2026-09-09)
 
 
