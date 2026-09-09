@@ -65,7 +65,7 @@ dev = [
 ]
 
 docs = [
-  "sphinx>=8.0",
+  "sphinx>=9.1.0",
   "furo",
   "sphinx-autoapi",
   "sphinx-autobuild",
