@@ -40,10 +40,11 @@ is holding. Adding an instrument adds no arithmetic.
 | `bfi2` | Big Five Inventory-2 | 60 | 1–5 | 5 domains, 15 facets |
 | `bfi2-xs` | BFI-2 Extra-Short Form | 15 | 1–5 | 5 domains |
 | `bfi10` | Big Five Inventory-10 | 10 | 1–5 | 5 domains |
+| `panas` | Positive and Negative Affect Schedule | 20 | 1–5 | Positive/Negative Affect |
 | `vasf` | Visual Analogue Scale to Evaluate Fatigue Severity | 18 | 0–10 | Fatigue, Energy, composite |
 
-<sub>BFI-2 and BFI-2-XS: Soto & John (2017). BFI-10: Rammstedt & John (2007). VAS-F:
-Lee, Hicks & Nino-Murcia (1991). See [docs/instruments.md](docs/instruments.md) for
+<sub>BFI-2 and BFI-2-XS: Soto & John (2017). BFI-10: Rammstedt & John (2007). PANAS:
+Watson, Clark & Tellegen (1988). VAS-F: Lee, Hicks & Nino-Murcia (1991). See [docs/instruments.md](docs/instruments.md) for
 full citations and licence notes.</sub>
 
 # Quickstart

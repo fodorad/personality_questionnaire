@@ -14,14 +14,16 @@ def naive_subscale_means(questionnaire, answers: np.ndarray) -> np.ndarray:
     """Score by an explicit per-participant, per-subscale loop.
 
     The obvious implementation, kept only as an oracle: the vectorised scorer must
-    agree with it on random data, which is what makes the matmul trustworthy.
+    agree with it on random data, which is what makes the matmul trustworthy. It
+    honours each subscale's declared aggregation, so a summed scale is summed here
+    too rather than silently averaged.
 
     Args:
         questionnaire: The instrument to score.
         answers: Raw responses of shape ``(n_participants, n_items)``.
 
     Returns:
-        Subscale means of shape ``(n_participants, n_subscales)``.
+        Subscale scores of shape ``(n_participants, n_subscales)``.
     """
     low, high = questionnaire.minimum, questionnaire.maximum
     out = np.zeros((answers.shape[0], len(questionnaire.subscales)))
@@ -31,7 +33,8 @@ def naive_subscale_means(questionnaire, answers: np.ndarray) -> np.ndarray:
             for number in subscale.items:
                 value = answers[row, number - 1]
                 total += (low + high - value) if number in subscale.reverse else value
-            out[row, column] = total / len(subscale.items)
+            summed = subscale.aggregation is registry.Aggregation.SUM
+            out[row, column] = total if summed else total / len(subscale.items)
     return out
 
 
@@ -149,6 +152,46 @@ class TestScore(unittest.TestCase):
         records = result.to_records()
         self.assertEqual(len(records), 3)
         self.assertIn("openness", records[0])
+
+
+class TestAggregation(unittest.TestCase):
+    """A subscale declares how it combines its items."""
+
+    def setUp(self):
+        self.panas = registry.get("panas")
+
+    def test_sum_is_the_mean_times_the_item_count(self):
+        rng = np.random.default_rng(7)
+        answers = rng.integers(1, 6, size=(15, 20))
+        result = scoring.score(self.panas, answers, normalize=False)
+        by_name = dict(zip(result.names, result.values.T, strict=True))
+        np.testing.assert_allclose(
+            by_name["Positive Affect (sum)"], by_name["Positive Affect"] * 10
+        )
+
+    def test_sum_subscales_are_never_normalised(self):
+        """Rescaling a published total would destroy the number it is stated in."""
+        normalised = scoring.score(self.panas, constant_answers(20, 5))
+        by_name = dict(zip(normalised.names, normalised.values.T, strict=True))
+        self.assertAlmostEqual(float(by_name["Positive Affect"][0]), 1.0)
+        self.assertAlmostEqual(float(by_name["Positive Affect (sum)"][0]), 50.0)
+
+    def test_mean_remains_the_default(self):
+        for key in ("bfi2", "bfi2-xs", "bfi10", "vasf"):
+            instrument = registry.get(key)
+            for subscale in instrument.subscales:
+                with self.subTest(instrument=key, subscale=subscale.name):
+                    self.assertIs(subscale.aggregation, registry.Aggregation.MEAN)
+
+    def test_naive_loop_agrees_for_a_summed_scale(self):
+        rng = np.random.default_rng(11)
+        answers = rng.integers(1, 6, size=(10, 20))
+        result = scoring.score(self.panas, answers, normalize=False)
+        by_name = dict(zip(result.names, result.values.T, strict=True))
+        expected = answers[:, [n - 1 for n in self.panas.subscale("Negative Affect").items]].sum(
+            axis=1
+        )
+        np.testing.assert_allclose(by_name["Negative Affect (sum)"], expected)
 
 
 class TestDelta(unittest.TestCase):

@@ -18,6 +18,7 @@ from enum import StrEnum
 
 __all__ = [
     "REGISTRY",
+    "Aggregation",
     "Item",
     "Questionnaire",
     "ScaleType",
@@ -26,6 +27,22 @@ __all__ = [
     "keys",
     "register",
 ]
+
+
+class Aggregation(StrEnum):
+    """How a subscale combines its items into a score.
+
+    Most instruments average, which keeps a score on the same range as a single
+    item and makes scales of different lengths comparable. Some are published as a
+    total instead -- the PANAS reports 10-50 per scale -- and reproducing the
+    published number matters more than internal consistency there.
+    """
+
+    MEAN = "mean"
+    """Average of the (reverse-keyed) items. Normalisable to ``[0, 1]``."""
+
+    SUM = "sum"
+    """Total of the (reverse-keyed) items, as published. Never normalised."""
 
 
 class ScaleType(StrEnum):
@@ -89,6 +106,9 @@ class Subscale:
         higher_is: Plain-language direction of the scale, e.g. ``"more neurotic"``.
             Recorded as data so a consumer never has to infer polarity from a name,
             which is precisely the inference that went wrong before 2.0.
+        aggregation: How the items combine. Defaults to a mean; a scale published as
+            a total declares :attr:`Aggregation.SUM`, and is left unnormalised so it
+            reproduces the published number.
     """
 
     name: str
@@ -97,6 +117,7 @@ class Subscale:
     level: str = "subscale"
     parent: str | None = None
     higher_is: str = ""
+    aggregation: Aggregation = Aggregation.MEAN
 
 
 @dataclass(frozen=True, slots=True)
