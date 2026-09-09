@@ -265,6 +265,21 @@ def _cmd_ui(args: argparse.Namespace) -> int:
     return EXIT_OK
 
 
+def _cmd_demo(args: argparse.Namespace) -> int:
+    """Start the public, no-storage demo.
+
+    Args:
+        args: Parsed arguments.
+
+    Returns:
+        An exit code. In practice the server runs until interrupted.
+    """
+    from demo.app import launch
+
+    launch(host=args.host, port=args.port)
+    return EXIT_OK
+
+
 def _cmd_records(args: argparse.Namespace) -> int:
     """List stored records.
 
@@ -488,6 +503,13 @@ def build_parser() -> argparse.ArgumentParser:
     ui_parser.add_argument("--db", default=None, help="database URL")
     ui_parser.add_argument("--show", action="store_true", help="open a browser on start")
     ui_parser.set_defaults(func=_cmd_ui)
+
+    demo_parser = subparsers.add_parser(
+        "demo", help="start the public no-storage demo (requires the demo extra)"
+    )
+    demo_parser.add_argument("--host", default="127.0.0.1", help="address to bind")
+    demo_parser.add_argument("--port", type=int, default=7860, help="port to listen on")
+    demo_parser.set_defaults(func=_cmd_demo)
 
     score_parser = subparsers.add_parser("score", help="score responses from a file")
     score_parser.add_argument("questionnaire", choices=registry.keys(), help="instrument used")

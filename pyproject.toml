@@ -51,6 +51,13 @@ mysql = [
   "pymysql>=1.1",
 ]
 
+# The public, no-storage Hugging Face Space: pure Gradio + matplotlib, no
+# SQLAlchemy or nicegui, so a stranger's answers have nowhere to persist.
+demo = [
+  "gradio>=5.0",
+  "matplotlib>=3.9",
+]
+
 dev = [
   "ruff",
   "ty",
@@ -113,7 +120,7 @@ python-version = "3.13"
 unused-ignore-comment = "ignore"
 
 [tool.coverage.run]
-source = ["personality_questionnaire"]
+source = ["personality_questionnaire", "demo"]
 omit = [
   "*/tests/*",
   "*/__init__.py",
@@ -123,6 +130,10 @@ omit = [
   # Omitted because the logic was extracted, not because it was hard to reach.
   "personality_questionnaire/app.py",
   "personality_questionnaire/pages/*",
+  # Same reasoning as app.py above: form.py and plots.py hold every decision
+  # (widget kind, chart type, completeness) and are tested directly; this file
+  # only wires Gradio callbacks together and needs a live server to exercise.
+  "demo/app.py",
 ]
 
 [tool.coverage.report]

@@ -91,3 +91,17 @@ item-total correlations on that subscale's own items alone. The cost is repeatin
 few lines of masking logic rather than reusing a shared array; the alternative is a
 diagnostic that is silently wrong for any instrument where one item serves two
 scales with opposite polarity.
+
+## The demo is a separate application, not a flag
+
+`demo/` is its own top-level package rather than a `--demo` flag on the Lab
+application. A flag means the record-writing code path *ships* to a public host
+and is disabled by a boolean — one bad conditional away from persisting a
+stranger's responses on a machine nobody administers. A separate package means
+there is no `personality_questionnaire.db` import anywhere in `demo/` to
+misconfigure: `tests/demo/test_isolation.py` walks every file in the package with
+`ast` and fails if one ever imports the database layer, NiceGUI, or SQLAlchemy,
+so the boundary is enforced by CI rather than by discipline.
+
+The two applications share only `registry` and `scoring` — pure, stateless
+modules with no notion of a database connection to accidentally reach for.
