@@ -111,6 +111,7 @@ BFI10: Questionnaire = register(
     Questionnaire(
         key="bfi10",
         name="Big Five Inventory-10",
+        abbreviation="BFI-10",
         scale=ScaleType.LIKERT,
         minimum=1,
         maximum=5,

@@ -33,6 +33,7 @@ __all__ = [
     "WARNING",
     "color",
     "contrast_ratio",
+    "domain_color",
 ]
 
 PRIMARY = "#0F4C5C"
@@ -77,6 +78,28 @@ DOMAIN_COLORS: dict[str, str] = {
 Shared by the application's chips and the analysis plots, so a domain keeps the same
 colour wherever a reader meets it.
 """
+
+
+def domain_color(subscale_name: str, parent: str | None) -> str:
+    """Resolve a subscale's colour by the domain it belongs to.
+
+    A domain-level subscale resolves through its own name. A facet resolves
+    through ``parent`` -- its owning domain's name -- so it inherits the same
+    colour as that domain rather than falling through to :data:`PRIMARY`, which is
+    what a lookup keyed on the facet's own name would do (``DOMAIN_COLORS`` only
+    has the five domain names as keys). Anything with no domain at all -- a PANAS
+    scale, the VAS-F composite -- has no match either way and falls back to
+    :data:`PRIMARY`, unchanged from before.
+
+    Args:
+        subscale_name: The subscale's own name.
+        parent: The name of its owning domain, or ``None`` if it has none.
+
+    Returns:
+        The resolved colour.
+    """
+    return DOMAIN_COLORS.get((parent or subscale_name).lower(), PRIMARY)
+
 
 ColorName = Literal["primary", "accent", "success", "warning", "danger", "neutral"]
 

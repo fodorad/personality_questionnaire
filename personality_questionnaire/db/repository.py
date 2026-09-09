@@ -11,6 +11,7 @@ from dataclasses import dataclass, field, replace
 from datetime import UTC, datetime
 from typing import TYPE_CHECKING, Any
 
+from sqlalchemy import delete as sql_delete
 from sqlalchemy import func, select
 from sqlalchemy.orm import selectinload
 
@@ -236,6 +237,96 @@ class Repository:
             session_id = row.id
 
         return replace(record, session_id=session_id)
+
+    def update(self, session_id: int, record: Record) -> Record:
+        """Overwrite an existing session's responses and scores in place.
+
+        The session's identity -- ``participant_code``, ``questionnaire`` and
+        ``tag`` -- is locked to what the row already has; the same three fields on
+        ``record`` are ignored, because changing them would make this a different
+        administration rather than an edit of this one, and they participate in
+        the table's uniqueness constraint.
+
+        Provenance (``package_version``, ``git_sha``, ``git_dirty``,
+        ``instrument_hash``, ``scoring_version``) and ``completed_at`` are
+        re-captured from the *current* environment rather than preserved from the
+        original save: an edit is a new act of recording, and what is stored
+        should be evidence of what actually happened, not a patch that silently
+        keeps stale metadata from before. This mirrors the "scores are stored, not
+        recomputed" rule the schema already follows -- see ``docs/storage.md``.
+
+        Args:
+            session_id: The session to overwrite.
+            record: The new responses and metadata. Its ``participant_code``,
+                ``questionnaire`` and ``tag`` are ignored.
+
+        Returns:
+            The updated record, reflecting what was actually stored -- including
+            the locked identity fields, which come from the existing row rather
+            than from ``record``.
+
+        Raises:
+            KeyError: If no session carries that id.
+            ValueError: If ``record`` is missing responses for the instrument.
+        """
+        with session_scope(self.engine) as session:
+            row = session.get(Session, session_id)
+            if row is None:
+                raise KeyError(f"no record with id {session_id}")
+
+            instrument = registry.get(row.questionnaire)
+            missing = [n for n in range(1, instrument.n_items + 1) if n not in record.responses]
+            if missing:
+                raise ValueError(
+                    f"{instrument.key} record for session {session_id} is missing items {missing}"
+                )
+            answers = [record.responses[n] for n in range(1, instrument.n_items + 1)]
+
+            result = scoring.score(instrument, [answers])
+            provenance = capture()
+
+            if record.participant_label and not row.participant.label:
+                row.participant.label = record.participant_label
+            row.experiment = record.experiment
+            row.source = record.source
+            row.completed_at = provenance.captured_at
+            row.package_version = provenance.package_version
+            row.git_sha = provenance.git_sha
+            row.git_dirty = provenance.git_dirty
+            row.instrument_hash = instrument_hash(instrument)
+            row.scoring_version = scoring.SCORING_VERSION
+            row.extra = dict(record.extra)
+
+            session.execute(sql_delete(Response).where(Response.session_id == session_id))
+            session.execute(sql_delete(Score).where(Score.session_id == session_id))
+            session.add_all(
+                Response(session_id=session_id, item_number=number, value=value)
+                for number, value in sorted(record.responses.items())
+            )
+            session.add_all(
+                Score(
+                    session_id=session_id,
+                    subscale=subscale.name,
+                    level=subscale.level,
+                    value=float(result.values[0, index]),
+                    normalized=result.normalized
+                    and subscale.aggregation is not registry.Aggregation.SUM,
+                )
+                for index, subscale in enumerate(instrument.subscales)
+            )
+            session.flush()
+
+            questionnaire = row.questionnaire
+            participant_code = row.participant.code
+            tag = row.tag
+
+        return replace(
+            record,
+            session_id=session_id,
+            questionnaire=questionnaire,
+            participant_code=participant_code,
+            tag=tag,
+        )
 
     def load(self, session_id: int) -> Record:
         """Load one record by its database id.

@@ -123,6 +123,12 @@ source = ["personality_questionnaire"]
 omit = [
   "*/tests/*",
   "*/__init__.py",
+  # The interface layer builds elements and nothing else. Every decision it
+  # presents -- readiness, progress, what remains unanswered, how a record is
+  # built -- lives in core/state.py and cli/render.py, which are tested directly.
+  # Omitted because the logic was extracted, not because it was hard to reach.
+  "personality_questionnaire/app.py",
+  "personality_questionnaire/pages/*",
 ]
 
 [tool.coverage.report]

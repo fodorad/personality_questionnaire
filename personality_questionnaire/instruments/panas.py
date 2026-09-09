@@ -114,6 +114,7 @@ PANAS: Questionnaire = register(
     Questionnaire(
         key="panas",
         name="Positive and Negative Affect Schedule",
+        abbreviation="PANAS",
         scale=ScaleType.LIKERT,
         minimum=1,
         maximum=5,

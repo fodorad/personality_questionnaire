@@ -240,6 +240,31 @@ def _save_record(
     return _repository(args).save(record)
 
 
+def _cmd_ui(args: argparse.Namespace) -> int:
+    """Start the localhost data-collection application.
+
+    Args:
+        args: Parsed arguments.
+
+    Returns:
+        An exit code. In practice the server runs until interrupted.
+    """
+    from personality_questionnaire.core.config import settings
+
+    if args.host is not None:
+        settings.host = args.host
+    if args.port is not None:
+        settings.port = args.port
+    if args.db is not None:
+        settings.database_url = args.db
+    settings.show = args.show
+
+    from personality_questionnaire.app import main as run_app
+
+    run_app()
+    return EXIT_OK
+
+
 def _cmd_records(args: argparse.Namespace) -> int:
     """List stored records.
 
@@ -421,6 +446,13 @@ def build_parser() -> argparse.ArgumentParser:
     export_parser.add_argument("--db", default=None, help="database URL")
     export_parser.set_defaults(func=_cmd_export)
 
+    ui_parser = subparsers.add_parser("ui", help="start the localhost application")
+    ui_parser.add_argument("--host", default=None, help="address to bind (default: 127.0.0.1)")
+    ui_parser.add_argument("--port", type=int, default=None, help="port to listen on")
+    ui_parser.add_argument("--db", default=None, help="database URL")
+    ui_parser.add_argument("--show", action="store_true", help="open a browser on start")
+    ui_parser.set_defaults(func=_cmd_ui)
+
     score_parser = subparsers.add_parser("score", help="score responses from a file")
     score_parser.add_argument("questionnaire", choices=registry.keys(), help="instrument used")
     score_parser.add_argument("--input", required=True, help="responses (.csv, .npy or .json)")
@@ -474,7 +506,7 @@ def _translate_legacy(argv: list[str]) -> list[str] | None:
     # `records` and `export` take a --questionnaire filter of their own, so the flag
     # alone no longer identifies the legacy form. Only a command line that names no
     # subcommand at all can be the pre-2.0 one.
-    subcommands = {"list", "info", "run", "score", "records", "export"}
+    subcommands = {"list", "info", "run", "score", "records", "export", "ui"}
     if any(token in subcommands for token in argv):
         return None
 
