@@ -7,7 +7,7 @@ name = "personality_questionnaire"
 # Managed by release-please (release-type "python" updates this line itself) --
 # do not edit by hand. A `feat!:` commit becomes a `chore(main): release X.0.0`
 # PR; merging that PR tags the version and CD publishes to PyPI.
-version = "2.0.0"
+version = "2.1.0"
 description = "Administer, score and record validated personality and affect questionnaires."
 keywords = [
   "bfi-2",
