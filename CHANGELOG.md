@@ -10,6 +10,13 @@ Commits.
 
 ---
 
+## [2.5.0](https://github.com/fodorad/personality_questionnaire/compare/v2.4.1...v2.5.0) (2026-09-09)
+
+
+### Features
+
+* **ui:** add an analyze tab for in-app reliability and descriptives ([#23](https://github.com/fodorad/personality_questionnaire/issues/23)) ([fd74581](https://github.com/fodorad/personality_questionnaire/commit/fd745814fabefec2469db0c01cb588f2940b9613))
+
 ## [2.4.1](https://github.com/fodorad/personality_questionnaire/compare/v2.4.0...v2.4.1) (2026-09-09)
 
 
