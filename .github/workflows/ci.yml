@@ -58,10 +58,13 @@ jobs:
         run: sphinx-build -b html -W docs/ site/
 
       - name: Upload coverage to Codecov
-        # Once per run, not once per matrix cell.
-        if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.13'
+        # Once per run, not once per matrix cell. Pinned to the floor version so
+        # this stays in step with the matrix: gating on a version the matrix does
+        # not build means the upload silently never runs.
+        if: matrix.os == 'ubuntu-latest' && matrix.python-version == '3.12'
         uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
           files: coverage.xml
-          fail_ci_if_error: false
+          # A failed upload is a broken report, not a passing build.
+          fail_ci_if_error: true

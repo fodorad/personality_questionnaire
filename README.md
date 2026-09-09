@@ -10,9 +10,10 @@
 [![GitHub Release](https://img.shields.io/github/v/release/fodorad/personality_questionnaire?color=purple)](https://github.com/fodorad/personality_questionnaire/releases)
 [![PyPI](https://img.shields.io/pypi/v/personality_questionnaire?color=purple)](https://pypi.org/project/personality_questionnaire/)
 [![CI](https://github.com/fodorad/personality_questionnaire/workflows/CI/badge.svg)](https://github.com/fodorad/personality_questionnaire/actions)
+[![Coverage](https://codecov.io/gh/fodorad/personality_questionnaire/branch/main/graph/badge.svg)](https://codecov.io/gh/fodorad/personality_questionnaire)
 [![Docs](https://img.shields.io/badge/docs-online-blue?logo=githubpages)](https://fodorad.github.io/personality_questionnaire/)
 <br/>
-[![Python](https://img.shields.io/badge/python-3.12+-3776AB?logo=python&logoColor=white)](https://www.python.org)
+[![Python](https://img.shields.io/badge/python-3.12%7C3.13%7C3.14-3776AB?logo=python&logoColor=white)](https://www.python.org)
 [![Code style: ruff](https://img.shields.io/badge/code%20style-ruff-000000)](https://github.com/astral-sh/ruff)
 [![License](https://img.shields.io/badge/license-MIT-yellow)](LICENSE)
 

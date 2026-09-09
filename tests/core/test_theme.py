@@ -148,6 +148,43 @@ class TestLogoMark(unittest.TestCase):
         self.assertEqual(svg.count('r="3"'), 25)
 
 
+class TestCoverageGates(unittest.TestCase):
+    """The coverage floor is stated in three places and they must agree.
+
+    A mismatch is silent: coverage could pass locally at 90 while Codecov enforces
+    something else, or the CI upload could be gated on a Python version the matrix
+    does not build, in which case no report is ever published.
+    """
+
+    ROOT = Path(__file__).resolve().parents[2]
+    FLOOR = 90
+
+    def test_pyproject_sets_the_floor(self):
+        text = (self.ROOT / "pyproject.toml").read_text(encoding="utf-8")
+        self.assertIn(f"fail_under = {self.FLOOR}", text)
+
+    def test_codecov_project_target_matches(self):
+        text = (self.ROOT / "codecov.yml").read_text(encoding="utf-8")
+        self.assertIn(f"target: {self.FLOOR}%", text)
+
+    def test_codecov_range_starts_at_the_floor(self):
+        text = (self.ROOT / "codecov.yml").read_text(encoding="utf-8")
+        self.assertIn(f'range: "{self.FLOOR}...100"', text)
+
+    def test_upload_runs_on_a_version_the_matrix_builds(self):
+        """Gating the upload on an unbuilt version means it never runs."""
+        workflow = (self.ROOT / ".github" / "workflows" / "ci.yml").read_text(encoding="utf-8")
+        gate = re.search(r"matrix\.python-version == '([\d.]+)'", workflow)
+        self.assertIsNotNone(gate, "no Codecov upload gate found")
+        matrix = re.search(r"python-version: \[([^\]]+)\]", workflow)
+        built = {v.strip().strip("\"'") for v in matrix.group(1).split(",")}
+        self.assertIn(gate.group(1), built)
+
+    def test_readme_carries_the_coverage_badge(self):
+        readme = (self.ROOT / "README.md").read_text(encoding="utf-8")
+        self.assertIn("codecov.io/gh/fodorad/personality_questionnaire", readme)
+
+
 class TestReadmeLogo(unittest.TestCase):
     """The README's mark has to survive PyPI, which GitHub's does not test."""
 
