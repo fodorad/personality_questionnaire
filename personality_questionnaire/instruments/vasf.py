@@ -126,6 +126,7 @@ VASF: Questionnaire = register(
     Questionnaire(
         key="vasf",
         name="Visual Analogue Scale to Evaluate Fatigue Severity",
+        abbreviation="VAS-F",
         scale=ScaleType.VISUAL_ANALOGUE,
         minimum=0,
         maximum=10,

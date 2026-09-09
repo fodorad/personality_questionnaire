@@ -127,6 +127,11 @@ class Questionnaire:
     Attributes:
         key: Registry key and CLI token, e.g. ``"bfi2"`` or ``"bfi2-xs"``.
         name: Full human-readable name.
+        abbreviation: The instrument's conventional short form, as printed in the
+            literature, e.g. ``"BFI-2-XS"`` or ``"VAS-F"``. Distinct from ``key``,
+            which is the lowercase registry/CLI token -- the mapping between them
+            isn't mechanical (``vasf`` is ``"VAS-F"``, not ``"VASF"``), so this is
+            supplied per instrument rather than derived.
         scale: How items are answered.
         minimum: Lowest valid response value.
         maximum: Highest valid response value.
@@ -145,6 +150,7 @@ class Questionnaire:
 
     key: str
     name: str
+    abbreviation: str
     scale: ScaleType
     minimum: int
     maximum: int
@@ -230,9 +236,12 @@ class Questionnaire:
             ValueError: If item numbering is not ``1..n``, if a subscale references
                 an unknown item, if a reverse key is not among its own subscale's
                 items, if an item belongs to no subscale, if a subscale name is
-                duplicated, if a declared parent does not exist, or if the response
-                range is empty.
+                duplicated, if a declared parent does not exist, if the response
+                range is empty, or if the abbreviation is blank.
         """
+        if not self.abbreviation.strip():
+            raise ValueError(f"{self.key}: abbreviation must not be blank")
+
         if self.minimum >= self.maximum:
             raise ValueError(
                 f"{self.key}: response range is empty "

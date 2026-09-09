@@ -107,6 +107,7 @@ BFI2_XS: Questionnaire = register(
     Questionnaire(
         key="bfi2-xs",
         name="Big Five Inventory-2 Extra-Short Form",
+        abbreviation="BFI-2-XS",
         scale=ScaleType.LIKERT,
         minimum=BFI2.minimum,
         maximum=BFI2.maximum,

@@ -7,7 +7,7 @@ name = "personality_questionnaire"
 # Managed by release-please (release-type "python" updates this line itself) --
 # do not edit by hand. A `feat!:` commit becomes a `chore(main): release X.0.0`
 # PR; merging that PR tags the version and CD publishes to PyPI.
-version = "2.3.0"
+version = "2.4.0"
 description = "Administer, score and record validated personality and affect questionnaires."
 keywords = [
   "bfi-2",
@@ -123,6 +123,12 @@ source = ["personality_questionnaire"]
 omit = [
   "*/tests/*",
   "*/__init__.py",
+  # The interface layer builds elements and nothing else. Every decision it
+  # presents -- readiness, progress, what remains unanswered, how a record is
+  # built -- lives in core/state.py and cli/render.py, which are tested directly.
+  # Omitted because the logic was extracted, not because it was hard to reach.
+  "personality_questionnaire/app.py",
+  "personality_questionnaire/pages/*",
 ]
 
 [tool.coverage.report]

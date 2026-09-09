@@ -47,6 +47,12 @@ is holding. Adding an instrument adds no arithmetic.
 Watson, Clark & Tellegen (1988). VAS-F: Lee, Hicks & Nino-Murcia (1991). See [docs/instruments.md](docs/instruments.md) for
 full citations and licence notes.</sub>
 
+<div align="center">
+
+<img src="https://raw.githubusercontent.com/fodorad/personality_questionnaire/main/docs/assets/screenshot-overview.png" alt="Landing page of the Personality Questionnaire application" width="720"/>
+
+</div>
+
 # Quickstart
 
 Score responses you already have:
@@ -84,6 +90,16 @@ pq export --shape long --output study-a.csv
 Records go to `~/.personality_questionnaire/records.db` unless `PQ_DATABASE_URL`
 says otherwise. See [docs/storage.md](docs/storage.md).
 
+Or collect through the application, which binds to localhost and never reaches the
+network:
+
+```bash
+pq ui        # http://127.0.0.1:8080
+```
+
+Five tabs: an overview, setup, the questionnaire itself, the computed scores, and
+every record collected so far with its exports. See [docs/ui.md](docs/ui.md).
+
 # How it works
 
 ```mermaid
@@ -103,7 +119,9 @@ flowchart LR
 | `io.py` | Reading and writing responses and scores |
 | `provenance.py` | Package version, git SHA, instrument hash for each record |
 | `db/` | SQLAlchemy record store, and the JSON/wide/long export shapes |
-| `cli/` | `pq list \| info \| run \| score \| records \| export` |
+| `core/` | Theme tokens, runtime settings, and the application's state |
+| `pages/`, `app.py` | The localhost data-collection application |
+| `cli/` | `pq list \| info \| run \| score \| records \| export \| ui` |
 
 # Design decisions
 

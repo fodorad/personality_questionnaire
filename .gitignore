@@ -132,6 +132,7 @@ dmypy.json
 .pyre/
 
 # project specific
+tmp/
 dist/
 site/
 coverage_html/
