@@ -54,8 +54,42 @@ class TestRegisteredInstruments(unittest.TestCase):
     """Every shipped instrument must be internally consistent."""
 
     def test_registry_is_populated(self):
-        self.assertIn("bfi2", registry.keys())
-        self.assertIn("vasf", registry.keys())
+        self.assertEqual(set(registry.keys()), {"bfi2", "bfi2-xs", "bfi10", "vasf"})
+
+    def test_every_big_five_form_reports_the_same_domains(self):
+        """The three Big Five forms must be interchangeable at the domain level.
+
+        Downstream code selects a form by key and reads its domains; a form that
+        named or ordered them differently would silently misalign the columns.
+        """
+        expected = [
+            "openness",
+            "conscientiousness",
+            "extraversion",
+            "agreeableness",
+            "neuroticism",
+        ]
+        for key in ("bfi2", "bfi2-xs", "bfi10"):
+            with self.subTest(instrument=key):
+                names = [s.name for s in registry.get(key).subscales_at("domain")]
+                self.assertEqual(names, expected)
+
+    def test_borrowed_items_reference_a_real_source(self):
+        """Any item claiming a source must actually match it."""
+        for key in registry.keys():
+            instrument = registry.get(key)
+            for item in instrument.items:
+                if item.source_number is None:
+                    continue
+                with self.subTest(instrument=key, item=item.number):
+                    parents = [
+                        registry.get(other)
+                        for other in registry.keys()
+                        if other != key
+                        and item.source_number in registry.get(other).item_numbers
+                        and registry.get(other).item(item.source_number).text == item.text
+                    ]
+                    self.assertTrue(parents, "source_number matches no parent instrument")
 
     def test_every_instrument_validates(self):
         for key in registry.keys():
