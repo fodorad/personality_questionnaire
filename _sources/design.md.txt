@@ -99,9 +99,49 @@ application. A flag means the record-writing code path *ships* to a public host
 and is disabled by a boolean — one bad conditional away from persisting a
 stranger's responses on a machine nobody administers. A separate package means
 there is no `personality_questionnaire.db` import anywhere in `demo/` to
-misconfigure: `tests/demo/test_isolation.py` walks every file in the package with
+misconfigure: `tests/demo_app/test_isolation.py` walks every file in the package with
 `ast` and fails if one ever imports the database layer, NiceGUI, or SQLAlchemy,
 so the boundary is enforced by CI rather than by discipline.
 
 The two applications share only `registry` and `scoring` — pure, stateless
 modules with no notion of a database connection to accidentally reach for.
+
+## A second, hand-ported demo exists because Gradio Lite is broken
+
+`demo-react/` reimplements the same instrument-fill-evaluate-plot flow as
+`demo/` in TypeScript, deployed to a free Hugging Face static Space. It exists
+alongside `demo/`, not instead of it, because of a hosting constraint rather
+than a technical one: Hugging Face's free personal-account tier does not
+allow a Docker or native-Gradio Space at all (both require a paid PRO plan),
+except for up to two Gradio Spaces running on ZeroGPU hardware -- a GPU-hosting
+mechanism this app has no use for, since every instrument scores and plots on
+CPU.
+
+The natural fix looked like Gradio Lite (`@gradio/lite`): it runs the actual
+`demo/app.py` client-side via Pyodide, so it would need no second
+implementation at all, and it deploys as exactly the free static Space this
+needed. Tried directly against the official example from Hugging Face's own
+`gradio-lite` blog post (not just this app): it fails to load. `gradio`'s own
+dependency chain pins `huggingface-hub<1.0,>=0.33.5`, and Pyodide's resolver
+cannot satisfy that constraint against what is currently on PyPI. A Gradio
+maintainer confirmed on the tracking issue
+([gradio-app/gradio#12262](https://github.com/gradio-app/gradio/issues/12262))
+that Lite is no longer maintained, and offered an unofficial patched build on
+a personal S3 bucket as a one-off favor -- which gets past that crash but then
+hits a second, unrelated one: `huggingface-hub`'s `filelock` dependency calls
+`os.link(..., follow_symlinks=False)`, a call Pyodide's WASM filesystem shim
+does not support. Two independent breakages in an explicitly unmaintained
+library is not something to build a portfolio piece's public demo on.
+
+`demo-react/src/scoring.ts` is therefore a deliberate, hand-written port of
+`scoring.py`'s arithmetic, not a client-side Python runtime -- see
+`personality_questionnaire/scoring.py`'s own module docstring for the
+canonical algorithm. It is tested against the same fixtures `scoring.py`'s own
+tests use (`tests/fixtures.py::PUBLISHED_OCEAN`, PANAS's sum-vs-mean
+invariants, VAS-F's normalization bounds), not values invented for the port,
+so a transcription mistake is caught the same way a mistake in the Python
+would be. The instrument *data* (items, labels, subscale structure) does not
+suffer the same duplication risk: `scripts/export_instruments.py` generates
+`demo-react/src/instruments.json` from the live `registry.py`, and
+`tests/demo_react/test_instruments_export.py` fails CI if the checked-in file
+drifts from a fresh export.

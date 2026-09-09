@@ -392,7 +392,11 @@ is holding. Adding an instrument adds no arithmetic.</p>
 Watson, Clark &amp; Tellegen (1988). VAS-F: Lee, Hicks &amp; Nino-Murcia (1991). See <a class="reference internal" href="instruments.html"><span class="doc std std-doc">docs/instruments.md</span></a> for
 full citations and licence notes.</sub></p>
 <div align="center">
+<br>
+<b>Landing page of the Personality Questionnaire application:</b>
 <img src="https://raw.githubusercontent.com/fodorad/personality_questionnaire/main/docs/assets/screenshot-overview.png" alt="Landing page of the Personality Questionnaire application" width="720"/>
+<br>
+<b>BFI-10 loaded on the Questionnaire tab:</b>
 <img src="https://raw.githubusercontent.com/fodorad/personality_questionnaire/main/docs/assets/screenshot-questionnaire.png" alt="BFI-10 loaded on the Questionnaire tab" width="720"/>
 </div>
 </section>
@@ -435,16 +439,37 @@ every record collected so far with its exports. See <a class="reference external
 </section>
 <section id="try-it-without-installing-anything">
 <h2>Try it without installing anything<a class="headerlink" href="#try-it-without-installing-anything" title="Link to this heading">¶</a></h2>
-<p>A separate, stateless Gradio demo – pick an instrument, answer it, see the scores
-plotted (a radar for the Big Five forms, a bar chart for PANAS and VAS-F). Nothing
-entered is stored: <code class="docutils literal notranslate"><span class="pre">demo/</span></code> never imports the database layer above, and
-<code class="docutils literal notranslate"><span class="pre">tests/demo/test_isolation.py</span></code> enforces that at CI time, not just in prose.</p>
+<p>A separate, stateless demo – pick an instrument, answer it, see the scores
+plotted (a radar for the Big Five forms, a bar chart for PANAS and VAS-F).
+Nothing entered is stored. <strong>Local-first is the primary, supported way to run
+it</strong> – both Hugging Face Space deployments below exist as optional extras
+and currently sit unpublished (see note).</p>
+<p>Gradio version (<code class="docutils literal notranslate"><span class="pre">demo/</span></code> – never imports the database layer above, and
+<code class="docutils literal notranslate"><span class="pre">tests/demo_app/test_isolation.py</span></code> enforces that at CI time, not just in
+prose):</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span><span class="s2">"personality_questionnaire[demo]"</span>
 pq<span class="w"> </span>demo<span class="w">        </span><span class="c1"># http://127.0.0.1:7860</span>
 </pre></div>
 </div>
-<p>Deployable as a CPU-only Hugging Face Space (<code class="docutils literal notranslate"><span class="pre">sdk:</span> <span class="pre">docker</span></code>) via <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">push-space</span></code>;
-see <code class="docutils literal notranslate"><span class="pre">Dockerfile</span></code> and <code class="docutils literal notranslate"><span class="pre">demo/README.md</span></code>.</p>
+<p>React/TypeScript version (<code class="docutils literal notranslate"><span class="pre">demo-react/</span></code> – scoring reimplemented in
+TypeScript rather than running Python client-side; see
+<a class="reference internal" href="design.html"><span class="doc std std-doc">docs/design.md</span></a> for why):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>make<span class="w"> </span>react-demo<span class="w">   </span><span class="c1"># http://localhost:5173</span>
+</pre></div>
+</div>
+<div align="center">
+<img src="https://raw.githubusercontent.com/fodorad/personality_questionnaire/main/docs/assets/screenshot-demo-gradio.jpg" alt="Gradio demo: BFI-10 scored as a Big Five radar chart" width="360"/>
+<img src="https://raw.githubusercontent.com/fodorad/personality_questionnaire/main/docs/assets/screenshot-demo-react.jpg" alt="React demo: BFI-10 scored as a Big Five radar chart" width="360"/>
+<p><sub>Gradio demo (left) and React/TypeScript demo (right), both scoring the same BFI-10 responses.</sub></p>
+</div>
+<p>Both are deployable to Hugging Face Spaces (<code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">push-space</span></code> for the Docker
+Gradio Space, <code class="docutils literal notranslate"><span class="pre">make</span> <span class="pre">push-space-react</span></code> for the static React Space), and both
+paths are implemented and tested. <strong>Deployment is currently on hold</strong>: as of
+2026-09, Hugging Face requires billing credits on the account to run a
+Space’s build step, even on the nominally-free static SDK tier, so neither
+Space is published right now. Once credits are added (or the React Space is
+switched to shipping a pre-built <code class="docutils literal notranslate"><span class="pre">dist/</span></code> with no build step), either <code class="docutils literal notranslate"><span class="pre">make</span></code>
+target above publishes it.</p>
 </section>
 <section id="how-it-works">
 <h2>How it works<a class="headerlink" href="#how-it-works" title="Link to this heading">¶</a></h2>
